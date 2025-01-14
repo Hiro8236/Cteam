@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<!-- 上記はEclipseの警告を消すための記述です。 -->
+
+<Context reloadable="true">
+	<Resource
+		name="jdbc/yajima"
+		auth="Container"
+		type="javax.sql.DataSource"
+        driverClassName="com.mysql.cj.jdbc.Driver"
+ 		url="jdbc:mysql://localhost:3306/cteam?serverTimezone=JST"
+		username="root"
+		password="admin"
+	/>
+</Context>
