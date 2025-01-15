@@ -1,4 +1,4 @@
-package user;
+package user.info;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
