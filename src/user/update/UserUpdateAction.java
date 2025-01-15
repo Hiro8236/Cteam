@@ -1,4 +1,4 @@
-package user;
+package user.update;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +8,7 @@ import bean.User;
 import dao.UserDao;
 import tool.Action;
 
-public class UserInfoAction extends Action{
+public class UserUpdateAction extends Action{
 
 	public void execute(HttpServletRequest req , HttpServletResponse res) throws Exception{
 
@@ -26,7 +26,7 @@ public class UserInfoAction extends Action{
 		user = userDao.get(userID);
 		req.setAttribute("user", user);
 
-		req.getRequestDispatcher("user_info.jsp").forward(req,res);
+		req.getRequestDispatcher("user_update.jsp").forward(req,res);
 
 	}
 }

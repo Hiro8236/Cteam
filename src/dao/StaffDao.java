@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.Staff;
 
@@ -61,5 +63,65 @@ public class StaffDao extends Dao {
         }
 
         return staff;
+}
+
+    public List<Staff> filterStaff(int staffId, String staffName, String staffRole) throws Exception {
+        List<Staff> staffList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+
+            // SQL文を構築
+            StringBuilder sql = new StringBuilder("SELECT * FROM Staff WHERE 1=1");
+
+            // 条件を追加
+            if (staffId > 0) {
+                sql.append(" AND staffId = ?");
+            }
+            if (staffName != null && !staffName.isEmpty()) {
+                sql.append(" AND staffname LIKE ?");
+            }
+            if (staffRole != null && !staffRole.isEmpty()) {
+                sql.append(" AND staffrole LIKE ?");
+            }
+
+            statement = connection.prepareStatement(sql.toString());
+
+            // パラメータを設定
+            int index = 1;
+            if (staffId > 0) {
+                statement.setInt(index++, staffId);
+            }
+            if (staffName != null && !staffName.isEmpty()) {
+                statement.setString(index++, "%" + staffName + "%");
+            }
+            if (staffRole != null && !staffRole.isEmpty()) {
+                statement.setString(index++, "%" + staffRole + "%");
+            }
+
+            resultSet = statement.executeQuery();
+
+            // 結果をリストに格納
+            while (resultSet.next()) {
+                Staff staff = new Staff();
+                staff.setStaffID(resultSet.getInt("staffId"));
+                staff.setStaffName(resultSet.getString("staffname"));
+                staff.setStaffRole(resultSet.getString("staffrole"));
+                staffList.add(staff);
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            // リソースを解放
+            if (resultSet != null) resultSet.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        }
+
+        return staffList;
     }
+
 }

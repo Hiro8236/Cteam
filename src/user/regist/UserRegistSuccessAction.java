@@ -1,4 +1,4 @@
-package user;
+package user.regist;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
