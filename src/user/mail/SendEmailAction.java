@@ -1,4 +1,4 @@
-package user;
+package user.mail;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;

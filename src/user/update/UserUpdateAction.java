@@ -1,4 +1,4 @@
-package user;
+package user.update;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
