@@ -18,9 +18,11 @@ C:.
 „¥„Ÿbuild
 „   „¤„Ÿclasses
 „       „¥„Ÿbean
+„       „       Bookmark.class
 „       „       Event.class
 „       „       Institusion.class
 „       „       Staff.class
+„       „       SuggestInstitusion.class
 „       „       User.class
 „       „       Video.class
 „       „       
@@ -29,6 +31,7 @@ C:.
 „       „       EventDao.class
 „       „       InstitusionDao.class
 „       „       StaffDao.class
+„       „       SuggestInstitusionDao.class
 „       „       UserDao.class
 „       „       VideoDao.class
 „       „       
@@ -47,6 +50,7 @@ C:.
 „       „       „   
 „       „       „¤„Ÿcalendar
 „       „               StaffCalendarAction.class
+„       „               StaticResourceServlet.class
 „       „               
 „       „¥„Ÿtool
 „       „       Action.class
@@ -59,6 +63,8 @@ C:.
 „           „   LoginAction.class
 „           „   LoginExecuteAction.class
 „           „   LogoutAction.class
+„           „   SuggestInstitusionAction.class
+„           „   UserUpdateAction.class
 „           „   VerifyCodeAction.class
 „           „   VideoListAction.class
 „           „   
@@ -81,17 +87,21 @@ C:.
 „                   
 „¥„Ÿsrc
 „   „¥„Ÿbean
+„   „       Bookmark.java
 „   „       Event.java
 „   „       Institusion.java
 „   „       Staff.java
+„   „       SuggestInstitusion.java
 „   „       User.java
 „   „       Video.java
 „   „       
 „   „¥„Ÿdao
+„   „       BookmarkDao.java
 „   „       Dao.java
 „   „       EventDao.java
 „   „       InstitusionDao.java
 „   „       StaffDao.java
+„   „       SuggestInstitusionDao.java
 „   „       UserDao.java
 „   „       VideoDao.java
 „   „       
@@ -113,6 +123,7 @@ C:.
 „   „               EventDeleteAction.java
 „   „               EventEditAction.java
 „   „               StaffCalendarAction.java
+„   „               StaticResourceServlet.java
 „   „               
 „   „¥„Ÿtool
 „   „       Action.java
@@ -121,10 +132,13 @@ C:.
 „   „       ValidationException.java
 „   „       
 „   „¤„Ÿuser
+„       „   BookmarkAction.java
 „       „   HomeAction.java
 „       „   LoginAction.java
 „       „   LoginExecuteAction.java
 „       „   LogoutAction.java
+„       „   SuggestInstitusionAction.java
+„       „   UserUpdateAction.java
 „       „   VerifyCodeAction.java
 „       „   VideoListAction.java
 „       „   
@@ -181,16 +195,13 @@ C:.
     „       footer.jsp
     „       header.jsp
     „       
-    „¥„Ÿstatic
-    „   „¤„Ÿfullcalendar
-    „           main.min.css
-    „           main.min.js
-    „           
     „¥„Ÿuser
+    „   „   email_update.jsp
     „   „   home.jsp
     „   „   index.jsp
+    „   „   password_update.jsp
+    „   „   suggest_institusion.jsp
     „   „   user_info.jsp
-    „   „   user_update.jsp
     „   „   
     „   „¤„Ÿlogin
     „           login.jsp
