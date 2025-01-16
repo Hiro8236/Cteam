@@ -1,4 +1,4 @@
-package staff.normalstaff.calendar;
+package staff.normalstaff.calender;
 
 import java.io.File;
 import java.io.FileInputStream;

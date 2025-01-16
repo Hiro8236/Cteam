@@ -70,7 +70,7 @@ public class StaffLoginExecuteAction extends Action {
             // staffroleによるリダイレクト
             String staffRole = staff.getStaffRole();
             if ("1".equals(staffRole)) {
-                url = "normalstaff/StaffHome.action";  // 一般スタッフホーム
+                url = "/Cteam1/staff/normalstaff/StaffHome.action";  // 一般スタッフホーム
             } else if ("2".equals(staffRole)) {
                 url = "adminstaff/AdminStaffHome.action";  // 管理者ホーム
             } else {

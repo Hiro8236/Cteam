@@ -1,4 +1,4 @@
-package staff.normalstaff.calendar;
+package staff.normalstaff.calender;
 
 import java.util.List;
 
