@@ -1,4 +1,4 @@
-package user.update;
+package user.user_update;
 
 import java.util.ArrayList;
 import java.util.List;
