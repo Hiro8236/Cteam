@@ -17,7 +17,7 @@
 			</div>
 			<div class="lh-lg row" style="margin-top: 8rem;">
 				<div class="mx-3 col-2">
-					<a href="BookmarkList.action">ブックマーク一覧</a>
+					<a href="BookmarkList.action">登録済み支援一覧</a>
 				</div>
 			</div>
 		</section>
