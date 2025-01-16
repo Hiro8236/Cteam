@@ -19,7 +19,15 @@ public class HomeAction extends Action {
 
 		HttpSession session=req.getSession();
 		User user =(User)session.getAttribute("userID");
-		req.setAttribute("User",user);
+
+        if (user != null) {
+        // セッションに userID が存在する場合は、リクエスト属性に設定
+        req.setAttribute("User", user);
+        } else {
+        // userID が null の場合でも問題なく進むようにする
+        System.out.println("Session userID is null. Proceeding without user.");
+        req.setAttribute("User", null); // 必要に応じて null を設定
+        }
 
 		 // DAOの初期化
         InstitusionDao institusionDao = new InstitusionDao();
@@ -29,7 +37,6 @@ public class HomeAction extends Action {
 
         // 結果をリクエストに設定
         req.setAttribute("institusions", institusions);
-
 
 		req.getRequestDispatcher("home.jsp").forward(req, res);
 	}
