@@ -11,32 +11,38 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = { "*.action" })
 public class FrontController extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		try {
-			// パスを取得
-			String path = req.getServletPath().substring(1);
-			// ファイル名を取得しクラス名に変換
-			String name = path.replace(".a", "A").replace('/', '.');
-			// アクションクラスのインスタンスを返却
-			Action action = (Action) Class.forName(name).getDeclaredConstructor().newInstance();
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        try {
+            // パスを取得
+            String path = req.getServletPath().substring(1);
 
-			// 遷移先URLを取得
-			action.execute(req, res);
-			//String url = action.execute(req, res);
-			//req.getRequestDispatcher(url).forward(req, res);
+            // ファイル名を取得しクラス名に変換
+            String name = path.replace(".a", "A").replace('/', '.');
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			// エラーページへリダイレクト
-			req.getRequestDispatcher("/error.jsp").forward(req, res);
-		}
-	}
+            // calendar パッケージを付与
+            if (name.startsWith("staff.normalstaff.") && !name.contains(".calendar.")) {
+                name = name.replace("staff.normalstaff.", "staff.normalstaff.calendar.");
+            }
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+            // デバッグログ
+            System.out.println("修正されたクラス名: " + name);
 
-		doGet(req,res);
+            // アクションクラスのインスタンスを返却
+            Action action = (Action) Class.forName(name).getDeclaredConstructor().newInstance();
 
-	}
+            // 遷移先URLを取得
+            action.execute(req, res);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // エラーページへリダイレクト
+            req.getRequestDispatcher("/error.jsp").forward(req, res);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        doGet(req, res);
+    }
 }
