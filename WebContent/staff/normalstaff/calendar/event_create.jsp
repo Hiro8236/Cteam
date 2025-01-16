@@ -19,7 +19,36 @@
                 locale: 'ja',
                 dateClick: function (info) {
                     console.log('クリックされた日付:', info.dateStr);
-                    alert('日付がクリックされました: ' + info.dateStr);
+
+                    // 登録データの作成
+                    var eventData = {
+                        title: "新しいイベント",
+                        description: "自動生成イベント",
+                        start: info.dateStr + 'T00:00:00',
+                        end: info.dateStr + 'T23:59:59',
+                        createdBy: 1
+                    };
+
+                    // サーバーへデータ送信
+                    fetch('/staff/normalstaff/calendar/create', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams(eventData)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('イベントが登録されました！');
+                            location.reload();
+                        } else {
+                            alert('登録中にエラーが発生しました。');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('エラー:', error);
+                        alert('通信エラーが発生しました。');
+                    });
                 }
             });
 

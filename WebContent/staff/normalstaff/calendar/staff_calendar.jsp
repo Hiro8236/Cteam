@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="bean.Event" %>
 <!DOCTYPE html>
@@ -79,42 +80,20 @@
             var modal = document.getElementById('eventModal');
             var closeModal = document.getElementsByClassName('close')[0];
 
-            // イベントデータを JavaScript 配列に変換
-            var events = [
-                <%
-                    List<Event> events = (List<Event>) request.getAttribute("events");
-                    if (events != null && !events.isEmpty()) {
-                        for (int i = 0; i < events.size(); i++) {
-                            Event event = events.get(i);
-                            String title = event.getTitle();
-                            String start = event.getStartTime().toString();
-                            String end = event.getEndTime().toString();
-                %>
-                {
-                    title: "<%= title %>",
-                    start: "<%= start %>",
-                    end: "<%= end %>"
-                }<%= (i < events.size() - 1) ? "," : "" %>
-                <%
-                        }
-                    }
-                %>
-            ];
-
-            // カレンダーを初期化
+            // カレンダー初期化
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth', // カレンダー形式
+                initialView: 'dayGridMonth', // 月表示
                 locale: 'ja',                // 日本語対応
-                events: events,              // イベントデータ
-                dateClick: function (info) { // 日付クリックイベント
-                    modal.style.display = 'block';
+                dateClick: function (info) { // 日付クリック時
+                    modal.style.display = 'block'; // モーダルを表示
                     document.getElementById('start').value = info.dateStr + 'T00:00';
+                    document.getElementById('end').value = info.dateStr + 'T00:00';
                 }
             });
 
             calendar.render();
 
-            // モーダルを閉じる処理
+            // モーダルを閉じる
             closeModal.onclick = function () {
                 modal.style.display = 'none';
             };
@@ -124,18 +103,19 @@
                 }
             };
 
-            // イベント登録フォーム送信
+            // フォーム送信
             document.getElementById('eventForm').addEventListener('submit', function (e) {
                 e.preventDefault();
                 var formData = new FormData(e.target);
 
-                fetch('/staff/normalstaff/calendar/create', {
+                fetch('Cteam1/staff/normalstaff/calendar/create', {
                     method: 'POST',
                     body: new URLSearchParams(formData),
                 })
                 .then(response => {
                     if (response.ok) {
                         alert('イベントが登録されました！');
+                        modal.style.display = 'none';
                         location.reload();
                     } else {
                         alert('登録中にエラーが発生しました。');
