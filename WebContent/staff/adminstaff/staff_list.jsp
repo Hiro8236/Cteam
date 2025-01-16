@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:import url="/staffcommon/base.jsp">
 
-<!-- 基本的なレイアウトを継承 -->
-<c:import url="/common/base.jsp">
     <c:param name="title">職員管理システム</c:param>
 
     <c:param name="content">
@@ -56,7 +56,19 @@
                                 <tr>
                                     <td>${staff.staffID}</td>
                                     <td>${staff.staffName}</td>
-                                    <td>${staff.staffRole}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${staff.staffRole == 1}">
+                                                職員
+                                            </c:when>
+                                            <c:when test="${staff.staffRole == 2}">
+                                                管理者
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${staff.staffRole} <!-- 他の役職の場合 -->
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
                                     <td>
                                         <a href="StaffUpdate.action?staffId=${staff.staffID}">変更</a>
                                     </td>
