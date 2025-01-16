@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Institusion;
-import bean.User;
 import dao.InstitusionDao;
 import tool.Action;
 
@@ -18,7 +17,10 @@ public class HomeAction extends Action {
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 		HttpSession session=req.getSession();
-		User user =(User)session.getAttribute("userID");
+		Integer user =(Integer)session.getAttribute("userID");
+
+
+
 
         if (user != null) {
         // セッションに userID が存在する場合は、リクエスト属性に設定
