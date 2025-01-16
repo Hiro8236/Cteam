@@ -16,7 +16,7 @@ public class NotificationDao extends Dao{
      * @return おしらせのリスト。
      * @throws Exception データ取得中にエラーが発生した場合。
      */
-    public List<Notification> getNotification() throws Exception {
+    public List<Notification> getAllNotification() throws Exception {
         List<Notification> notifications = new ArrayList<>();
         Connection connection = getConnection();
         PreparedStatement statement = null;
