@@ -68,7 +68,7 @@
 						<input class="w-25 btn btn-lg btn-primary" type="submit" name="login" value="ログイン"/>
 					</div>
 					<div class="mt-4">
-						<a class="w-25 btn btn-lg btn-primary" href="/Cteam1/user/UserRegist.action">新規登録</a>
+						<a class="w-25 btn btn-lg btn-primary" href="/Cteam1/user/login/UserRegist.action">新規登録</a>
 					</div>
 				</div>
 			</form>

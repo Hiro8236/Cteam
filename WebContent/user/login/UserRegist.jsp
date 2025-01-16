@@ -9,7 +9,7 @@
 
 	<c:param name="content">
 		<section class="w-75 text-center m-auto border pb-3">
-			<form action="/Cteam1/user/UserRegistSuccess.action" method="post">
+			<form action="/user/login/UserRegistSuccess.action" method="post">
 				<div id="wrap_box">
 					<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2">新規登録</h2>
 
@@ -73,7 +73,7 @@
 						        }, 1000); // 1秒ごとに実行
 
 						        // メール送信リクエスト
-						        fetch('/Cteam1/user/SendEmail.action', {
+						        fetch('/Cteam1/user/mail/SendEmail.action', {
 						            method: 'POST',
 						            headers: {
 						                'Content-Type': 'application/x-www-form-urlencoded',
