@@ -14,7 +14,7 @@ public class StaffHomeAction extends Action {
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 		HttpSession session=req.getSession();
-		Staff staff =(Staff)session.getAttribute("StaffID");
+		Staff staff =(Staff)session.getAttribute("user");
 		req.setAttribute("Staffs",staff);
 
 		req.getRequestDispatcher("staffhome.jsp").forward(req, res);
