@@ -45,7 +45,7 @@ public class Notification implements Serializable{
 		 return sentence;
 	 }
 
-	 public void setSentence(){
+	 public void setSentence(String sentence){
 		 this.sentence=sentence;
 	 }
 
