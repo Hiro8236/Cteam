@@ -12,32 +12,32 @@ import javax.servlet.http.HttpServletResponse;
 import bean.Event;
 import dao.EventDao;
 
-@WebServlet("/staff/normalstaff/calendar/create")
-public class EventCreateAction extends HttpServlet {
+@WebServlet("/staff/normalstaff/calendar/edit")
+public class EventEditAction extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            int eventId = Integer.parseInt(request.getParameter("eventId"));
             String title = request.getParameter("title");
             String description = request.getParameter("description");
             String start = request.getParameter("start");
             String end = request.getParameter("end");
-            int createdBy = 1;
 
             Event event = new Event();
+            event.setEventId(eventId);
             event.setTitle(title);
             event.setDescription(description);
             event.setStartTime(Timestamp.valueOf(start));
             event.setEndTime(Timestamp.valueOf(end));
-            event.setCreatedBy(createdBy);
 
             EventDao eventDao = new EventDao();
-            eventDao.createEvent(event);
+            eventDao.updateEvent(event);
 
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "イベント登録中にエラーが発生しました。");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "イベント更新中にエラーが発生しました。");
         }
     }
 }
