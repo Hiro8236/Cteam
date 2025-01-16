@@ -108,11 +108,11 @@
                 e.preventDefault();
                 var formData = new FormData(e.target);
 
-                fetch('Cteam1/staff/normalstaff/calendar/create', {
+                fetch('/staff/normalstaff/calendar/create', {
                     method: 'POST',
                     body: new URLSearchParams(formData),
                 })
-                .then(response => {
+                .then(function(response) {
                     if (response.ok) {
                         alert('イベントが登録されました！');
                         modal.style.display = 'none';
@@ -121,8 +121,10 @@
                         alert('登録中にエラーが発生しました。');
                     }
                 })
-                .catch(error => console.error('エラー:', error));
-            });
+                .catch(function(error) {
+                    console.error('エラー:', error);
+                });
+
         });
     </script>
 </body>
