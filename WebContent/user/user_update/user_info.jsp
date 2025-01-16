@@ -13,10 +13,10 @@
 
     <h2>メールアドレス</h2>
     EmailAddress: ${user.getEmailAddress()}
-    <a class="nav-item px-2" href="/Cteam1/user/UserUpdate.action?action=1&cd=${UserID}">変更</a>
+    <a class="nav-item px-2" href="/Cteam1/user/user_update/UserUpdate.action?action=1&cd=${UserID}">変更</a>
     <h2>パスワード</h2>
     password: ${user.getPassword()}
-    <a class="nav-item px-2" href="/Cteam1/user/UserUpdate.action?action=2&cd=${UserID}">変更</a>
+    <a class="nav-item px-2" href="/Cteam1/user/user_update/UserUpdate.action?action=2&cd=${UserID}">変更</a>
 
     <h2>詳細情報</h2>
 
