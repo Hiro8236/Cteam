@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- セッション情報の取得 -->
 <%@ page session="true" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- ヘッダー部分の共通処理 --%>
-<div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-    <ul>
+
+<!-- ヘッダー部分の共通処理 -->
+<div class="d-flex justify-content-between align-items-center mb-3 mb-md-0 text-dark text-decoration-none">
+    <ul class="list-unstyled"> <!-- リストの縦表示のためlist-unstyledを追加 -->
         <!-- 職員ログインの場合 -->
         <c:if test="${user != null && user.staffRole == 1}">
             <li><a href="/Cteam1/staff/normalstaff/StaffHome.action">ホーム</a></li>
@@ -24,11 +24,10 @@
         </c:if>
     </ul>
 
-    <div class="ms-auto">
+    <div class="d-flex">
         <c:if test="${user != null && user.isAuthenticated()}">
             <!-- 認証済みの場合 -->
-            <a class="nav-item px-2" href="/Cteam1/staff/UserInfo.action">情報変更</a>
-            <span class="nav-item px-2">staffID: ${user.staffID}</span>
+            <span class="nav-item px-2">staffName: ${user.staffName}</span>
             <a class="nav-item px-2" href="StaffLogout.action">ログアウト</a>
         </c:if>
         <c:if test="${user == null || !user.isAuthenticated()}">
@@ -37,3 +36,4 @@
         </c:if>
     </div>
 </div>
+

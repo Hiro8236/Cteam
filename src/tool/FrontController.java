@@ -20,11 +20,6 @@ public class FrontController extends HttpServlet {
             // ファイル名を取得しクラス名に変換
             String name = path.replace(".a", "A").replace('/', '.');
 
-            // calendar パッケージを付与
-            if (name.startsWith("staff.normalstaff.") && !name.contains(".calendar.")) {
-                name = name.replace("staff.normalstaff.", "staff.normalstaff.calendar.");
-            }
-
             // デバッグログ
             System.out.println("修正されたクラス名: " + name);
 
