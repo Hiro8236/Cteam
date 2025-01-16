@@ -124,7 +124,7 @@
                 .catch(function(error) {
                     console.error('エラー:', error);
                 });
-
+            });
         });
     </script>
 </body>
