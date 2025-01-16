@@ -35,7 +35,7 @@
         </section>
 
         <div class="">
-			<a href="SuggestInstitusion.action">おすすめ一覧</a>
+			<a href="SuggestList.action">おすすめ一覧</a>
 		</div>
 
     </c:param>
