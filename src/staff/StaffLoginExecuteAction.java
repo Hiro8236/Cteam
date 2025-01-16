@@ -65,7 +65,7 @@ public class StaffLoginExecuteAction extends Action {
             // 認証済みフラグを立てる
             staff.setAuthenticated(true);
             // セッションにログイン情報を保存
-            session.setAttribute("staff", staff);
+            session.setAttribute("user", staff);
 
             // staffroleによるリダイレクト
             String staffRole = staff.getStaffRole();

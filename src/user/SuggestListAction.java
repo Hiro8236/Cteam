@@ -6,12 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.SuggestInstitusion;
+import bean.Suggest;
 import bean.User;
-import dao.SuggestInstitusionDao;
+import dao.SuggestListDao;
 import tool.Action;
 
-public class SuggestInstitusionAction extends Action {
+public class SuggestListAction extends Action {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -21,15 +21,15 @@ public class SuggestInstitusionAction extends Action {
 		req.setAttribute("User",user);
 
 		 // DAOの初期化
-        SuggestInstitusionDao suggestinstitusionDao = new SuggestInstitusionDao();
+        SuggestListDao suggestlistDao = new SuggestListDao();
 
         // 全件取得メソッドを使用
-        List<SuggestInstitusion> suggestinstitusions = suggestinstitusionDao.getAll();
+        List<Suggest> suggestlists = suggestlistDao.getAll();
 
         // 結果をリクエストに設定
-        req.setAttribute("suggestinstitusions", suggestinstitusions);
+        req.setAttribute("suggestlists", suggestlists);
 
 
-		req.getRequestDispatcher("suggest_institusion.jsp").forward(req, res);
+		req.getRequestDispatcher("suggest_list.jsp").forward(req, res);
 	}
 }

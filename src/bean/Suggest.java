@@ -2,20 +2,20 @@ package bean;
 
 import java.io.Serializable;
 
-public class Bookmark implements Serializable {
+public class Suggest implements Serializable {
 
 	/**
-	 * 支援ID:Int
+	 * おすすめ支援ID:Int
 	 */
 	private int id;
 
 	/**
-	 * 支援名:String
+	 * おすすめ支援名:String
 	 */
 	private String name;
 
 	/**
-	 * 支援詳細:String
+	 * おすすめ支援詳細:String
 	 */
 	private String detail;
 

@@ -1,4 +1,3 @@
-<%-- ログインJSP --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -9,7 +8,7 @@
          <section class="me-4">
             <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4" style="background-color:#f2f2f2">おすすめ支援一覧</h2>
 			<c:choose>
-			    <c:when test="${suggestinstitusions != null && suggestinstitusions.size() > 0}">
+			    <c:when test="${suggestlists != null && suggestlists.size() > 0}">
 			        <table class="table table-hover">
 			            <thead>
 			                <tr>
@@ -18,16 +17,11 @@
 			                </tr>
 			            </thead>
 			            <tbody>
-			                <c:forEach var="suggestinstitusions" items="${suggestinstitusions}">
+			                <c:forEach var="suggestlists" items="${suggestlists}">
 			                    <tr>
-			                        <td>${suggestinstitusions.name}</td>
-			                        <td>${suggestinstitusions.detail}</td>
-			                        <td>
-                                        <form action="bookmark" method="post">
-                                            <input type="hidden" name="suggestinstitusionId" value="${suggestinstitusion.ID}" />
-                                            <button type="submit" class="btn btn-primary">ブックマーク登録</button>
-                                        </form>
-                                    </td>
+			                        <td>${suggestlists.name}</td>
+			                        <td>${suggestlists.detail}</td>
+			                        <td><a href="BookmarkRegist.action?cd=${bookmarkregist.id}">登録</a></td>
 			                    </tr>
 			                </c:forEach>
 			            </tbody>
