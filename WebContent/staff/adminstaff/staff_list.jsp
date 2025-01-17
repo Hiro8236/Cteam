@@ -8,7 +8,7 @@
         <section class="me-4">
             <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">職員管理</h2>
             <div class="my-2 text-end px-4">
-                <a href="StaffCreate.action">新規登録</a>
+                <a href="StaffCreate.action" class="btn btn-primary">新規登録</a>
             </div>
 
             <!-- 職員一覧 -->
@@ -23,21 +23,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- 職員のリスト（staffRole == 1） -->
+                    <!-- 職員のリスト -->
                     <c:forEach var="staff" items="${staffs}">
-                        <c:if test="${staff.staffRole == 1}">
-                            <tr>
-                                <td>${staff.staffID}</td>
-                                <td>${staff.staffName}</td>
-                                <td>職員</td>
-                                <td>
-                                    <a href="StaffUpdate.action?staffId=${staff.staffID}">変更</a>
-                                </td>
-                            </tr>
-                        </c:if>
+                        <tr>
+                            <td>${staff.staffID}</td>
+                            <td>${staff.staffName}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${staff.staffRole == 1}">職員</c:when>
+                                    <c:when test="${staff.staffRole == 2}">管理者</c:when>
+                                    <c:otherwise>不明</c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <!-- 変更ボタン -->
+                                <a href="StaffUpdate.action?staffId=${staff.staffID}" class="btn btn-primary btn-sm">変更</a>
+
+                                <!-- 削除ボタン -->
+                                <form action="StaffDelete.action" method="post" style="display:inline;">
+                                    <input type="hidden" name="staffId" value="${staff.staffID}" />
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('本当に削除しますか？');">
+                                        削除
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
                     </c:forEach>
                 </tbody>
             </table>
         </section>
     </c:param>
 </c:import>
+
