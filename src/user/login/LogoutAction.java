@@ -1,4 +1,4 @@
-package user;
+package user.login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +18,6 @@ public class LogoutAction extends Action {
         }
 
         // ログインページにリダイレクト
-        res.sendRedirect("Home.action");
+        res.sendRedirect("../Home.action");
     }
 }
