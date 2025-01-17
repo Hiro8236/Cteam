@@ -22,7 +22,7 @@
 						</div>
 					</c:if>
 					<div class="mt-4">
-						<a class="w-25 btn btn-lg btn-primary" href="/user/login/Login.action">ログイン</a>
+						<a class="w-25 btn btn-lg btn-primary" href="Login.action">ログイン</a>
 					</div>
 				</div>
 			</form>
