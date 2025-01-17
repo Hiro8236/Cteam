@@ -21,7 +21,7 @@
         </c:if>
         <c:if test="${empty userID}">
             <!-- 未認証の場合 -->
-            <a class="nav-item px-2" href="/Cteam1/user/Login.action">ログイン</a>
+            <a class="nav-item px-2" href="/Cteam1/user/login/Login.action">ログイン</a>
         </c:if>
     </div>
 

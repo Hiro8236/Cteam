@@ -19,7 +19,7 @@ public class UserRegistSuccessAction extends Action {
             if (emailAddress == null || emailAddress.trim().isEmpty() ||
                 password == null || password.trim().isEmpty()) {
                 req.setAttribute("error", "メールアドレスまたはパスワードが空です。");
-                req.getRequestDispatcher("login/UserRegist.jsp").forward(req, res);
+                req.getRequestDispatcher("/user/login/UserRegist.jsp").forward(req, res);
                 return;
             }
 
@@ -37,12 +37,12 @@ public class UserRegistSuccessAction extends Action {
             req.setAttribute("message", "登録が完了しました。ログインしてください。");
 
             // 登録完了ページに遷移
-            req.getRequestDispatcher("login/UserRegistSuccess.jsp").forward(req, res);
+            req.getRequestDispatcher("/user/login/UserRegistSuccess.jsp").forward(req, res);
 
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("error", "ユーザー登録中にエラーが発生しました。");
-            req.getRequestDispatcher("login/UserRegist.jsp").forward(req, res);
+            req.getRequestDispatcher("/user/login/UserRegist.jsp").forward(req, res);
         }
     }
 /*

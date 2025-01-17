@@ -11,6 +11,6 @@ public class LoginAction extends Action {
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 
-		req.getRequestDispatcher("login/login.jsp").forward(req, res);
+		req.getRequestDispatcher("/user/login/login.jsp").forward(req, res);
 	}
 }
