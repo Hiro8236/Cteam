@@ -37,12 +37,18 @@
                             </td>
                             <td>
                                 <!-- 変更ボタン -->
-                                <a href="StaffUpdate.action?staffId=${staff.staffID}" class="btn btn-primary btn-sm">変更</a>
+								<form action="StaffUpdate.action" method="post" style="display:inline;">
+    								<input type="hidden" name="staffId" value="${staff.staffID}" />
+    								<button type="submit" class="btn btn-primary btn-sm">
+        												変更
+   									 </button>
+								</form>
+
 
                                 <!-- 削除ボタン -->
                                 <form action="StaffDelete.action" method="post" style="display:inline;">
                                     <input type="hidden" name="staffId" value="${staff.staffID}" />
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('本当に削除しますか？');">
+                                    <button type="submit" class="btn btn-danger btn-sm">
                                         削除
                                     </button>
                                 </form>
