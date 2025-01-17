@@ -58,7 +58,7 @@ public class UpdateEmailAction extends Action {
 
             // OTPを保存（メールアドレスベースで）
             try {
-                userDao.saveOTP(emailAddress, otp);
+                userDao.saveUpdateOTP(emailAddress, otp);
                 System.out.println("OTP保存成功。EmailAddress: " + emailAddress + ", OTP: " + otp);
             } catch (Exception e) {
                 e.printStackTrace();

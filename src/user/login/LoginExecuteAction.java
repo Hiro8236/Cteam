@@ -44,7 +44,7 @@ public class LoginExecuteAction extends Action {
 			session.setAttribute("userID", user.getUserID());
 
 			//リダイレクト
-			url = "Home.action";
+			url = "/Cteam1/user/Home.action";
 			res.sendRedirect(url);
 		} else {
 			// 認証失敗の場合
