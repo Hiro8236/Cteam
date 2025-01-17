@@ -20,31 +20,26 @@ public class StaffDao extends Dao {
      */
     public Staff login(Integer staffId, String password) throws Exception {
         Staff staff = null;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
 
-        try {
-            connection = getConnection();
-            String sql = "SELECT * FROM Staff WHERE staffId = ? AND password = ?";
-            statement = connection.prepareStatement(sql);
+        String sql = "SELECT * FROM Staff WHERE staffId = ? AND password = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
             statement.setInt(1, staffId);
             statement.setString(2, password);
 
-            resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                staff = new Staff();
-                staff.setStaffID(resultSet.getInt("staffId"));
-                staff.setStaffName(resultSet.getString("staffname"));
-                staff.setStaffRole(resultSet.getString("staffrole"));
-                staff.setPassword(resultSet.getString("password"));
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    staff = new Staff();
+                    staff.setStaffID(resultSet.getInt("staffId"));
+                    staff.setStaffName(resultSet.getString("staffname"));
+                    staff.setStaffRole(resultSet.getString("staffrole"));
+                    staff.setPassword(resultSet.getString("password"));
+                } else {
+                    System.out.println("ログイン失敗: 職員IDまたはパスワードが間違っています");
+                }
             }
-        } finally {
-            if (resultSet != null) resultSet.close();
-            if (statement != null) statement.close();
-            if (connection != null) connection.close();
         }
-
         return staff;
     }
 
@@ -57,30 +52,22 @@ public class StaffDao extends Dao {
      */
     public Staff findById(int staffId) throws Exception {
         Staff staff = null;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
 
-        try {
-            connection = getConnection();
-            String sql = "SELECT * FROM Staff WHERE staffId = ?";
-            statement = connection.prepareStatement(sql);
+        String sql = "SELECT * FROM Staff WHERE staffId = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
             statement.setInt(1, staffId);
-            resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                staff = new Staff();
-                staff.setStaffID(resultSet.getInt("staffId"));
-                staff.setStaffName(resultSet.getString("staffname"));
-                staff.setStaffRole(resultSet.getString("staffrole"));
-                staff.setPassword(resultSet.getString("password"));
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    staff = new Staff();
+                    staff.setStaffID(resultSet.getInt("staffId"));
+                    staff.setStaffName(resultSet.getString("staffname"));
+                    staff.setStaffRole(resultSet.getString("staffrole"));
+                    staff.setPassword(resultSet.getString("password"));
+                }
             }
-        } finally {
-            if (resultSet != null) resultSet.close();
-            if (statement != null) statement.close();
-            if (connection != null) connection.close();
         }
-
         return staff;
     }
 
@@ -91,28 +78,20 @@ public class StaffDao extends Dao {
      * @throws Exception
      */
     public void save(Staff staff) throws Exception {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
+        String sql = "INSERT INTO Staff (staffname, staffrole, password) VALUES (?, ?, ?)";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-        try {
-            connection = getConnection();
-            String sql = "INSERT INTO Staff (staffname, staffrole, password) VALUES (?, ?, ?)";
-            statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, staff.getStaffName());
             statement.setString(2, staff.getStaffRole());
             statement.setString(3, staff.getPassword());
             statement.executeUpdate();
 
-            // 自動生成された職員IDを取得
-            resultSet = statement.getGeneratedKeys();
-            if (resultSet.next()) {
-                staff.setStaffID(resultSet.getInt(1));  // 自動生成されたIDを設定
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                if (resultSet.next()) {
+                    staff.setStaffID(resultSet.getInt(1));  // 自動生成されたIDを設定
+                }
             }
-        } finally {
-            if (resultSet != null) resultSet.close();
-            if (statement != null) statement.close();
-            if (connection != null) connection.close();
         }
     }
 
@@ -127,58 +106,71 @@ public class StaffDao extends Dao {
      */
     public List<Staff> filterStaff(int staffId, String staffName, String staffRole) throws Exception {
         List<Staff> staffList = new ArrayList<>();
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
 
-        try {
-            connection = getConnection();
+        StringBuilder sql = new StringBuilder("SELECT * FROM Staff WHERE 1=1");
+        if (staffId > 0) sql.append(" AND staffId = ?");
+        if (staffName != null && !staffName.isEmpty()) sql.append(" AND staffname LIKE ?");
+        if (staffRole != null && !staffRole.isEmpty()) sql.append(" AND staffrole LIKE ?");
 
-            // SQL文を構築
-            StringBuilder sql = new StringBuilder("SELECT * FROM Staff WHERE 1=1");
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql.toString())) {
 
-            // 条件を追加
-            if (staffId > 0) {
-                sql.append(" AND staffId = ?");
-            }
-            if (staffName != null && !staffName.isEmpty()) {
-                sql.append(" AND staffname LIKE ?");
-            }
-            if (staffRole != null && !staffRole.isEmpty()) {
-                sql.append(" AND staffrole LIKE ?");
-            }
-
-            statement = connection.prepareStatement(sql.toString());
-
-            // パラメータを設定
             int index = 1;
-            if (staffId > 0) {
-                statement.setInt(index++, staffId);
-            }
-            if (staffName != null && !staffName.isEmpty()) {
-                statement.setString(index++, "%" + staffName + "%");
-            }
-            if (staffRole != null && !staffRole.isEmpty()) {
-                statement.setString(index++, "%" + staffRole + "%");
-            }
+            if (staffId > 0) statement.setInt(index++, staffId);
+            if (staffName != null && !staffName.isEmpty()) statement.setString(index++, "%" + staffName + "%");
+            if (staffRole != null && !staffRole.isEmpty()) statement.setString(index++, "%" + staffRole + "%");
 
-            resultSet = statement.executeQuery();
-
-            // 結果をリストに格納
-            while (resultSet.next()) {
-                Staff staff = new Staff();
-                staff.setStaffID(resultSet.getInt("staffId"));
-                staff.setStaffName(resultSet.getString("staffname"));
-                staff.setStaffRole(resultSet.getString("staffrole"));
-                staff.setPassword(resultSet.getString("password"));
-                staffList.add(staff);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Staff staff = new Staff();
+                    staff.setStaffID(resultSet.getInt("staffId"));
+                    staff.setStaffName(resultSet.getString("staffname"));
+                    staff.setStaffRole(resultSet.getString("staffrole"));
+                    staff.setPassword(resultSet.getString("password"));
+                    staffList.add(staff);
+                }
             }
-        } finally {
-            if (resultSet != null) resultSet.close();
-            if (statement != null) statement.close();
-            if (connection != null) connection.close();
         }
-
         return staffList;
+    }
+
+    /**
+     * 単一の職員を削除する
+     *
+     * @param staffId 削除する職員ID
+     * @return 成功時true、失敗時false
+     * @throws Exception
+     */
+    public boolean deleteStaffById(int staffId) throws Exception {
+        String sql = "DELETE FROM Staff WHERE staffId = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, staffId);
+            return pstmt.executeUpdate() > 0; // 削除された行がある場合はtrueを返す
+        }
+    }
+
+    /**
+     * 複数の職員を削除する
+     *
+     * @param staffIds 削除する職員IDのリスト
+     * @return 削除された行数
+     * @throws Exception
+     */
+    public int deleteStaffByIds(List<Integer> staffIds) throws Exception {
+        if (staffIds == null || staffIds.isEmpty()) return 0;
+
+        String placeholders = String.join(",", staffIds.stream().map(id -> "?").toArray(String[]::new));
+        String sql = "DELETE FROM Staff WHERE staffId IN (" + placeholders + ")";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            for (int i = 0; i < staffIds.size(); i++) {
+                pstmt.setInt(i + 1, staffIds.get(i));
+            }
+            return pstmt.executeUpdate();
+        }
     }
 }
