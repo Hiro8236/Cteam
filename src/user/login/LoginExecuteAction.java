@@ -1,4 +1,4 @@
-package user;
+package user.login;
 
 import java.util.ArrayList;
 import java.util.List;
