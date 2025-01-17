@@ -120,10 +120,8 @@
                     } else {
                         alert('登録中にエラーが発生しました。');
                     }
-                })
-                .catch(function(error) {
+                }, function(error) { // .catch() を削除し、ここにエラーハンドリングを追加
                     console.error('エラー:', error);
-                });
             });
         });
     </script>
