@@ -11,7 +11,7 @@ import bean.User;
 import dao.UserDao;
 import tool.Action;
 
-public class UserUpdateExecuteAction extends Action {
+public class UserPasswordUpdateExecuteAction extends Action {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {

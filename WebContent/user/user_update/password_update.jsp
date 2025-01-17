@@ -17,7 +17,7 @@
         </div>
     </c:if>
 
-    <form action="UserUpdateExecute.action" method="post">
+    <form action="UserPasswordUpdateExecute.action" method="post">
         <!-- 現在のパスワード -->
         <div class="form-floating mx-5">
             <input class="form-control px-5 fs-5" autocomplete="off" id="id-input" maxlength="20" name="Password"
