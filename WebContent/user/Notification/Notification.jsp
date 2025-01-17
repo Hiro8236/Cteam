@@ -4,15 +4,29 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>お知らせ一覧</title>
+    <title>通知一覧</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
         table {
             border-collapse: collapse;
             width: 80%;
             margin: 20px auto;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         table, th, td {
-            border: 1px solid #333;
+            border: 1px solid #ccc;
         }
         th, td {
             padding: 10px;
@@ -21,29 +35,46 @@
         th {
             background-color: #f4f4f4;
         }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .no-data {
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">お知らせ一覧</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>タイトル</th>
-                <th>内容</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- NotificationListを繰り返し処理 -->
-            <c:forEach var="notification" items="${NotificationList}">
+    <h1>通知一覧</h1>
+
+    <c:if test="${empty notificationList}">
+        <div class="no-data">
+            <p>現在、お知らせはありません。</p>
+        </div>
+    </c:if>
+
+    <c:if test="${not empty notificationList}">
+        <table>
+            <thead>
                 <tr>
-                    <td>${notification.id}</td>
-                    <td>${notification.title}</td>
-                    <td>${notification.sentence}</td>
+                    <th>ID</th>
+                    <th>タイトル</th>
+                    <th>内容</th>
                 </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <!-- NotificationListをループで処理 -->
+                <c:forEach var="notification" items="${notificationList}">
+                    <tr>
+                        <td>${notification.id}</td>
+                        <td>${notification.title}</td>
+                        <td>${notification.sentence}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
+
 </body>
 </html>

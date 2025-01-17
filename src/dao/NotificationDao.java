@@ -16,51 +16,31 @@ public class NotificationDao extends Dao{
      * @return おしらせのリスト。
      * @throws Exception データ取得中にエラーが発生した場合。
      */
-    public List<Notification> getAllNotification() throws Exception {
-        List<Notification> notifications = new ArrayList<>();
-        Connection connection = getConnection();
-        PreparedStatement statement = null;
+	public List<Notification> getAll() throws Exception {
+	    List<Notification> notificationlists = new ArrayList<>();
+	    String sql = " SELECT NoticeID, Sentence, Title FROM notice";
 
-        try {
-            // SQLクエリの準備
-            statement = connection.prepareStatement("SELECT * FROM Notice ORDER BY upload_date DESC");
-            ResultSet resultSet = statement.executeQuery();
+	    try (Connection connection = getConnection();
+	         PreparedStatement statement = connection.prepareStatement(sql);
+	         ResultSet resultSet = statement.executeQuery()) {
 
-            // 結果セットをお知らせオブジェクトに変換してリストに追加
-            while (resultSet.next()) {
-                Notification notification= new Notification();
-                notification.setTitle(resultSet.getString("TITLE"));
-                notification.setId(resultSet.getInt("ID"));
-                notification.setSentence(resultSet.getString("Sentence"));
-                notifications.add(notification);
-            }
+	        while (resultSet.next()) {
+	            Notification notificationlist = new Notification();
+	            notificationlist.setId(resultSet.getInt("ID"));
+	            notificationlist.setTitle(resultSet.getString("Title"));
+	            notificationlist.setSentence(resultSet.getString("Sentencel"));
+	            notificationlists.add(notificationlist);
+	        }
+	    }
 
-        } catch (SQLException e) {
-            throw new Exception("お知らせデータの取得中にエラーが発生しました。", e);
-        } finally {
-            // リソースのクリーンアップ
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException sqle) {
-                    throw sqle;
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException sqle) {
-                    throw sqle;
-                }
-            }
-        }
+	    return notificationlists;
+	}
 
-        return notifications;
 
-}
+
     /**
      * 指定したお知らせIDに基づいてお知らせ情報を取得するメソッド。
-     * @param NoticeId 動画ID。
+     * @param NoticeId
      * @return お知らせオブジェクト、またはnull（見つからない場合）。
      * @throws Exception データ取得中にエラーが発生した場合。
      */
@@ -71,7 +51,7 @@ public class NotificationDao extends Dao{
 
         try {
             // SQLクエリの準備
-            statement = connection.prepareStatement("SELECT * FROM Notice WHERE NoticeID = ?");
+            statement = connection.prepareStatement("SELECT * FROM notice WHERE NoticeID = ?");
             statement.setInt(1, Id);
             ResultSet resultSet = statement.executeQuery();
 

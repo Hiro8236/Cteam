@@ -7,24 +7,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.Notification;
 import dao.NotificationDao;
+import tool.Action;
 
-public class NotificationAction {
+public class NotificationAction extends Action {
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         try {
-            // DAOを使用して動画一覧を取得
-        	NotificationDao notificationDao = new NotificationDao();
-        	List<Notification> notificationList = notificationDao.getAllNotification();
-            // リクエストに動画一覧をセット
-            request.setAttribute("NotificationList", notificationList);
+            NotificationDao notificationDao = new NotificationDao();
+            List<Notification> notificationList = notificationDao.getAll();
 
-            // 表示するJSPのパスを返す
-            return "/user/notification.jsp";
+            System.out.println("DAOから取得した通知リスト: " + notificationList);
 
+            req.setAttribute("notificationList", notificationList);
+            req.getRequestDispatcher("notification.jsp").forward(req, res);
         } catch (Exception e) {
             e.printStackTrace();
-            // エラーページにリダイレクト
-            return "/error.jsp";
+            req.setAttribute("errorMessage", "通知情報の取得中にエラーが発生しました。");
+            req.getRequestDispatcher("error.jsp").forward(req, res);
         }
     }
+
 }
