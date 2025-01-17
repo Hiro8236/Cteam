@@ -3,25 +3,14 @@ package bean;
 import java.util.Date;
 
 public class Event {
-    private int eventId;           // イベントID
-    private String title;          // イベントタイトル
-    private String description;    // イベントの詳細
-    private Date startTime;        // 開始時間
-    private Date endTime;          // 終了時間
-    private int createdBy;         // 作成者（スタッフID）
+    private int eventId;
+    private String title;
+    private String description;
+    private Date startTime;
+    private Date endTime;
+    private int createdBy;
 
-    // コンストラクタ
-    public Event() {}
-
-    public Event(String title, String description, Date startTime, Date endTime, int createdBy) {
-        this.title = title;
-        this.description = description;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.createdBy = createdBy;
-    }
-
-    // GetterとSetter
+    // Getters and Setters
     public int getEventId() {
         return eventId;
     }
