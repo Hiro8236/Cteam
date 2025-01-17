@@ -117,11 +117,11 @@
                         alert('イベントが登録されました！');
                         modal.style.display = 'none';
                         location.reload();
-                    } else {
-                        alert('登録中にエラーが発生しました。');
                     }
-                }, function(error) { // .catch() を削除し、ここにエラーハンドリングを追加
+                })
+                .catch(function(error) {
                     console.error('エラー:', error);
+                });
             });
         });
     </script>
