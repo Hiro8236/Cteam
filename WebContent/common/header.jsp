@@ -16,13 +16,13 @@
   <div class="ms-auto">
         <c:if test="${not empty userID}">
             <!-- 認証済みの場合 -->
-            <a class="nav-item px-2" href="/Cteam1/user/UserInfo.action">情報変更</a>
+            <a class="nav-item px-2" href="/Cteam1/user/user_update/UserInfo.action">情報変更</a>
             <span class="nav-item px-2">UserID: ${userID}</span>
             <a class="nav-item px-2" href="Logout.action">ログアウト</a>
         </c:if>
         <c:if test="${empty userID}">
             <!-- 未認証の場合 -->
-            <a class="nav-item px-2" href="/Cteam1/user/Login.action">ログイン</a>
+            <a class="nav-item px-2" href="/Cteam1/user/login/Login.action">ログイン</a>
         </c:if>
     </div>
 
