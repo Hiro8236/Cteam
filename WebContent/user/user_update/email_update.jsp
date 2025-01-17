@@ -67,7 +67,7 @@
                                     }
                                 }, 1000);
 
-                                fetch('/Cteam1/user/SendEmail.action', {
+                                fetch('/Cteam1/user/mail/UpdateEmail.action', {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -102,7 +102,7 @@
                         <!-- 認証コード確認および送信ボタン -->
                         <div class="mt-3 mx-5">
                             <button class="btn btn-primary px-5 fs-5" type="button" id="verify-and-submit">
-                                認証
+                                                認証
                             </button>
                             <div id="verify-message" style="margin-top: 10px; color: red; font-weight: bold; text-align: center;"></div>
                         </div>
@@ -120,7 +120,7 @@
                                     }
 
                                     try {
-                                        const response = await fetch('/Cteam1/user/VerifyCode.action', {
+                                        const response = await fetch('/Cteam1/user/VerifyCodeEmail.action', {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/x-www-form-urlencoded',

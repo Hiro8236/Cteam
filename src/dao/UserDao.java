@@ -360,4 +360,63 @@ public class UserDao extends Dao {
     }
 
 
+
+
+    public void EmailUpdateOTP(Integer userID, String emailAddress, String otp) throws Exception {
+
+    	String sql = "INSERT INTO Email_otp (user_ID, email_address, otp, expires_at) " +
+                "VALUES (?, ?, ?, NOW() + INTERVAL 10 MINUTE) " +
+                "ON DUPLICATE KEY UPDATE otp = VALUES(otp), expires_at = VALUES(expires_at);";
+
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+        	ps.setInt(1, userID);
+            ps.setString(2, emailAddress);
+            ps.setString(3, otp);
+
+            // ログを追加
+            System.out.println("Saving OTP: email = " + emailAddress + ", otp = " + otp);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("OTPの保存に失敗しました。");
+        }
+    }
+
+
+
+    /**
+     * 認証コードの検証
+     */
+    public boolean EmailOTP(Integer userID, String emailAddress, String otp) throws Exception {
+    	 String sql = "SELECT COUNT(*) FROM Email_otp WHERE user_id = ? AND email_address = ? AND otp = ? AND expires_at > NOW()";        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+    		 ps.setInt(1, userID);
+    		ps.setString(2, emailAddress);
+            ps.setString(3, otp);
+
+
+
+            // ログを追加
+            System.out.println("Validating OTP: email = " + emailAddress + ", otp = " + otp);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    System.out.println("Validation result: count = " + count);
+                    return count > 0;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("OTPの検証中にエラーが発生しました。");
+        }
+        return false;
+    }
+
+
+
 }

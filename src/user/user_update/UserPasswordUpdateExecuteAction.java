@@ -65,7 +65,7 @@ public class UserPasswordUpdateExecuteAction extends Action {
         if (!errors.isEmpty()) {
             req.setAttribute("errors", errors);
             req.setAttribute("Password", currentPassword); // 再表示用
-            req.getRequestDispatcher("user_update.jsp").forward(req, res);
+            req.getRequestDispatcher("password_update.jsp").forward(req, res);
             return;
         }
 
@@ -86,7 +86,7 @@ public class UserPasswordUpdateExecuteAction extends Action {
             // 更新失敗時
             errors.add("パスワードの更新に失敗しました。");
             req.setAttribute("errors", errors);
-            req.getRequestDispatcher("user_update.jsp").forward(req, res);
+            req.getRequestDispatcher("password_update.jsp").forward(req, res);
         }
     }
 }

@@ -13,6 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import tool.Action;
@@ -56,10 +57,21 @@ public class UpdateEmailAction extends Action {
             // 6桁のOTPを生成
             String otp = generateOTP();
 
+            HttpSession session = req.getSession();
+            Integer userID = (Integer) session.getAttribute("userID");
+
+            if (userID == null) {
+                errors.add("セッションが無効です。再度ログインしてください。");
+                req.setAttribute("errors", errors);
+                req.getRequestDispatcher("/user/login.jsp").forward(req, res);
+                return;
+            }
+
+
             // OTPを保存（メールアドレスベースで）
             try {
-                userDao.saveUpdateOTP(emailAddress, otp);
-                System.out.println("OTP保存成功。EmailAddress: " + emailAddress + ", OTP: " + otp);
+                userDao.EmailUpdateOTP(userID, emailAddress, otp);
+                System.out.println("OTP保存成功。useID:" + userID + "EmailAddress: " + emailAddress + ", OTP: " + otp);
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new Exception("OTPの保存に失敗しました。");
