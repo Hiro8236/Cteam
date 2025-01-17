@@ -18,10 +18,20 @@ public class StaffCalendarAction extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // リクエストとレスポンスの文字コードを設定
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
         try {
+            // イベントデータを取得
             EventDao eventDao = new EventDao();
             List<Event> events = eventDao.getEvents();
+
+            // データをリクエストスコープに設定
             request.setAttribute("events", events);
+
+            // JSP に転送
             request.getRequestDispatcher("/staff/normalstaff/calendar/staff_calendar.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();

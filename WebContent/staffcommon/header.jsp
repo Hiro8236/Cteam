@@ -11,7 +11,7 @@
         <c:if test="${user != null && user.staffRole == 1}">
             <li><a href="/Cteam1/staff/normalstaff/StaffHome.action">ホーム</a></li>
             <li><a href="#制度">制度</a></li>
-            <li><a href="/Cteam1/staff/normalstaff/StaffCalendar.action">カレンダー</a></li>
+            <li><a href="/Cteam1/staff/normalstaff/calendar/StaffCalendar.action">カレンダー</a></li>
             <li><a href="#お知らせ">これは職員です</a></li>
         </c:if>
 
@@ -27,7 +27,7 @@
     <div class="d-flex">
         <c:if test="${user != null && user.isAuthenticated()}">
             <!-- 認証済みの場合 -->
-            <span class="nav-item px-2">staffName: ${user.staffName}</span>
+            <span class="nav-item px-2">${user.staffName}</span>
             <a class="nav-item px-2" href="StaffLogout.action">ログアウト</a>
         </c:if>
         <c:if test="${user == null || !user.isAuthenticated()}">
