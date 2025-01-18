@@ -7,9 +7,9 @@
     <c:param name="content">
         <h1>HOME</h1>
 
-         <!--  <section class="me-4">
- 		</section -->
-		<!--  	<c:choose>
+         <section class="me-4">
+
+		  	<c:choose>
 			    <c:when test="${institutions != null && institutions.size() > 0}">
 			        <table class="table table-hover">
 			            <thead>
@@ -18,7 +18,7 @@
 			                    <th>支援詳細</th>
 			                </tr>
 			            </thead>
-			            <!--  tbody>
+			            <tbody>
 			                <c:forEach var="institutions" items="${institutions}">
 			                    <tr>
 			                        <td>${institutions.name}</td>
@@ -37,6 +37,6 @@
         <div class="">
 			<a href="SuggestList.action">おすすめ一覧</a>
 		</div>
-
+	</section >
     </c:param>
 </c:import>
