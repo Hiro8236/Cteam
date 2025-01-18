@@ -2,7 +2,7 @@ package bean;
 
 import java.io.Serializable;
 
-public class Institusion implements Serializable {
+public class Institution implements Serializable {
 
 	/**
 	 * 支援ID:Int

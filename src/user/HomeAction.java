@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Institusion;
-import dao.InstitusionDao;
+import bean.Institution;
+import dao.InstitutionDao;
 import tool.Action;
 
 
@@ -16,30 +16,33 @@ public class HomeAction extends Action {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		HttpSession session=req.getSession();
-		Integer user =(Integer)session.getAttribute("userID");
+	    HttpSession session = req.getSession();
+	    Integer user = (Integer) session.getAttribute("userID");
+	    System.out.println("セッションの userID: " + user);
 
+	    if (user != null) {
+	        req.setAttribute("User", user);
+	    } else {
+	        System.out.println("Session userID is null. Proceeding without user.");
+	        req.setAttribute("User", null);
+	    }
 
+	    // DAOの初期化
+	    InstitutionDao institutionDao = new InstitutionDao();
 
+	    try {
+	        // 全件取得メソッドを使用
+	        List<Institution> institutions = institutionDao.getAll();
+	        System.out.println("DAOから取得した institution リスト: " + institutions);
 
-        if (user != null) {
-        // セッションに userID が存在する場合は、リクエスト属性に設定
-        req.setAttribute("User", user);
-        } else {
-        // userID が null の場合でも問題なく進むようにする
-        System.out.println("Session userID is null. Proceeding without user.");
-        req.setAttribute("User", null); // 必要に応じて null を設定
-        }
+	        // 結果をリクエストに設定
+	        req.setAttribute("institutions", institutions);
+	    } catch (Exception e) {
+	    	System.err.println("エラー詳細: " + e);
+	        e.printStackTrace();
+	        throw e; // 必要に応じて例外を再スロー
+	    }
 
-		 // DAOの初期化
-        InstitusionDao institusionDao = new InstitusionDao();
-
-        // 全件取得メソッドを使用
-        List<Institusion> institusions = institusionDao.getAll();
-
-        // 結果をリクエストに設定
-        req.setAttribute("institusions", institusions);
-
-		req.getRequestDispatcher("home.jsp").forward(req, res);
+	    req.getRequestDispatcher("home.jsp").forward(req, res);
 	}
 }
