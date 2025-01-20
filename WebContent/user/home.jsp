@@ -31,7 +31,7 @@
 			    <c:otherwise>
 			        <div>支援情報が存在しませんでした</div>
 			    </c:otherwise>
-			</c:choose> -->
+			</c:choose>
 
 
         <div class="">

@@ -8,7 +8,7 @@
 
     <c:param name="content">
         <section class="w-75 text-center m-auto border pb-3">
-            <form action="/Cteam1/user/UserRegistSuccess.action" method="post">
+            <form action="/Cteam1/user/user_update/UserEmailUpdateProcess.action" method="post">
                 <div id="wrap_box">
                     <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2">メールアドレス変更</h2>
 
@@ -26,7 +26,7 @@
                         <!-- メールアドレス -->
                         <div class="form-floating mx-5">
                             <input class="form-control px-5 fs-5" autocomplete="off"
-                                   id="email-input" maxlength="255" name="EmailAddress"
+                                   id="email-input" maxlength="255" name="NewEmailAddress"
                                    placeholder="メールアドレスを入力してください" type="email" required />
                             <label for="email-input">メールアドレス</label>
                         </div>

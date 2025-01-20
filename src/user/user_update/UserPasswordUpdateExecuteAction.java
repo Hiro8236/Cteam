@@ -59,6 +59,9 @@ public class UserPasswordUpdateExecuteAction extends Action {
             errors.add("新しいパスワードを入力してください。");
         } else if (newPassword.length() > 20) {
             errors.add("新しいパスワードは20文字以内で入力してください。");
+        }else if (currentPassword != null && currentPassword.equals(newPassword)) {
+            // 現在のパスワードと新しいパスワードが同じ場合
+            errors.add("新しいパスワードは現在のパスワードと異なる必要があります。");
         }
 
         // エラーがあれば JSP に返す
@@ -79,9 +82,11 @@ public class UserPasswordUpdateExecuteAction extends Action {
             // 更新成功時、セッション情報も更新
             user.setPassword(hashedNewPassword);  // セッション内のユーザーオブジェクトを更新
             session.setAttribute("user", user);  // ユーザーオブジェクトをセッションに再設定
+            req.setAttribute("message", "パスワードが正常に更新されました。");
 
-            // 更新成功後のリダイレクト
-            res.sendRedirect("user_info.jsp");
+            // 更新完了ページへ転送
+            req.getRequestDispatcher("UserInfo.action").forward(req, res);
+
         } else {
             // 更新失敗時
             errors.add("パスワードの更新に失敗しました。");
