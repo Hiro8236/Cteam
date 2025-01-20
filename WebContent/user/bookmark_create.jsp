@@ -11,9 +11,7 @@
 		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4" style="background-color:#f2f2f2">登録画面</h2>
 			<div class="bg-success bg-opacity-50 text-center lh-lg">
-				 <input type="hidden" name="id" value="${id}" />
-    			 <input type="hidden" name="name" value="${name}" />
-				<p>登録が完了しました</p>
+				 <p>登録が完了しました</p>
 			</div>
 			<div class="lh-lg row" style="margin-top: 8rem;">
 				<div class="mx-3 col-2">

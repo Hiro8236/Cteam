@@ -18,12 +18,13 @@
 			            </thead>
 			            <tbody>
 			                <c:forEach var="suggestlists" items="${suggestlists}">
-			                    <tr>
-			                        <td>${suggestlists.name}</td>
-			                        <td>${suggestlists.detail}</td>
-			                        <td><a href="BookmarkRegist.action?cd=${bookmarkregist.id}">登録</a></td>
-			                    </tr>
-			                </c:forEach>
+							    <tr>
+							        <td>${suggestlists.name}</td>
+							        <td>${suggestlists.detail}</td>
+							        <td><a href="BookmarkCreate.action?id=${suggestlists.ID}">登録</a></td>
+							    </tr>
+							</c:forEach>
+
 			            </tbody>
 			        </table>
 			    </c:when>

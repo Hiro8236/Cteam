@@ -17,10 +17,10 @@
 			                </tr>
 			            </thead>
 			            <tbody>
-			                <c:forEach var="bookmark" items="${sessionScope.bookmarklists}">
+			                <c:forEach var="suggestlists"  items="${suggestlists}">
 			                    <tr>
-			                        <td>${bookmark.name}</td>
-			                        <td>${bookmark.detail}</td>
+			                        <td>${suggestlists.name}</td>
+			                        <td>${suggestlists.detail}</td>
 			                    </tr>
 			                </c:forEach>
 			            </tbody>
