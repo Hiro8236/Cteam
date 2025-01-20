@@ -1,36 +1,37 @@
 package staff.normalstaff.calendar;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.Event;
 import dao.EventDao;
+import tool.Action;
 
 @WebServlet("/staff/normalstaff/calendar/create")
-public class EventCreateAction extends HttpServlet {
+public class EventCreateAction extends Action{
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	@Override
+    public void execute(HttpServletRequest req, HttpServletResponse res)
+            throws Exception {
         try {
             System.out.println("=== イベント登録処理開始 ===");
 
             // フォームデータを取得
-            String title = request.getParameter("title");
-            String description = request.getParameter("description");
-            String start = request.getParameter("start");
-            String end = request.getParameter("end");
+            String title = req.getParameter("title");
+            String description = req.getParameter("description");
+            String start = req.getParameter("start");
+            String end = req.getParameter("end");
+
+            String restart = start.replace("T", " ") + ":00";
+            String reend= end.replace("T", " ") + ":00";
 
             System.out.println("タイトル: " + title);
             System.out.println("説明: " + description);
-            System.out.println("開始日時: " + start);
-            System.out.println("終了日時: " + end);
+            System.out.println("開始日時: " + restart);
+            System.out.println("終了日時: " + reend);
 
             // 必須フィールドのチェック
             if (title == null || title.isEmpty() || start == null || start.isEmpty() || end == null || end.isEmpty()) {
@@ -44,9 +45,12 @@ public class EventCreateAction extends HttpServlet {
             Event event = new Event();
             event.setTitle(title);
             event.setDescription(description);
-            event.setStartTime(Timestamp.valueOf(start.replace("T", " ")));
-            event.setEndTime(Timestamp.valueOf(end.replace("T", " ")));
+            event.setStartTime(Timestamp.valueOf(restart));
+            System.out.println("2");
+            event.setEndTime(Timestamp.valueOf(reend));
+            System.out.println("3");
             event.setCreatedBy(createdBy);
+            System.out.println("4");
 
             // データベースに登録
             EventDao eventDao = new EventDao();
@@ -56,14 +60,14 @@ public class EventCreateAction extends HttpServlet {
             System.out.println("イベントが正常に登録されました。");
 
             // 成功レスポンス
-            response.setStatus(HttpServletResponse.SC_OK);
+            req.getRequestDispatcher("StaffCalendar.action").forward(req, res);
         } catch (IllegalArgumentException e) {
             System.err.println("[エラー] 入力データが不正です: " + e.getMessage());
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+            res.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
         } catch (Exception e) {
             System.err.println("[エラー] サーバーエラー: " + e.getMessage());
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "イベント登録中にエラーが発生しました。");
+            res.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "イベント登録中にエラーが発生しました。");
         }
     }
 }

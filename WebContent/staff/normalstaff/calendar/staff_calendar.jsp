@@ -60,7 +60,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>イベントを登録</h2>
-            <form id="eventForm">
+            <form action="EventCreate.action" id="eventForm" method="post">
                 <label for="title">タイトル:</label>
                 <input type="text" id="title" name="title" required><br><br>
                 <label for="description">説明:</label>
@@ -80,10 +80,33 @@
             var modal = document.getElementById('eventModal');
             var closeModal = document.getElementsByClassName('close')[0];
 
+            // イベントデータを JavaScript 配列に変換
+            var events = [
+                <%
+                    List<Event> events = (List<Event>) request.getAttribute("events");
+                    if (events != null && !events.isEmpty()) {
+                        for (int i = 0; i < events.size(); i++) {
+                            Event event = events.get(i);
+                            String title = event.getTitle();
+                            String start = event.getStartTime().toString();
+                            String end = event.getEndTime().toString();
+                %>
+                {
+                    title: "<%= title %>",
+                    start: "<%= start %>",
+                    end: "<%= end %>"
+                }<%= (i < events.size() - 1) ? "," : "" %>
+                <%
+                        }
+                    }
+                %>
+            ];
+
             // カレンダー初期化
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth', // 月表示
                 locale: 'ja',                // 日本語対応
+                events: events,              // イベントデータを設定
                 dateClick: function (info) { // 日付クリック時
                     modal.style.display = 'block'; // モーダルを表示
                     document.getElementById('start').value = info.dateStr + 'T00:00';
@@ -102,27 +125,6 @@
                     modal.style.display = 'none';
                 }
             };
-
-            // フォーム送信
-            document.getElementById('eventForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-                var formData = new FormData(e.target);
-
-                fetch('/staff/normalstaff/calendar/create', {
-                    method: 'POST',
-                    body: new URLSearchParams(formData),
-                })
-                .then(function(response) {
-                    if (response.ok) {
-                        alert('イベントが登録されました！');
-                        modal.style.display = 'none';
-                        location.reload();
-                    }
-                })
-                .catch(function(error) {
-                    console.error('エラー:', error);
-                });
-            });
         });
     </script>
 </body>
