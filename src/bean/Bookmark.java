@@ -5,39 +5,26 @@ import java.io.Serializable;
 public class Bookmark implements Serializable {
 
 	/**
-	 * ブックマーク登録支援ID:Int
+	 * ユーザID:Int
 	 */
-	private int id;
+	private int UserID;
 
 	/**
-	 * ブックマーク登録支援名:String
+	 * 制度ID:Int
 	 */
-	private String name;
+	private int InstitutionID;
 
-	/**
-	 * ブックマーク登録支援詳細:String
-	 */
-	private String detail;
+	public int getUserID() {
+		return UserID;
+	}
+	public void setUserID(int UserID) {
+		this.UserID = UserID;
+	}
+	public int getInstitutionID() {
+		return InstitutionID;
+	}
+	public void setInstitutionID(int InstitutionID) {
+		this.InstitutionID = InstitutionID;
+	}
 
-	/**
-	 * ゲッター、セッター
-	 */
-	public int getID() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDetail() {
-		return detail;
-	}
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
 }
