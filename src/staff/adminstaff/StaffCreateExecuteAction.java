@@ -58,7 +58,6 @@ public class StaffCreateExecuteAction extends Action {
         Staff newStaff = new Staff();
         newStaff.setStaffName(staffName);
         newStaff.setStaffRole(staffRole);
-
         newStaff.setPassword(password);
 
         // 職員IDを自動インクリメントに任せる

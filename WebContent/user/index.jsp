@@ -9,7 +9,6 @@
 <script>
 //ログインページにリダイレクト
 location.href="/Cteam1/user/Home.action";
-//location.href="/Cteam1/user/Institusion.action";
 </script>
 </head>
 <body>

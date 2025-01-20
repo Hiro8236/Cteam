@@ -4,11 +4,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 <ul>
-    <li><a href="#ホーム">ホーム</a></li>
+    <li><a href="Home.action">ホーム</a></li>
     <li><a href="#制度">制度</a></li>
     <li><a href="#カレンダー">カレンダー</a></li>
     <li><a href="#お知らせ">お知らせ</a></li>
-    <li><a href="/Cteam1/user/MailSender.action">メール送信</a></li>
 
 </ul>
 
