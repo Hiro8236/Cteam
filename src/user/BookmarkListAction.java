@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Bookmark;
-import bean.User;
 import dao.BookmarkListDao;
 import tool.Action;
 
@@ -17,8 +16,8 @@ public class BookmarkListAction extends Action {
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 		HttpSession session=req.getSession();
-		User user =(User)session.getAttribute("userID");
-		req.setAttribute("User",user);
+        Integer userID = (Integer) session.getAttribute("userID");
+		req.setAttribute("UserID",userID);
 
 		 // DAOの初期化
         BookmarkListDao bookmarklistDao = new BookmarkListDao();

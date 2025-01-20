@@ -21,7 +21,8 @@
 							    <tr>
 							        <td>${suggestlists.name}</td>
 							        <td>${suggestlists.detail}</td>
-							        <td><a href="BookmarkCreate.action?id=${suggestlists.ID}">登録</a></td>
+							        <td><a href="BookmarkCreate.action?id=${suggestlists.ID}">${suggestlists.ID}:登録</a></td>
+
 							    </tr>
 							</c:forEach>
 

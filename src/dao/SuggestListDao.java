@@ -33,17 +33,17 @@ public class SuggestListDao extends Dao {
     }
 
     // 支援をデータベースに挿入するメソッド
-    public void insert(Suggest suggest) throws Exception {
+    public void insert(Integer userID, Integer InstitutionID) throws Exception {
         // SQLのINSERT文
-        String sql = "INSERT INTO Suggest (name, detail) VALUES (?, ?)";
+        String sql = "INSERT INTO Bookmark (userID, InstitutionID) VALUES (?, ?)";
 
         // データベース接続
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             // パラメータの設定
-            statement.setString(1, suggest.getName());
-            statement.setString(2, suggest.getDetail());
+            statement.setInt(1, userID);
+            statement.setInt(2, InstitutionID);
 
             // 実行
             statement.executeUpdate();

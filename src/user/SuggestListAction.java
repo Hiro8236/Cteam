@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Suggest;
-import bean.User;
 import dao.SuggestListDao;
 import tool.Action;
 
@@ -17,8 +16,9 @@ public class SuggestListAction extends Action {
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 		HttpSession session=req.getSession();
-		User user =(User)session.getAttribute("userID");
-		req.setAttribute("User",user);
+        Integer userID = (Integer) session.getAttribute("userID");
+
+		req.setAttribute("UserID",userID);
 
 		 // DAOの初期化
         SuggestListDao suggestlistDao = new SuggestListDao();
