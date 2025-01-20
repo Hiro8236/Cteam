@@ -10,6 +10,14 @@
 
 <c:param name="content">
 
+    <!-- メッセージが存在する場合、表示 -->
+    <c:if test="${not empty message}">
+        <div class="alert alert-info">
+            <c:out value="${message}"/>
+        </div>
+    </c:if>
+
+
 
     <h2>メールアドレス</h2>
     EmailAddress: ${user.getEmailAddress()}

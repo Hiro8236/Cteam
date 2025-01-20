@@ -22,6 +22,11 @@ public class UserInfoAction extends Action{
 		System.out.println(userID);
 
 
+	    String message = (String) req.getAttribute("message");
+		 if (message != null) {
+		        // messageを使って処理（画面に表示など）
+		        req.setAttribute("message", message);
+		    }
 
 		user = userDao.get(userID);
 		req.setAttribute("user", user);

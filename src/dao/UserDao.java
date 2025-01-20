@@ -364,9 +364,13 @@ public class UserDao extends Dao {
 
     public void EmailUpdateOTP(Integer userID, String emailAddress, String otp) throws Exception {
 
+
     	String sql = "INSERT INTO Email_otp (user_ID, email_address, otp, expires_at) " +
                 "VALUES (?, ?, ?, NOW() + INTERVAL 10 MINUTE) " +
-                "ON DUPLICATE KEY UPDATE otp = VALUES(otp), expires_at = VALUES(expires_at);";
+                "ON DUPLICATE KEY UPDATE " +
+                "email_address = VALUES(email_address), " +
+                "otp = VALUES(otp), " +
+                "expires_at = VALUES(expires_at);";
 
 
         try (Connection conn = getConnection();
@@ -419,4 +423,52 @@ public class UserDao extends Dao {
 
 
 
+        // メールアドレスを更新するメソッド
+    public boolean updateEmail(Integer userID, String EmailAddress, String password, String NewEmailAddress) {
+        boolean isUpdated = false;
+
+        String selectQuery = "SELECT * FROM user WHERE UserID = ? AND EmailAddress = ? AND Password = ?";
+        String updateQuery = "UPDATE user SET EmailAddress = ? WHERE UserID = ?";
+
+
+        System.out.println(userID);
+        System.out.println(EmailAddress);
+        System.out.println(password);
+        System.out.println(NewEmailAddress);
+
+
+        try (Connection con = getConnection();
+             PreparedStatement selectStmt = con.prepareStatement(selectQuery);
+             PreparedStatement updateStmt = con.prepareStatement(updateQuery)) {
+
+            // 現在の情報を確認
+            selectStmt.setInt(1, userID);
+            selectStmt.setString(2, EmailAddress);
+            selectStmt.setString(3, password);
+
+            try (ResultSet rs = selectStmt.executeQuery()) {
+                if (rs.next()) {
+                    // 新しいメールアドレスを更新
+                    updateStmt.setString(1, NewEmailAddress);
+                    updateStmt.setInt(2, userID);
+                    int rowsAffected = updateStmt.executeUpdate();
+                    isUpdated = rowsAffected > 0;
+                    if (rowsAffected > 0) {
+                        isUpdated = true; // 更新成功
+                        System.out.println("メールアドレスの更新が完了しました。");
+                    }
+                } else {
+                    // パスワードが一致しない場合、更新しない
+                    isUpdated = false;
+                    System.out.println("パスワードが一致しません。メールアドレスは更新されません。");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            isUpdated = false; // エラー時にはfalse
+        }
+
+        return isUpdated;
+    }
 }
+

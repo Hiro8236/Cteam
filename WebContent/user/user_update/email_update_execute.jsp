@@ -14,27 +14,36 @@
         <!-- 現在のメールアドレス表示 -->
         <div class="form-floating mx-5 mb-3">
             <input class="form-control px-5 fs-5" type="email" id="current-email" name="currentEmail"
-                   value="${param.currentEmail}" readonly>
+                   value="${user.getEmailAddress()}" readonly>
+                   :::${EmailAddress}
             <label for="current-email">現在のメールアドレス</label>
         </div>
 
         <!-- 新しいメールアドレス表示 -->
         <div class="form-floating mx-5 mb-3">
-            <input class="form-control px-5 fs-5" type="email" id="new-email" name="newEmail"
-                   value="${param.newEmail}" readonly>
+            <input class="form-control px-5 fs-5" type="email" id="new-email" name="newEmailAddress"
+                   value="${NewEmailAddress}" readonly>
             <label for="new-email">新しいメールアドレス</label>
         </div>
 
         <!-- パスワード入力フォーム -->
-        <form action="/Cteam1/user/UpdateEmailProcess.action" method="post">
-            <input type="hidden" name="currentEmail" value="${param.currentEmail}">
-            <input type="hidden" name="newEmail" value="${param.newEmail}">
-            
+        <form action="/Cteam1/user/user_update/UserEmailUpdateExecute.action" method="post">
+            <!-- 現在のメールアドレス -->
+            <input type="hidden" name="EmailAddress" value="${user.getEmailAddress()}">
+            <!-- 新しいメールアドレス -->
+            <input type="hidden" name="NewEmailAddress" value="${NewEmailAddress}">
+
             <div class="form-floating mx-5 mb-3">
-                <input class="form-control px-5 fs-5" type="password" id="password" name="password"
+                <input class="form-control px-5 fs-5" type="Password" id="Password" name="Password"
                        placeholder="ログインパスワードを入力してください" required>
-                <label for="password">ログインパスワード</label>
+                <label for="Password">ログインパスワード</label>
             </div>
+                <!-- エラーメッセージの表示 -->
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger">
+                <c:out value="${errorMessage}" />
+            </div>
+        </c:if>
 
             <!-- 更新ボタン -->
             <button class="btn btn-primary px-5 fs-5" type="submit">メールアドレスを更新</button>
