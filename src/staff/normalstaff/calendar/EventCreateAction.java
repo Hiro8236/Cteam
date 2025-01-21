@@ -25,6 +25,14 @@ public class EventCreateAction extends Action{
             String start = req.getParameter("start");
             String end = req.getParameter("end");
 
+         // チェックボックスの値を取得
+            boolean isPublic = req.getParameter("isPublic") != null; // チェックされていれば true
+            boolean isStaffOnly = req.getParameter("isStaffOnly") != null; // チェックされていれば true
+
+         // デバッグログ
+            System.out.println("公開: " + isPublic);
+            System.out.println("スタッフ限定: " + isStaffOnly);
+
             String restart = start.replace("T", " ") + ":00";
             String reend= end.replace("T", " ") + ":00";
 
@@ -54,11 +62,20 @@ public class EventCreateAction extends Action{
             event.setTitle(title);
             event.setDescription(description);
             event.setStartTime(Timestamp.valueOf(restart));
-            System.out.println("2");
             event.setEndTime(Timestamp.valueOf(reend));
-            System.out.println("3");
             event.setCreatedBy(createdBy);
-            System.out.println("4");
+            String visibility = req.getParameter("visibility");
+            event.setPublic("public".equals(visibility));
+            event.setStaffOnly("staffOnly".equals(visibility));
+
+
+            //デバッグ用
+            System.out.println("タイトル: " + title);
+            System.out.println("説明: " + description);
+            System.out.println("開始日時: " + restart);
+            System.out.println("終了日時: " + reend);
+            System.out.println("公開: " + isPublic);
+            System.out.println("スタッフ限定: " + isStaffOnly);
 
             // データベースに登録
             EventDao eventDao = new EventDao();

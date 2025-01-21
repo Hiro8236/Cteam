@@ -22,6 +22,8 @@ public class EventUpdateAction extends Action {
             String description = req.getParameter("description");
             String start = req.getParameter("start");
             String end = req.getParameter("end");
+            String isPublicStr = req.getParameter("isPublic");
+            String isStaffOnlyStr = req.getParameter("isStaffOnly");
 
             // 必須フィールドのチェック
             if (eventIdStr == null || eventIdStr.isEmpty()) {
@@ -29,6 +31,9 @@ public class EventUpdateAction extends Action {
             }
 
             int eventId = Integer.parseInt(eventIdStr);
+            boolean isPublic = isPublicStr != null && isPublicStr.equals("on");
+            boolean isStaffOnly = isStaffOnlyStr != null && isStaffOnlyStr.equals("on");
+
             String restart = start.replace("T", " ") + ":00";
             String reend = end.replace("T", " ") + ":00";
 
@@ -39,6 +44,19 @@ public class EventUpdateAction extends Action {
             event.setDescription(description);
             event.setStartTime(java.sql.Timestamp.valueOf(restart));
             event.setEndTime(java.sql.Timestamp.valueOf(reend));
+            String visibility = req.getParameter("visibility");
+            event.setPublic("public".equals(visibility));
+            event.setStaffOnly("staffOnly".equals(visibility));
+
+            // デバッグ用ログ
+            System.out.println("更新対象イベントの情報:");
+            System.out.println("  - イベントID: " + eventId);
+            System.out.println("  - タイトル: " + title);
+            System.out.println("  - 説明: " + description);
+            System.out.println("  - 開始日時: " + restart);
+            System.out.println("  - 終了日時: " + reend);
+            System.out.println("  - 公開設定 (isPublic): " + isPublic);
+            System.out.println("  - スタッフ限定設定 (isStaffOnly): " + isStaffOnly);
 
             // データベースを更新
             EventDao eventDao = new EventDao();

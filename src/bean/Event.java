@@ -9,6 +9,8 @@ public class Event {
     private Date startTime;
     private Date endTime;
     private int createdBy;
+    private boolean isPublic;     // 公開設定
+    private boolean isStaffOnly;  // スタッフ限定公開設定
 
     // Getters and Setters
     public int getEventId() {
@@ -58,4 +60,21 @@ public class Event {
     public void setCreatedBy(int createdBy) {
         this.createdBy = createdBy;
     }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean isPublic) {
+        this.isPublic = isPublic;
+    }
+
+    public boolean isStaffOnly() {
+        return isStaffOnly;
+    }
+
+    public void setStaffOnly(boolean isStaffOnly) {
+        this.isStaffOnly = isStaffOnly;
+    }
+
 }
