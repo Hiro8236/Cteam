@@ -51,27 +51,64 @@ public class EventDao extends Dao{
         return events;
     }
 
-    // イベントの更新
+
+    /**
+     * 単一のイベントを削除する
+     *
+     * @param eventId 削除するイベントID
+     * @return 成功時true、失敗時false
+     * @throws Exception
+     */
+    public boolean deleteEvent(int eventId) throws Exception {
+        String sql = "DELETE FROM events WHERE event_id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // SQL パラメータを設定
+            pstmt.setInt(1, eventId);
+
+            // デバッグログ
+            System.out.println("イベント削除のSQL: " + pstmt.toString());
+
+            // クエリ実行し、削除された行があるかどうかを返す
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println("削除された行数: " + rowsAffected);
+
+            return rowsAffected > 0; // 削除が成功した場合はtrue
+        } catch (SQLException e) {
+            // SQL エラーの詳細ログ
+            System.err.println("SQLエラー: " + e.getMessage());
+            System.err.println("SQLState: " + e.getSQLState());
+            System.err.println("エラーコード: " + e.getErrorCode());
+            throw new Exception("イベント削除中にエラーが発生しました: " + e.getMessage(), e);
+        }
+    }
+
+
+ // イベントの更新
     public void updateEvent(Event event) throws Exception {
         String sql = "UPDATE events SET title = ?, description = ?, start_time = ?, end_time = ? WHERE event_id = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, event.getTitle());
-            stmt.setString(2, event.getDescription());
-            stmt.setTimestamp(3, new Timestamp(event.getStartTime().getTime()));
-            stmt.setTimestamp(4, new Timestamp(event.getEndTime().getTime()));
-            stmt.setInt(5, event.getEventId());
-            stmt.executeUpdate();
+
+            // 各プレースホルダーに値を設定
+            stmt.setString(1, event.getTitle()); // タイトルを設定
+            stmt.setString(2, event.getDescription()); // 説明を設定
+            stmt.setTimestamp(3, new Timestamp(event.getStartTime().getTime())); // 開始日時を設定
+            stmt.setTimestamp(4, new Timestamp(event.getEndTime().getTime())); // 終了日時を設定
+            stmt.setInt(5, event.getEventId()); // 更新対象のイベントIDを設定
+
+            // 更新クエリを実行
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("[成功] イベントが正常に更新されました: ID=" + event.getEventId());
+            } else {
+                System.out.println("[警告] 更新対象のイベントが見つかりませんでした: ID=" + event.getEventId());
+            }
+        } catch (SQLException e) {
+            System.err.println("[エラー] データベース更新中にエラー: " + e.getMessage());
+            throw e; // エラーを再スロー
         }
     }
 
-    // イベントの削除
-    public void deleteEvent(int eventId) throws Exception {
-        String sql = "DELETE FROM events WHERE event_id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, eventId);
-            stmt.executeUpdate();
-        }
-    }
 }
