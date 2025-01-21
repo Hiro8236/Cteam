@@ -24,7 +24,7 @@
 			            </thead>
 			            <tbody>
 			                <c:forEach var="institutions" items="${institutions}">
-			                    <tr onclick="location.href='StaffInstitutionsDetail.action?id=${institution.ID}'"style="cursor: pointer;">
+			                    <tr onclick="location.href='StaffInstitutionsDetail.action?id=${institutions.ID}'"style="cursor: pointer;">
 			                        <td>${institutions.name}</td>
 			                        <td>${institutions.detail}</td>
 							        <td><a href="　　　　　　　　　　.action?id=${institutions.ID}">${institutions.ID}:編集</a></td>
