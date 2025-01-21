@@ -76,4 +76,20 @@ public class InstitutionDao extends Dao {
         }
     }
 
+    public boolean deleteInstitutionById(int id) throws Exception {
+        boolean isDeleted = false;
+        String sql = "DELETE FROM institution WHERE ID = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+
+            isDeleted = rowsAffected > 0; // 削除成功判定
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isDeleted;
+    }
 }

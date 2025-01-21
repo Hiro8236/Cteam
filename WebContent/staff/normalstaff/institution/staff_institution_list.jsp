@@ -27,8 +27,10 @@
 			                    <tr onclick="location.href='StaffInstitutionsDetail.action?id=${institutions.ID}'"style="cursor: pointer;">
 			                        <td>${institutions.name}</td>
 			                        <td>${institutions.detail}</td>
+			                    </tr>
+			                    <tr>
 							        <td><a href="　　　　　　　　　　.action?id=${institutions.ID}">${institutions.ID}:編集</a></td>
-							        <td><a href="　　　　　　　　　　.action?id=${institutions.ID}">${institutions.ID}:削除</a></td>
+							        <td><a href="StaffInstitutionDelete.action?id=${institutions.ID}"onclick="return confirm('本当に削除しますか？');event.stopPropagation();">${institutions.ID}:削除</a></td>
 
 			                    </tr>
 			                </c:forEach>
