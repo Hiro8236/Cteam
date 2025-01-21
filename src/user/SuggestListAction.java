@@ -29,7 +29,6 @@ public class SuggestListAction extends Action {
         // 結果をリクエストに設定
         req.setAttribute("suggestlists", suggestlists);
 
-
 		req.getRequestDispatcher("suggest_list.jsp").forward(req, res);
 	}
 }
