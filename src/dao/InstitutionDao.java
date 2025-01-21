@@ -55,5 +55,25 @@ public class InstitutionDao extends Dao {
 
         return institution;
     }
+    // 支援をデータベースに挿入するメソッド
+    public void insert(Integer userID, Integer InstitutionID) throws Exception {
+        // SQLのINSERT文
+        String sql = "INSERT INTO Bookmark (userID, InstitutionID) VALUES (?, ?)";
+
+        // データベース接続
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            // パラメータの設定
+            statement.setInt(1, userID);
+            statement.setInt(2, InstitutionID);
+
+            // 実行
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();  // エラーが発生した場合
+            throw e;
+        }
+    }
 
 }
