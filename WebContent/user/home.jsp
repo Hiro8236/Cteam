@@ -19,19 +19,21 @@
 			                </tr>
 			            </thead>
 			            <tbody>
-			                <c:forEach var="institutions" items="${institutions}">
-			                    <tr>
-			                        <td>${institutions.name}</td>
-			                        <td>${institutions.detail}</td>
+			                <c:forEach var="institution" items="${institutions}">
+			                    <tr onclick="location.href='InstitutionsDetail.action?id=${institution.ID}'"style="cursor: pointer;">
+			                        <td>${institution.name}</td>
+			                        <td>${institution.detail}</td>
 			                    </tr>
 			                </c:forEach>
 			            </tbody>
 			        </table>
 			    </c:when>
-			    <c:otherwise>
-			        <div>支援情報が存在しませんでした</div>
-			    </c:otherwise>
+			    	<c:otherwise>
+			        	<div>支援情報が存在しませんでした</div>
+			    	</c:otherwise>
 			</c:choose>
+
+
 
 
         <div class="">
