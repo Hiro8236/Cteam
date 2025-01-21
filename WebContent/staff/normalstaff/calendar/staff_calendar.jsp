@@ -70,7 +70,7 @@
                 <label for="end">終了日時:</label>
                 <input type="datetime-local" id="end" name="end" required><br><br>
                 <input type="hidden" id="eventId" name="eventId">
-                <button type="submit">保存</button>
+                <button type="submit">更新</button>
                 <button type="button" id="deleteEventBtn" style="display:none;">削除</button>
             </form>
         </div>
@@ -84,7 +84,7 @@
             var deleteEventBtn = document.getElementById('deleteEventBtn');
             var modalTitle = document.getElementById('modalTitle');
 
-            // イベントデータを JavaScript 配列に変換
+         // イベントデータを JavaScript 配列に変換
             var events = [
                 <%
                     List<Event> events = (List<Event>) request.getAttribute("events");
@@ -94,13 +94,17 @@
                             String title = event.getTitle();
                             String start = event.getStartTime().toString();
                             String end = event.getEndTime().toString();
+                            String description = event.getDescription(); // 説明を取得
                             int id = event.getEventId();
                 %>
                 {
                     id: <%= id %>,
                     title: "<%= title %>",
                     start: "<%= start %>",
-                    end: "<%= end %>"
+                    end: "<%= end %>",
+                    extendedProps: { // extendedProps 内に説明を含める
+                        description: "<%= description %>"
+                    }
                 }<%= (i < events.size() - 1) ? "," : "" %>
                 <%
                         }
@@ -108,10 +112,12 @@
                 %>
             ];
 
+
             // カレンダー初期化
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth', // 月表示
                 locale: 'ja',                // 日本語対応
+                timeZone: 'Asia/Tokyo', // タイムゾーンを指定
                 events: events,              // イベントデータを設定
                 dateClick: function (info) { // 日付クリック時
                     modal.style.display = 'block'; // モーダルを表示
@@ -138,6 +144,19 @@
             });
 
             calendar.render();
+
+         // 保存ボタンのクリック時の処理
+            document.getElementById('eventForm').addEventListener('submit', function (e) {
+                e.preventDefault(); // フォームのデフォルト動作を防止
+                var eventId = document.getElementById('eventId').value;
+                var formAction = eventId ? 'EventUpdate.action' : 'EventCreate.action'; // 更新か新規作成かを判定
+
+                // フォームの action 属性を設定して送信
+                var form = e.target;
+                form.action = formAction; // 適切なアクションを設定
+                form.submit();
+            });
+
 
             // モーダルを閉じる
             closeModal.onclick = function () {
