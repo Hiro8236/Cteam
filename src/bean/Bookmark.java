@@ -19,6 +19,9 @@ public class Bookmark implements Serializable {
 	 */
 	private int InstitutionID;
 
+	private String name; // Institutionのname
+    private String detail; // Institutionのdetail
+
 	public int getBookmarkID() {
 		return BookmarkID;
 	}
@@ -37,5 +40,20 @@ public class Bookmark implements Serializable {
 	public void setInstitutionID(int InstitutionID) {
 		this.InstitutionID = InstitutionID;
 	}
+	public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
 
 }

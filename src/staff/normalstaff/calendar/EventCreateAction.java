@@ -38,6 +38,14 @@ public class EventCreateAction extends Action{
                 throw new IllegalArgumentException("必須フィールドが不足しています。");
             }
 
+            // 日付の検証: 終了時が開始時より前でないことを確認
+            Timestamp startTime = Timestamp.valueOf(start.replace("T", " ") + ":00");
+            Timestamp endTime = Timestamp.valueOf(end.replace("T", " ") + ":00");
+
+            if (endTime.before(startTime)) {
+                throw new IllegalArgumentException("終了時は開始時より後である必要があります。");
+            }
+
             // 仮の作成者ID（ログイン情報がある場合に変更）
             int createdBy = 1;
 
