@@ -10,7 +10,7 @@
 	    <h1>StaffHOME</h1>
 
 
-         <a href="　　　　　　　　　　　　　　　.action">投稿</a>
+         <a href="StaffInstitutionCreate.action">投稿</a>
 
          <section class="me-4">
 		  	<c:choose>

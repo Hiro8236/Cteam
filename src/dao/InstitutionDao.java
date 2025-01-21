@@ -33,7 +33,7 @@ public class InstitutionDao extends Dao {
 
     public Institution findById(int id) throws Exception {
         Institution institution = null;
-        String sql = "SELECT ID, name, detail FROM institution WHERE ID = ?"; // カラム名を大文字に修正
+        String sql = "SELECT ID, name, detail FROM institution WHERE ID = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -43,30 +43,58 @@ public class InstitutionDao extends Dao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     institution = new Institution();
-                    institution.setId(resultSet.getInt("ID")); // カラム名を大文字に修正
+                    institution.setId(resultSet.getInt("ID"));
                     institution.setName(resultSet.getString("name"));
                     institution.setDetail(resultSet.getString("detail"));
                 }
             }
         } catch (SQLException e) {
             System.out.println("Error executing query: " + e.getMessage());
-            throw e; // 例外を再スロー
+            throw e;
         }
 
         return institution;
     }
-    // 支援をデータベースに挿入するメソッド
-    public void insert(Integer userID, Integer InstitutionID) throws Exception {
-        // SQLのINSERT文
+
+    // 支援をデータベースに挿入し、自動生成されたIDを返すメソッド
+    public int insert(Institution institution) throws Exception {
+        String sql = "INSERT INTO institution (name, detail) VALUES (?, ?)";
+        int generatedId = -1;
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            // パラメータの設定
+            statement.setString(1, institution.getName());
+            statement.setString(2, institution.getDetail());
+
+            // 実行
+            statement.executeUpdate();
+
+            // 自動生成されたIDを取得
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    generatedId = generatedKeys.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+
+        return generatedId;
+    }
+
+    // 追加したメソッド：staffIDとinstitutionIDを使ってBookmarkに挿入
+    public void insert(int staffID, int institutionID) throws Exception {
         String sql = "INSERT INTO Bookmark (userID, InstitutionID) VALUES (?, ?)";
 
-        // データベース接続
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             // パラメータの設定
-            statement.setInt(1, userID);
-            statement.setInt(2, InstitutionID);
+            statement.setInt(1, staffID);
+            statement.setInt(2, institutionID);
 
             // 実行
             statement.executeUpdate();
@@ -86,7 +114,7 @@ public class InstitutionDao extends Dao {
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
 
-            isDeleted = rowsAffected > 0; // 削除成功判定
+            isDeleted = rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
