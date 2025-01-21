@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:import url="/common/base.jsp">
-    <c:param name="title" value="支援詳細 - ぽシステム" />
-    <c:param name="content">
-        <h1>支援詳細</h1>
-
-        <!-- 内部CSSスタイル -->
-        <style>
+ <style>
             .institution-details {
                 max-width: 800px;
                 margin: 0 auto;
@@ -61,6 +55,15 @@
                 background-color: #000;
             }
         </style>
+
+<c:import url="/common/base.jsp">
+    <c:param name="title" value="支援詳細 - ぽシステム" />
+    <c:param name="content">
+        <h1>支援詳細</h1>
+
+        <div style="text-align: right;">
+            <a href="Home.action">戻る</a>
+        </div>
 
         <section class="institution-details">
             <!-- 支援名 -->
