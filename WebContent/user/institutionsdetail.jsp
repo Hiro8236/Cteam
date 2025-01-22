@@ -80,9 +80,7 @@
             <!-- 動画セクション -->
             <div class="video-section">
                 <h3>支援関連動画</h3>
-                <video controls>
-                    <!-- 動画ソースは現在指定していません -->
-                </video>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/vMEecCSTKtM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </section>
     </c:param>
