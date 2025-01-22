@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:import url="/common/base.jsp">
+<c:import url="/staffcommon/base.jsp">
     <c:param name="title" value="支援詳細 - ぽシステム" />
     <c:param name="content">
         <h1>支援詳細</h1>

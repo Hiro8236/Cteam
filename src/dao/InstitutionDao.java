@@ -13,7 +13,7 @@ public class InstitutionDao extends Dao {
 
     public List<Institution> getAll() throws Exception {
         List<Institution> institutions = new ArrayList<>();
-        String sql = "SELECT ID, name, detail FROM institution";
+        String sql = "SELECT ID, name, detail, video FROM institution";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -24,6 +24,7 @@ public class InstitutionDao extends Dao {
                 institution.setId(resultSet.getInt("ID"));
                 institution.setName(resultSet.getString("name"));
                 institution.setDetail(resultSet.getString("detail"));
+                institution.setVideo(resultSet.getString("video"));
                 institutions.add(institution);
             }
         }
