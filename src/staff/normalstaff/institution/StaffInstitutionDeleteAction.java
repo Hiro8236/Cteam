@@ -11,39 +11,34 @@ public class StaffInstitutionDeleteAction extends Action {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        // セッション情報を取得
         HttpSession session = req.getSession();
-        // 必要に応じてユーザー情報を取得する場合はここで行う（現在のコードでは未使用）
-        // Staff staff =(Staff)session.getAttribute("user");
 
-        // 削除するインスタンスIDをリクエストから取得
         String idParam = req.getParameter("id");
         if (idParam != null && !idParam.isEmpty()) {
             try {
                 int id = Integer.parseInt(idParam);
 
-                // DAOの初期化
                 InstitutionDao institutionDao = new InstitutionDao();
-
-                // 削除メソッドを呼び出し
                 boolean isDeleted = institutionDao.deleteInstitutionById(id);
 
                 if (isDeleted) {
-                    // 削除成功後、一覧ページにリダイレクト
-                    res.sendRedirect("StaffInstitution.action");  // 一覧にリダイレクト
+                    // 削除成功：セッションにメッセージを保存
+                    session.setAttribute("message", "制度を削除しました");
                 } else {
-                    // 削除失敗時の処理（エラーメッセージなどを設定する）
-                    req.setAttribute("errorMessage", "削除に失敗しました");
-                    req.getRequestDispatcher("error.jsp").forward(req, res);
+                    // 削除失敗：セッションにエラーメッセージを保存
+                    session.setAttribute("message", "削除に失敗しました");
                 }
 
             } catch (NumberFormatException e) {
-                req.setAttribute("errorMessage", "無効なIDです");
-                req.getRequestDispatcher("error.jsp").forward(req, res);
+                // 無効なIDの場合
+                session.setAttribute("message", "無効なIDです");
             }
         } else {
-            req.setAttribute("errorMessage", "IDが指定されていません");
-            req.getRequestDispatcher("error.jsp").forward(req, res);
+            // IDが指定されていない場合
+            session.setAttribute("message", "IDが指定されていません");
         }
+
+        // 一覧ページにリダイレクト
+        res.sendRedirect("StaffInstitution.action");
     }
 }

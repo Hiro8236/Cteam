@@ -12,6 +12,15 @@
 
          <a href="StaffInstitutionCreate.action">投稿</a>
 
+        <!-- メッセージが存在する場合、表示 -->
+        <c:if test="${not empty message}">
+            <div class="alert alert-info">
+                <c:out value="${message}"/>
+            </div>
+        </c:if>
+
+
+
          <section class="me-4">
 		  	<c:choose>
 			    <c:when test="${institutions != null && institutions.size() > 0}">
