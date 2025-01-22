@@ -1,0 +1,104 @@
+/* 全体のレイアウト */
+.institution-details {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* 支援名 */
+.institution-name {
+    margin-bottom: 25px;
+}
+
+.institution-name h2 {
+    font-size: 28px;
+    color: #2c3e50;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+/* 支援詳細 */
+.institution-detail {
+    margin-bottom: 35px;
+}
+
+.institution-detail h3 {
+    font-size: 22px;
+    color: #34495e;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.institution-detail p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #7f8c8d;
+    word-wrap: break-word;
+}
+
+/* 動画セクション */
+.video-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 3px solid #ecf0f1;
+    text-align: center;
+}
+
+.video-section h3 {
+    font-size: 22px;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.video-section iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ボタンやリンクのスタイル */
+a {
+    font-size: 16px;
+    color: #2980b9;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .institution-details {
+        padding: 20px;
+    }
+
+    .institution-name h2 {
+        font-size: 24px;
+    }
+
+    .institution-detail h3 {
+        font-size: 20px;
+    }
+
+    .institution-detail p {
+        font-size: 16px;
+    }
+
+    .video-section iframe {
+        max-width: 100%;
+        height: 350px;
+    }
+}
