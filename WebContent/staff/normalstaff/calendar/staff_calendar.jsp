@@ -84,7 +84,7 @@
                     <input type="radio" id="staffOnly" name="visibility" value="staffOnly" checked> スタッフ限定公開
                 </label><br><br>
 
-                <input type="hidden" id="eventId" name="eventId">
+                <input type="hidden" id="eventID" name="eventID">
 				    <div style="display: flex; gap: 10px;">
 				        <button type="submit">保存</button>
 				        <button type="button" id="deleteEventBtn" style="display: none;">削除</button>
@@ -112,7 +112,7 @@
                             String start = event.getStartTime().toString();
                             String end = event.getEndTime().toString();
                             String description = event.getDescription();
-                            int id = event.getEventId();
+                            int id = event.getEventID();
                             boolean isPublic = event.isPublic();
                             boolean isStaffOnly = event.isStaffOnly();
 
@@ -147,7 +147,7 @@
                     document.getElementById('description').value = '';
                     document.getElementById('start').value = info.dateStr + 'T00:00';
                     document.getElementById('end').value = info.dateStr + 'T00:00';
-                    document.getElementById('eventId').value = '';
+                    document.getElementById('eventID').value = '';
                     document.getElementById('isPublic').checked = false;
                     document.getElementById('isStaffOnly').checked = true;
                     deleteEventBtn.style.display = 'none';
@@ -163,7 +163,7 @@
                     document.getElementById('end').value = info.event.end
                         ? info.event.end.toISOString().slice(0, 16)
                         : info.event.start.toISOString().slice(0, 16);
-                    document.getElementById('eventId').value = info.event.id;
+                    document.getElementById('eventID').value = info.event.id;
 
                     // デバッグログ
                     console.log("extendedProps:", info.event.extendedProps);
@@ -195,8 +195,8 @@
          // 保存ボタンのクリック時の処理
             document.getElementById('eventForm').addEventListener('submit', function (e) {
                 e.preventDefault(); // フォームのデフォルト動作を防止
-                var eventId = document.getElementById('eventId').value;
-                var formAction = eventId ? 'EventUpdate.action' : 'EventCreate.action'; // 更新か新規作成かを判定
+                var eventID = document.getElementById('eventID').value;
+                var formAction = eventID ? 'EventUpdate.action' : 'EventCreate.action'; // 更新か新規作成かを判定
 
                 // フォームの action 属性を設定して送信
                 var form = e.target;
@@ -219,8 +219,8 @@
 
             // 削除処理
             deleteEventBtn.addEventListener('click', function () {
-                var eventId = document.getElementById('eventId').value;
-                if (!eventId) {
+                var eventID = document.getElementById('eventID').value;
+                if (!eventID) {
                     alert('イベントIDが取得できません。削除を中止します。');
                     return;
                 }
@@ -231,8 +231,8 @@
                     form.action = 'EventDelete.action';
                     var input = document.createElement('input');
                     input.type = 'hidden';
-                    input.name = 'eventId';
-                    input.value = eventId;
+                    input.name = 'eventID';
+                    input.value = eventID;
                     form.appendChild(input);
                     document.body.appendChild(form);
                     form.submit();

@@ -3,7 +3,7 @@ package bean;
 import java.util.Date;
 
 public class Event {
-    private int eventId;
+    private int eventID;
     private String title;
     private String description;
     private Date startTime;
@@ -13,12 +13,12 @@ public class Event {
     private boolean isStaffOnly;  // スタッフ限定公開設定
 
     // Getters and Setters
-    public int getEventId() {
-        return eventId;
+    public int getEventID() {
+        return eventID;
     }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
     }
 
     public String getTitle() {

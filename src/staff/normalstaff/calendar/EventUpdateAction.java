@@ -17,7 +17,7 @@ public class EventUpdateAction extends Action {
             System.out.println("=== イベント更新処理開始 ===");
 
             // フォームデータを取得
-            String eventIdStr = req.getParameter("eventId");
+            String eventIDStr = req.getParameter("eventID");
             String title = req.getParameter("title");
             String description = req.getParameter("description");
             String start = req.getParameter("start");
@@ -26,11 +26,11 @@ public class EventUpdateAction extends Action {
             String isStaffOnlyStr = req.getParameter("isStaffOnly");
 
             // 必須フィールドのチェック
-            if (eventIdStr == null || eventIdStr.isEmpty()) {
+            if (eventIDStr == null || eventIDStr.isEmpty()) {
                 throw new IllegalArgumentException("イベントIDが指定されていません。");
             }
 
-            int eventId = Integer.parseInt(eventIdStr);
+            int eventID = Integer.parseInt(eventIDStr);
             boolean isPublic = isPublicStr != null && isPublicStr.equals("on");
             boolean isStaffOnly = isStaffOnlyStr != null && isStaffOnlyStr.equals("on");
 
@@ -39,7 +39,7 @@ public class EventUpdateAction extends Action {
 
             // Eventオブジェクトを作成
             Event event = new Event();
-            event.setEventId(eventId); // イベントIDを設定
+            event.setEventID(eventID); // イベントIDを設定
             event.setTitle(title);
             event.setDescription(description);
             event.setStartTime(java.sql.Timestamp.valueOf(restart));
@@ -50,7 +50,7 @@ public class EventUpdateAction extends Action {
 
             // デバッグ用ログ
             System.out.println("更新対象イベントの情報:");
-            System.out.println("  - イベントID: " + eventId);
+            System.out.println("  - イベントID: " + eventID);
             System.out.println("  - タイトル: " + title);
             System.out.println("  - 説明: " + description);
             System.out.println("  - 開始日時: " + restart);
@@ -63,7 +63,7 @@ public class EventUpdateAction extends Action {
             eventDao.updateEvent(event);
 
             // 成功レスポンス
-            System.out.println("イベントが正常に更新されました: ID=" + eventId);
+            System.out.println("イベントが正常に更新されました: ID=" + eventID);
             req.getRequestDispatcher("StaffCalendar.action").forward(req, res);
 
         } catch (IllegalArgumentException e) {

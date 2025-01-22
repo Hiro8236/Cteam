@@ -17,19 +17,19 @@ public class EventDeleteAction extends Action {
             System.out.println("=== イベント削除処理開始 ===");
 
             // フォームデータからイベントIDを取得
-            String eventIdStr = req.getParameter("eventId");
+            String eventIdStr = req.getParameter("eventID");
             if (eventIdStr == null || eventIdStr.isEmpty()) {
                 throw new IllegalArgumentException("イベントIDが指定されていません。");
             }
 
-            int eventId = Integer.parseInt(eventIdStr);
+            int eventID = Integer.parseInt(eventIdStr);
 
             // イベントを削除
             EventDao eventDao = new EventDao();
-            eventDao.deleteEvent(eventId);
+            eventDao.deleteEvent(eventID);
 
             // 成功ログ
-            System.out.println("イベントが正常に削除されました: ID=" + eventId);
+            System.out.println("イベントが正常に削除されました: ID=" + eventID);
 
             // 成功レスポンス
             req.getRequestDispatcher("StaffCalendar.action").forward(req, res);
