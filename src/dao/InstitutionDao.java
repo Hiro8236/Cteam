@@ -58,7 +58,7 @@ public class InstitutionDao extends Dao {
 
     // 支援をデータベースに挿入し、自動生成されたIDを返すメソッド
     public int insert(Institution institution) throws Exception {
-        String sql = "INSERT INTO institution (name, detail) VALUES (?, ?)";
+        String sql = "INSERT INTO institution (name, detail, video) VALUES (?, ?, ?)";
         int generatedId = -1;
 
         try (Connection connection = getConnection();
@@ -67,6 +67,7 @@ public class InstitutionDao extends Dao {
             // パラメータの設定
             statement.setString(1, institution.getName());
             statement.setString(2, institution.getDetail());
+            statement.setString(3, institution.getVideo()); // 動画URLを挿入
 
             // 実行
             statement.executeUpdate();
@@ -84,6 +85,7 @@ public class InstitutionDao extends Dao {
 
         return generatedId;
     }
+
 
     // 追加したメソッド：staffIDとinstitutionIDを使ってBookmarkに挿入
     public void insert(int staffID, int institutionID) throws Exception {

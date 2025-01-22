@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:import url="/common/base.jsp">
     <c:param name="title" value="支援詳細 - ぽシステム" />
@@ -76,11 +77,35 @@
 
             <!-- 動画セクション -->
             <div class="video-section">
-                <h3>支援関連動画</h3>
-                <video controls>
-                    <!-- 動画ソースは現在指定していません -->
-                </video>
-            </div>
+    <h3>支援関連動画</h3>
+    <c:choose>
+        <c:when test="${not empty institution.video}">
+            <!-- 動画URLが存在する場合、YouTube動画を埋め込む -->
+            <c:choose>
+                <c:when test="${fn:contains(institution.video, 'youtube')}">
+                    <!-- YouTubeの動画IDを抽出して埋め込む -->
+                    <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/${institution.video}"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                    </iframe>
+                </c:when>
+                <c:otherwise>
+                    <!-- YouTubeのURLでない場合の処理 -->
+                    <p>無効な動画URLです。</p>
+                </c:otherwise>
+            </c:choose>
+        </c:when>
+        <c:otherwise>
+            <!-- 動画URLが存在しない場合 -->
+            <p>支援関連動画はありません。</p>
+        </c:otherwise>
+    </c:choose>
+</div>
+
         </section>
     </c:param>
 </c:import>
