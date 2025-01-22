@@ -26,6 +26,7 @@
                         <th>支援ID</th>
                         <th>支援名</th>
                         <th>支援詳細</th>
+                        <th>動画URL</th> <!-- 動画URL列を追加 -->
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,12 @@
                             <td><c:out value="${institution.id}" /></td>
                             <td><c:out value="${institution.name}" /></td>
                             <td><c:out value="${institution.detail}" /></td>
+                            <td>
+                                <!-- 動画URLを表示 -->
+                                <a href="https://www.youtube.com/watch?v=${institution.video}" target="_blank">
+                                    <c:out value="${institution.video}" />
+                                </a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -49,6 +56,11 @@
                 <div class="mb-3">
                     <label for="institution_detail" class="form-label">支援詳細:</label>
                     <textarea class="form-control" id="institution_detail" name="institution_detail" rows="3">${institution_detail}</textarea>
+                </div>
+                <!-- 動画URL入力フィールドを追加 -->
+                <div class="mb-3">
+                    <label for="institution_video" class="form-label">動画URL:</label>
+                    <input type="text" class="form-control" id="institution_video" name="institution_video" value="${institution_video}" />
                 </div>
                 <button type="submit" class="btn btn-primary">登録</button>
             </form>

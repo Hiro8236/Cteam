@@ -19,6 +19,8 @@ public class Institution implements Serializable {
 	 */
 	private String detail;
 
+	private String video;
+
 	/**
 	 * ゲッター、セッター
 	 */
@@ -39,5 +41,11 @@ public class Institution implements Serializable {
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	public String getVideo(){
+		return video;
+	}
+	public void setVideo(String video)  {
+		this.video = video;
 	}
 }
