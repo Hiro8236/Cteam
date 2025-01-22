@@ -1,4 +1,64 @@
-/* 全体のレイアウト */
+/* custom-header.css */
+
+/* ヘッダー全体のスタイル */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* 左右に配置 */
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+/* ナビゲーションリストを横並びにする */
+.navigation-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;  /* 横並びにする */
+}
+
+.navigation-list li {
+    margin-right: 20px;  /* アイテムの間隔を調整 */
+}
+
+.navigation-list a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+}
+
+.navigation-list a:hover {
+    text-decoration: underline;
+}
+
+/* 認証情報部分 */
+.auth-links {
+    display: flex;   /* 横並び */
+    align-items: center;
+}
+
+/* 各リンクのスタイル */
+.auth-link {
+    padding: 0 10px;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+/* UserIDの表示 */
+.user-id {
+    font-size: 14px;
+    color: #333;
+    margin-right: 15px;
+}
+
+
+/* 制度詳細css */
 .institution-details {
     max-width: 900px;
     margin: 30px auto;

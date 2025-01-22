@@ -5,9 +5,9 @@
 <%@ page session="true" %>
 
 <!-- ヘッダー部分の共通処理 -->
-<header class="d-flex justify-content-between align-items-center mb-3 mb-md-0 text-dark text-decoration-none">
+<header class="header-container">
     <!-- 左側メニュー -->
-    <ul class="list-unstyled mb-0">
+    <ul class="navigation-list">
         <c:if test="${user != null && user.staffRole == 1}">
             <li><a href="/Cteam1/staff/normalstaff/StaffHome.action">ホーム</a></li>
             <li><a href="/Cteam1/staff/normalstaff/institution/StaffInstitution.action">制度</a></li>
@@ -23,11 +23,11 @@
     </ul>
 
     <!-- 右側のログアウトとスタッフ情報 -->
-    <div class="d-flex align-items-center">
+    <div class="auth-links">
         <c:if test="${user != null && user.isAuthenticated()}">
             <!-- 認証済みの場合 -->
-            <span class="px-2">${user.staffName}</span>
-            <a class="px-2" href="StaffLogout.action">ログアウト</a>
+            <span class="user-id">${user.staffName}</span>
+            <a class="auth-link" href="StaffLogout.action">ログアウト</a>
         </c:if>
         <c:if test="${user == null || !user.isAuthenticated()}">
             <!-- 未認証の場合 -->
