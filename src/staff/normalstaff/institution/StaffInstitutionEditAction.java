@@ -19,13 +19,16 @@ public class StaffInstitutionEditAction extends Action {
         InstitutionDao insDao = new InstitutionDao(); // 支援Dao
         Map<String, String> errors = new HashMap<>(); // エラーメッセージ
 
+        System.out.println("1");
         // 支援リストを取得
         List<Institution> institutions = insDao.getAll(); // 全ての支援情報を取得
         req.setAttribute("institutions", institutions); // JSPに渡す
+        System.out.println("2");
 
         // リクエストパラメータの取得
         String insIDstr = req.getParameter("id"); // 支援ID (変更)
         System.out.println("Received institutionID: " + insIDstr);
+        System.out.println("3");
 
         // institutionID がnullまたは空の場合、エラーメッセージを設定
         if (insIDstr == null || insIDstr.isEmpty()) {
@@ -34,12 +37,14 @@ public class StaffInstitutionEditAction extends Action {
             req.getRequestDispatcher("staff_institution_edit.jsp").forward(req, res);
             return; // エラーが発生した場合は処理を中断
         }
+        System.out.println("4");
 
         int insId = Integer.parseInt(insIDstr);
 
         // DBからデータ取得
         Institution InsFromDb = insDao.findById(insId);
         System.out.println("Retrieved Institution: " + InsFromDb);
+        System.out.println("5");
 
         // ビジネスロジック
         if (InsFromDb != null) {
@@ -52,6 +57,7 @@ public class StaffInstitutionEditAction extends Action {
             req.getRequestDispatcher("staff_institution_edit.jsp").forward(req, res);
             return; // エラーが発生した場合は処理を中断
         }
+        System.out.println("6");
 
         // 詳細画面に遷移
         req.getRequestDispatcher("staff_institution_edit.jsp").forward(req, res);

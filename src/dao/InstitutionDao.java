@@ -120,4 +120,23 @@ public class InstitutionDao extends Dao {
         }
         return isDeleted;
     }
+
+
+
+    public boolean updateInstitution(Integer id, String name, String detail) throws Exception {
+        String sql = "UPDATE institution SET name = ?, detail = ? WHERE id = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            // パラメータを設定
+            statement.setString(1, name);
+            statement.setString(2, detail);
+            statement.setInt(3, id);
+
+            // クエリを実行し、影響を受けた行数を取得
+            int rowsUpdated = statement.executeUpdate();
+            return rowsUpdated > 0; // 1以上なら更新成功
+        }
+    }
 }

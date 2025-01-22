@@ -93,8 +93,8 @@
             <!-- 編集フォームセクション -->
             <div class="form-section">
                 <h3>支援情報を編集</h3>
-                <form action="EditInstitutionAction.action" method="post">
-                    <input type="hidden" name="id" value="${institution.id}" />
+                <form action="StaffInstitutionEditExecute.action" method="post">
+                    <input type="hidden" name="id" value="${institution.ID}" />
 
                     <label for="name">支援名</label>
                     <input type="text" id="name" name="name" value="${institution.name}" required />
