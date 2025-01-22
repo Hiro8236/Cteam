@@ -34,7 +34,7 @@ public class InstitutionDao extends Dao {
 
     public Institution findById(int id) throws Exception {
         Institution institution = null;
-        String sql = "SELECT ID, name, detail FROM institution WHERE ID = ?";
+        String sql = "SELECT ID, name, detail, video FROM institution WHERE ID = ?"; // videoを追加
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -47,6 +47,7 @@ public class InstitutionDao extends Dao {
                     institution.setId(resultSet.getInt("ID"));
                     institution.setName(resultSet.getString("name"));
                     institution.setDetail(resultSet.getString("detail"));
+                    institution.setVideo(resultSet.getString("video")); // videoを取得して設定
                 }
             }
         } catch (SQLException e) {
@@ -56,6 +57,7 @@ public class InstitutionDao extends Dao {
 
         return institution;
     }
+
 
     // 支援をデータベースに挿入し、自動生成されたIDを返すメソッド
     public int insert(Institution institution) throws Exception {

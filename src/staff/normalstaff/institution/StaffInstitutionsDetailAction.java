@@ -1,7 +1,6 @@
 package staff.normalstaff.institution;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +18,6 @@ public class StaffInstitutionsDetailAction extends Action {
         InstitutionDao insDao = new InstitutionDao(); // 支援Dao
         Map<String, String> errors = new HashMap<>(); // エラーメッセージ
 
-        // 支援リストを取得
-        List<Institution> institutions = insDao.getAll(); // 全ての支援情報を取得
-        req.setAttribute("institutions", institutions); // JSPに渡す
-
         // リクエストパラメータの取得
         String insIDstr = req.getParameter("id"); // 支援ID (変更)
         System.out.println("Received institutionID: " + insIDstr);
@@ -39,7 +34,17 @@ public class StaffInstitutionsDetailAction extends Action {
 
         // DBからデータ取得
         Institution InsFromDb = insDao.findById(insId);
-        System.out.println("Retrieved Institution: " + InsFromDb);
+
+        // InsFromDbの内容をログに出力
+        if (InsFromDb != null) {
+            System.out.println("Retrieved Institution:");
+            System.out.println("ID: " + InsFromDb.getID());
+            System.out.println("Name: " + InsFromDb.getName());
+            System.out.println("Detail: " + InsFromDb.getDetail());
+            System.out.println("Video: " + InsFromDb.getVideo());
+        } else {
+            System.out.println("No institution found with ID: " + insId);
+        }
 
         // ビジネスロジック
         if (InsFromDb != null) {
