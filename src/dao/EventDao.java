@@ -69,7 +69,7 @@ public class EventDao extends Dao {
 
     // スタッフ用イベント取得
     public List<Event> getStaffEvents() throws Exception {
-        String sql = "SELECT * FROM events WHERE is_public = 1 OR is_staff_only = 1";
+        String sql = "SELECT * FROM events WHERE is_staff_only = 1";
         List<Event> events = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
