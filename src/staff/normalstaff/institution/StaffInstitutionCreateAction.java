@@ -17,17 +17,17 @@ public class StaffInstitutionCreateAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         // セッションからログイン中の職員情報を取得
         HttpSession session = req.getSession();
-        Staff staff =(Staff)session.getAttribute("user");
-        req.setAttribute("Staff", staff);
+        Staff staff = (Staff) session.getAttribute("user");
+        req.setAttribute("staff", staff);
 
-        // DAOを使用して既存の職員情報を取得
-        InstitutionDao InsDao = new InstitutionDao();
-        List<Institution> institution = InsDao.getAll();
+        // DAOを使用して既存の支援情報を取得
+        InstitutionDao institutionDao = new InstitutionDao();
+        List<Institution> institutions = institutionDao.getAll();
 
-        // 職員一覧をリクエストスコープに設定
-        req.setAttribute("institution", institution);
+        // 支援情報をリクエストスコープに設定
+        req.setAttribute("institutions", institutions);
 
-        // 職員登録用のJSPページに転送
+        // 支援登録用のJSPページに転送
         req.getRequestDispatcher("staff_institution_create.jsp").forward(req, res);
     }
 }

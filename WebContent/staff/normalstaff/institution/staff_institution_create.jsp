@@ -18,34 +18,6 @@
                 </ul>
             </c:if>
 
-            <!-- 既存の支援一覧を表示 -->
-            <h3 class="mt-5">既存の支援一覧</h3>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>支援ID</th>
-                        <th>支援名</th>
-                        <th>支援詳細</th>
-                        <th>動画URL</th> <!-- 動画URL列を追加 -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="institution" items="${institution_list}">
-                        <tr>
-                            <td><c:out value="${institution.id}" /></td>
-                            <td><c:out value="${institution.name}" /></td>
-                            <td><c:out value="${institution.detail}" /></td>
-                            <td>
-                                <!-- 動画URLを表示 -->
-                                <a href="https://www.youtube.com/watch?v=${institution.video}" target="_blank">
-                                    <c:out value="${institution.video}" />
-                                </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-
             <!-- 新しい支援を登録するフォーム -->
             <h3 class="mt-5">新しい支援を登録</h3>
             <form action="StaffInstitutionCreateExecute.action" method="post">
