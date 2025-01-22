@@ -73,7 +73,7 @@
 						        }, 1000); // 1秒ごとに実行
 
 						        // メール送信リクエスト
-						        fetch('/Cteam1/user/mail/UpdateEmail.action', {
+						        fetch('/Cteam1/user/mail/SendEmail.action', {
 						            method: 'POST',
 						            headers: {
 						                'Content-Type': 'application/x-www-form-urlencoded',
