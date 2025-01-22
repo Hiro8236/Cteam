@@ -15,7 +15,7 @@ public class EventDao extends Dao {
     // ヘルパーメソッド: ResultSet から Event オブジェクトを作成
     private Event mapResultSetToEvent(ResultSet rs) throws SQLException {
         Event event = new Event();
-        event.setEventId(rs.getInt("event_id"));
+        event.setEventID(rs.getInt("event_id"));
         event.setTitle(rs.getString("title"));
         event.setDescription(rs.getString("description"));
         event.setStartTime(rs.getTimestamp("start_time"));
@@ -83,7 +83,7 @@ public class EventDao extends Dao {
 
     // 公開イベントの取得
     public List<Event> getPublicEvents() throws Exception {
-        String sql = "SELECT event_id, title, description, start_time, end_time, created_by FROM events WHERE is_public = 1";
+        String sql = "SELECT event_id, title, description, start_time, end_time, created_by, is_public, is_staff_only FROM events WHERE is_public = 1";
         List<Event> events = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -96,12 +96,12 @@ public class EventDao extends Dao {
     }
 
     // 特定のユーザーが登録したイベントを取得
-    public List<Event> getEventsByUserId(int userId) throws Exception {
+    public List<Event> getEventsByUserID(int userID) throws Exception {
         String sql = "SELECT * FROM events WHERE created_by = ?";
         List<Event> events = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, userId);
+            stmt.setInt(1, userID);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     events.add(mapResultSetToEvent(rs));
@@ -112,11 +112,11 @@ public class EventDao extends Dao {
     }
 
     // イベントの削除
-    public boolean deleteEvent(int eventId) throws Exception {
+    public boolean deleteEvent(int eventID) throws Exception {
         String sql = "DELETE FROM events WHERE event_id = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, eventId);
+            pstmt.setInt(1, eventID);
             int rowsAffected = pstmt.executeUpdate();
             System.out.println("削除された行数: " + rowsAffected);
             return rowsAffected > 0;
@@ -139,11 +139,11 @@ public class EventDao extends Dao {
             stmt.setTimestamp(4, new java.sql.Timestamp(event.getEndTime().getTime()));
             stmt.setInt(5, event.isPublic() ? 1 : 0); // boolean を int に変換
             stmt.setInt(6, event.isStaffOnly() ? 1 : 0); // boolean を int に変換
-            stmt.setInt(7, event.getEventId()); // WHERE句で使用するID
+            stmt.setInt(7, event.getEventID()); // WHERE句で使用するID
 
             // デバッグログ: 入力値を確認
             System.out.println("[DEBUG] 更新処理対象のイベント情報:");
-            System.out.println("  - イベントID: " + event.getEventId());
+            System.out.println("  - イベントID: " + event.getEventID());
             System.out.println("  - タイトル: " + event.getTitle());
             System.out.println("  - 説明: " + event.getDescription());
             System.out.println("  - 開始日時: " + event.getStartTime());
@@ -157,9 +157,9 @@ public class EventDao extends Dao {
 
             // 更新結果ログ
             if (rowsUpdated > 0) {
-                System.out.println("[成功] イベントが正常に更新されました: ID=" + event.getEventId());
+                System.out.println("[成功] イベントが正常に更新されました: ID=" + event.getEventID());
             } else {
-                System.out.println("[警告] 更新対象のイベントが見つかりませんでした: ID=" + event.getEventId());
+                System.out.println("[警告] 更新対象のイベントが見つかりませんでした: ID=" + event.getEventID());
             }
 
         } catch (SQLException e) {

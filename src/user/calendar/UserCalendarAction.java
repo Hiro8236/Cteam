@@ -1,7 +1,6 @@
 package user.calendar;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,21 +14,11 @@ public class UserCalendarAction extends Action {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+
         try {
+            // DAOを使用してイベントデータを取得
             EventDao eventDao = new EventDao();
-            List<Event> events = new ArrayList<>();
-
-            // ログイン状態を確認
-            Integer userId = (Integer) req.getSession().getAttribute("userId");
-
-            if (userId == null) {
-                // ログインしていない場合は公開イベントのみ取得
-                events = eventDao.getPublicEvents();
-            } else {
-                // ログインしている場合は公開イベントとユーザー自身のイベントを取得
-                events.addAll(eventDao.getPublicEvents());
-                events.addAll(eventDao.getEventsByUserId(userId));
-            }
+            List<Event> events = eventDao.getEvents();
 
             // イベントデータをリクエストスコープに設定
             req.setAttribute("events", events);
@@ -38,6 +27,7 @@ public class UserCalendarAction extends Action {
             req.getRequestDispatcher("user_calendar.jsp").forward(req, res);
 
         } catch (SQLException e) {
+            // 例外が発生した場合、エラー情報をリクエストスコープに設定しエラーページへ
             e.printStackTrace();
             req.setAttribute("error", "イベントデータの取得中にエラーが発生しました。");
             req.getRequestDispatcher("error.jsp").forward(req, res);
