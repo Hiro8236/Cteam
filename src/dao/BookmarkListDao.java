@@ -12,7 +12,7 @@ import bean.Bookmark;
 public class BookmarkListDao extends Dao {
 
     // おすすめ一覧からブックマーク一覧に移動するメソッド
-    public void moveAllToBookmark() throws Exception {
+    public void moveAllToBookmark(int userID) throws Exception {
         String selectSql = "SELECT id, name, detail FROM Institution";
         String insertSql = "INSERT INTO Bookmark (UserID, InstitutionID) VALUES (?, ?)";
         String deleteSql = "DELETE FROM Institution WHERE id = ?";
@@ -27,12 +27,10 @@ public class BookmarkListDao extends Dao {
             connection.setAutoCommit(false);
 
             while (rs.next()) {
-                String name = rs.getString("name");
-                String detail = rs.getString("detail");
-
+                int institutionID = rs.getInt("id");
                 // Bookmarkテーブルにデータを挿入
-                insertStatement.setString(1, name);
-                insertStatement.setString(2, detail);
+                insertStatement.setInt(1, userID);  // ユーザーID
+                insertStatement.setInt(2, institutionID);  // InstitutionID
                 insertStatement.executeUpdate();
             }
 
@@ -48,9 +46,10 @@ public class BookmarkListDao extends Dao {
         }
     }
 
+    // ブックマーク一覧を取得するメソッド
     public List<Bookmark> getAll() throws Exception {
         List<Bookmark> bookmarklists = new ArrayList<>();
-        String sql = "SELECT BookmarkID, UserID, InstitutionID, Institution.name, Institution.detail FROM Bookmark JOIN Institution ON Bookmark.InstitutionID = Institution.id";
+        String sql = "SELECT BookmarkID, UserID, InstitutionID, Institution.name, Institution.detail FROM Bookmark JOIN Institution ON Bookmark.InstitutionID = Institution.ID";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -70,5 +69,67 @@ public class BookmarkListDao extends Dao {
         return bookmarklists;
     }
 
+    // IDでブックマークを検索するメソッド
+    public Bookmark findByID(int bookmarkID) throws Exception {
+        Connection connection = getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        Bookmark bookmark = null;
 
+        try {
+            // 指定されたBookmarkIDで検索
+            statement = connection.prepareStatement("SELECT * FROM Bookmark WHERE BookmarkID = ?");
+            statement.setInt(1, bookmarkID);
+            resultSet = statement.executeQuery();
+
+            // 結果があればBookmarkオブジェクトを作成
+            if (resultSet.next()) {
+                bookmark = new Bookmark();
+                bookmark.setBookmarkID(resultSet.getInt("BookmarkID"));
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+        }
+
+        return bookmark;  // 該当するブックマークが見つからなければnull
+    }
+
+
+    // ブックマークを削除するメソッド
+    public boolean delete(Bookmark bookmark) throws Exception {
+        String sql = "DELETE FROM Bookmark WHERE BookmarkID = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, bookmark.getBookmarkID());
+            int count = statement.executeUpdate();
+
+            return count > 0;
+        } catch (SQLException e) {
+            throw new Exception("削除に失敗しました", e);
+        }
+    }
 }

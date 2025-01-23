@@ -21,6 +21,8 @@
                                 <tr>
                                     <td>${bookmark.name}</td>
                                     <td>${bookmark.detail}</td>
+                                    <td><input type="hidden" name="bookmarkID" value="${bookmark.bookmarkID}" /><a href="BookmarkDelete.action">削除</a></td>
+
                                 </tr>
                             </c:forEach>
                         </tbody>
