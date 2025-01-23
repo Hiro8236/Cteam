@@ -54,6 +54,13 @@
     color: #333;
     margin-right: 15px;
 }
+/* ヘッダーcssここまで */
+
+
+
+
+
+
 
 /* 制度詳細css */
 .institution-details {
@@ -159,8 +166,13 @@ a:hover {
         height: 350px;
     }
 }
+/* 制度詳細css ここまで*/
+
+
+
 
 /* ユーザーHomeのcss */
+
 .table {
     width: 100%;
     margin-top: 30px;
@@ -233,6 +245,11 @@ a:hover {
     }
 }
 
+/* ユーザーHomeのcssここまで */
+
+
+
+
 /* adminstaff css */
 .admin-button {
     display: inline-block;
@@ -267,8 +284,15 @@ a:hover {
     justify-content: center;
     margin-top: 40px;
 }
+/* adminstaff css ここまで*/
+
+
+
+
 
 /* 職員削除ページのcss */
+
+/* セクション全体のスタイル */
 .me-4 {
     margin: 20px auto;
     max-width: 800px;
@@ -308,64 +332,4 @@ a:hover {
     line-height: 1.5;
 }
 
-/* 削除確認メッセージのスタイル */
-h3 {
-    font-size: 1.2rem;
-    color: #d9534f;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-/* フォームのボタンスタイル */
-form {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.btn {
-    font-size: 1rem;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-danger {
-    background-color: #d9534f;
-    color: #fff;
-}
-
-.btn-danger:hover {
-    background-color: #c9302c;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-    color: #fff;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268;
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-    .me-4 {
-        padding: 15px;
-    }
-
-    .btn {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-    }
-}
+/*
