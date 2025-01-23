@@ -7,12 +7,12 @@
 		ぽシステム
 	</c:param>
 
-
 	<c:param name="content">
 
 	    <h1>AdminStaffHOME</h1>
-	    <h2><a href="/Cteam1/staff/adminstaff/StaffList.action">職員一覧</a></h2>
-
+	    <div class="button-container">
+	        <a class="admin-button" href="/Cteam1/staff/adminstaff/StaffList.action">職員一覧</a>
+	    </div>
 
 	</c:param>
 </c:import>
