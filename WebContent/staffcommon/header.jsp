@@ -25,7 +25,7 @@
         <c:if test="${user != null && user.isAuthenticated()}">
             <!-- 認証済みの場合 -->
             <span class="user-id">${user.staffName}</span>
-            <a class="auth-link" href="StaffLogout.action">ログアウト</a>
+            <a class="auth-link" href="/Cteam1/staff/StaffLogout.action">ログアウト</a>
         </c:if>
         <c:if test="${user == null || !user.isAuthenticated()}">
             <!-- 未認証の場合 -->
