@@ -2,6 +2,7 @@ package staff.normalstaff.institution;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import dao.InstitutionDao;
 import tool.Action;
 
@@ -45,3 +46,4 @@ public class StaffInstitutionEditExecuteAction extends Action {
         }
     }
 }
+

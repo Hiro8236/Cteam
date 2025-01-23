@@ -31,3 +31,4 @@ public class StaffInstitutionCreateAction extends Action {
         req.getRequestDispatcher("staff_institution_create.jsp").forward(req, res);
     }
 }
+
