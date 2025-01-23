@@ -16,8 +16,6 @@
         </c:if>
         <c:if test="${user != null && user.staffRole == 2}">
             <li><a href="/Cteam1/staff/adminstaff/AdminStaffHome.action">ホーム</a></li>
-            <li><a href="#制度">制度</a></li>
-            <li><a href="#カレンダー">カレンダー</a></li>
             <li><a href="#お知らせ">これは管理者です</a></li>
         </c:if>
     </ul>
