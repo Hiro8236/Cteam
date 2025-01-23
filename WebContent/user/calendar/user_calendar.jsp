@@ -111,6 +111,31 @@
 
                 calendar.render();
 
+             // 削除ボタンのイベントリスナー
+                deleteEventBtn.addEventListener('click', function () {
+                    var eventID = document.getElementById('eventID').value;
+                    if (!eventID) {
+                        alert('イベントIDが取得できません。削除を中止します。');
+                        return;
+                    }
+
+                    if (confirm('このイベントを削除しますか？')) {
+                        // フォームを作成してPOSTリクエストを送信
+                        var form = document.createElement('form');
+                        form.method = 'post';
+                        form.action = 'EventDelete.action';
+
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'eventID';
+                        input.value = eventID;
+                        form.appendChild(input);
+
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
+
                 // モーダルを閉じる
                 closeModal.onclick = function () {
                     modal.style.display = 'none';
