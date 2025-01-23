@@ -111,6 +111,9 @@ public class EventDao extends Dao {
         return events;
     }
 
+
+    //スタッフ用の削除、更新
+
     // イベントの削除
     public boolean deleteEvent(int eventID) throws Exception {
         String sql = "DELETE FROM events WHERE event_id = ?";
@@ -169,6 +172,72 @@ public class EventDao extends Dao {
             System.err.println("  - SQLステート: " + e.getSQLState());
             System.err.println("  - エラーコード: " + e.getErrorCode());
             throw new Exception("[エラー] イベント更新中にエラーが発生しました。詳細: " + e.getMessage(), e);
+        }
+    }
+
+    //ユーザー用の削除、更新
+
+ //ユーザー用の更新
+    public void updateEventForUser(Event event) throws Exception {
+        String sql = "UPDATE events SET title = ?, description = ?, start_time = ?, end_time = ? WHERE event_id = ? AND created_by = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // 各プレースホルダーに値を設定
+            stmt.setString(1, event.getTitle());
+            stmt.setString(2, event.getDescription());
+            stmt.setTimestamp(3, new java.sql.Timestamp(event.getStartTime().getTime()));
+            stmt.setTimestamp(4, new java.sql.Timestamp(event.getEndTime().getTime()));
+            stmt.setInt(5, event.getEventID()); // イベントID
+            stmt.setInt(6, event.getCreatedBy()); // 作成者（本人）であることを確認
+
+            // クエリ実行
+            int rowsUpdated = stmt.executeUpdate();
+
+            // 更新結果ログ
+            if (rowsUpdated > 0) {
+                System.out.println("[成功] ユーザーイベントが正常に更新されました: ID=" + event.getEventID());
+            } else {
+                throw new Exception("[エラー] 更新対象のイベントが見つかりませんでした。ID=" + event.getEventID());
+            }
+
+        } catch (SQLException e) {
+            // エラー処理
+            System.err.println("[エラー] ユーザーイベント更新中にエラーが発生しました。");
+            System.err.println("  - エラー詳細: " + e.getMessage());
+            System.err.println("  - SQLステート: " + e.getSQLState());
+            System.err.println("  - エラーコード: " + e.getErrorCode());
+            throw new Exception("[エラー] ユーザーイベント更新中にエラーが発生しました。詳細: " + e.getMessage(), e);
+        }
+    }
+
+    //ユーザー用の削除
+    public void deleteEventForUser(int eventID, int userID) throws Exception {
+        String sql = "DELETE FROM events WHERE event_id = ? AND created_by = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // 各プレースホルダーに値を設定
+            stmt.setInt(1, eventID);
+            stmt.setInt(2, userID);
+
+            // クエリ実行
+            int rowsDeleted = stmt.executeUpdate();
+
+            // 削除結果ログ
+            if (rowsDeleted > 0) {
+                System.out.println("[成功] ユーザーイベントが削除されました: ID=" + eventID);
+            } else {
+                throw new Exception("[エラー] 削除対象のイベントが見つかりませんでした: ID=" + eventID);
+            }
+
+        } catch (SQLException e) {
+            // エラー処理
+            System.err.println("[エラー] ユーザーイベント削除中にエラーが発生しました。");
+            System.err.println("  - エラー詳細: " + e.getMessage());
+            System.err.println("  - SQLステート: " + e.getSQLState());
+            System.err.println("  - エラーコード: " + e.getErrorCode());
+            throw new Exception("[エラー] ユーザーイベント削除中にエラーが発生しました。詳細: " + e.getMessage(), e);
         }
     }
 
