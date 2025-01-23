@@ -5,7 +5,7 @@
     <c:param name="title" value="ぽシステム" />
     <c:param name="content">
 
-         <section class="me-4">
+        <section class="me-4">
             <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4" style="background-color:#f2f2f2">ブックマーク一覧</h2>
             <c:choose>
                 <c:when test="${bookmarklists != null && bookmarklists.size() > 0}">
@@ -21,8 +21,13 @@
                                 <tr>
                                     <td>${bookmark.name}</td>
                                     <td>${bookmark.detail}</td>
-                                    <td><input type="hidden" name="bookmarkID" value="${bookmark.bookmarkID}" /><a href="BookmarkDelete.action">削除</a></td>
-
+                                    <!-- フォームを使って削除リクエストを送信 -->
+                                    <td>
+                                        <form action="BookmarkDelete.action" method="post">
+                                            <input type="hidden" name="BookmarkID" value="${bookmark.bookmarkID}" />
+                                            <input class="btn btn-secondary" type="submit" value="削除" />
+                                        </form>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>

@@ -4,43 +4,37 @@ import java.io.Serializable;
 
 public class Bookmark implements Serializable {
 
-	/**
-	 * ユーザID:Int
-	 */
-	private int BookmarkID;
+    private int BookmarkID;
+    private int UserID;
+    private int InstitutionID;
+    private String name;
+    private String detail;
 
-	/**
-	 * ユーザID:Int
-	 */
-	private int UserID;
+    public int getBookmarkID() {
+        return BookmarkID;
+    }
 
-	/**
-	 * 制度ID:Int
-	 */
-	private int InstitutionID;
+    public void setBookmarkID(int BookmarkID) {
+        this.BookmarkID = BookmarkID;
+    }
 
-	private String name; // Institutionのname
-    private String detail; // Institutionのdetail
+    public int getUserID() {
+        return UserID;
+    }
 
-	public int getBookmarkID() {
-		return BookmarkID;
-	}
-	public void setBookmarkID(int BookmarkID) {
-		this.BookmarkID = BookmarkID;
-	}
-	public int getUserID() {
-		return UserID;
-	}
-	public void setUserID(int UserID) {
-		this.UserID = UserID;
-	}
-	public int getInstitutionID() {
-		return InstitutionID;
-	}
-	public void setInstitutionID(int InstitutionID) {
-		this.InstitutionID = InstitutionID;
-	}
-	public String getName() {
+    public void setUserID(int UserID) {
+        this.UserID = UserID;
+    }
+
+    public int getInstitutionID() {
+        return InstitutionID;
+    }
+
+    public void setInstitutionID(int InstitutionID) {
+        this.InstitutionID = InstitutionID;
+    }
+
+    public String getName() {
         return name;
     }
 
@@ -55,5 +49,4 @@ public class Bookmark implements Serializable {
     public void setDetail(String detail) {
         this.detail = detail;
     }
-
 }
