@@ -149,7 +149,7 @@
         </script>
     </c:param>
     <c:param name="content">
-        <h1 style="text-align: center;">ユーザー用イベントカレンダー</h1>
+        <h1 style="text-align: center;">イベントカレンダー</h1>
         <div id="calendar"></div>
 
         <!-- モーダル -->
