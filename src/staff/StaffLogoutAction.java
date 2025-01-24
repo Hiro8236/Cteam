@@ -13,18 +13,7 @@ public class StaffLogoutAction extends Action {
 		//ローカル変数の宣言 1
 		HttpSession session = req.getSession();//セッション
 
-		//リクエストパラメータ―の取得 2
-		//なし
-		//DBからデータ取得 3
-		//なし
-
-		//ビジネスロジック 4
 		session.invalidate();//セッション全削除
-
-		//DBへデータ保存 5
-		//なし
-		//レスポンス値をセット 6
-		//なし
 
 		//JSPへフォワード 7
 		req.getRequestDispatcher("stafflogout.jsp").forward(req, res);
