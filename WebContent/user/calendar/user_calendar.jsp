@@ -150,7 +150,7 @@
     </c:param>
     <c:param name="content">
         <h1 style="text-align: center;">イベントカレンダー</h1>
-        <div id="calendar"></div>
+        <div id="calendar" class="calendar-container" style="width: 95%; max-width: 1600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);"></div>
 
         <!-- モーダル -->
         <div id="eventModal" class="modal">

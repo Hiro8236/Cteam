@@ -11,43 +11,56 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar/locales/ja.js"></script>
 
-        <h1 style="text-align: center;">スタッフ用イベント管理カレンダー</h1>
-        <div id="calendar"></div>
+        <h1 class="h3 mb-3 fw-normal text-center bg-secondary bg-opacity-10 py-2 px-4">スタッフ用イベント管理カレンダー</h1>
+        <div id="calendar" class="calendar-container" style="width: 95%; max-width: 1600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);"></div>
 
         <!-- モーダル -->
         <div id="eventModal" class="modal">
-            <div class="modal-content">
+            <div class="modal-content institution-details">
                 <span class="close">&times;</span>
-                <h2 id="modalTitle">イベントを登録</h2>
+                <h2 id="modalTitle" class="institution-name">イベントを登録</h2>
                 <form id="eventForm" action="EventCreate.action" method="post">
-                    <label for="title">タイトル:</label>
-                    <input type="text" id="title" name="title" required><br><br>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">タイトル:</label>
+                        <input type="text" id="title" name="title" class="form-control" required>
+                    </div>
 
-                    <label for="description">説明:</label>
-                    <input type="text" id="description" name="description"><br><br>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">説明:</label>
+                        <input type="text" id="description" name="description" class="form-control">
+                    </div>
 
-                    <label for="start">開始日時:</label>
-                    <input type="datetime-local" id="start" name="start" required><br><br>
+                    <div class="mb-3">
+                        <label for="start" class="form-label">開始日時:</label>
+                        <input type="datetime-local" id="start" name="start" class="form-control" required>
+                    </div>
 
-                    <label for="end">終了日時:</label>
-                    <input type="datetime-local" id="end" name="end" required><br><br>
+                    <div class="mb-3">
+                        <label for="end" class="form-label">終了日時:</label>
+                        <input type="datetime-local" id="end" name="end" class="form-control" required>
+                    </div>
 
-
-                    <!-- 公開設定ラジオボタンの追加 -->
-
-                    <label>公開設定:</label><br>
-                    <label>
-                        <input type="radio" id="public" name="visibility" value="public"> 全体公開
-                    </label><br>
-                    <label>
-                        <input type="radio" id="staffOnly" name="visibility" value="staffOnly" checked> スタッフ限定公開
-                    </label><br><br>
+                    <!-- 公開設定ラジオボタン -->
+                    <fieldset class="mb-3">
+                        <legend class="form-label">公開設定:</legend>
+                        <div>
+                            <label>
+                                <input type="radio" id="public" name="visibility" value="public"> 全体公開
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="radio" id="staffOnly" name="visibility" value="staffOnly" checked> スタッフ限定公開
+                            </label>
+                        </div>
+                    </fieldset>
 
                     <input type="hidden" id="eventID" name="eventID">
-                        <div style="display: flex; gap: 10px;">
-                            <button type="submit">保存</button>
-                            <button type="button" id="deleteEventBtn" style="display: none;">削除</button>
-                        </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="button" id="deleteEventBtn" class="btn btn-danger" style="display: none;">削除</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -128,20 +141,8 @@
                         console.log("extendedProps:", info.event.extendedProps);
 
                         // ラジオボタンの状態を設定
-                        var isPublicRadio = document.getElementById('public');
-                        var isStaffOnlyRadio = document.getElementById('staffOnly');
-
-                        if (isPublicRadio) {
-                            isPublicRadio.checked = info.event.extendedProps.isPublic === true;
-                        } else {
-                            console.error("要素 'public' が見つかりませんでした");
-                        }
-
-                        if (isStaffOnlyRadio) {
-                            isStaffOnlyRadio.checked = info.event.extendedProps.isStaffOnly === true;
-                        } else {
-                            console.error("要素 'staffOnly' が見つかりませんでした");
-                        }
+                        document.getElementById('public').checked = info.event.extendedProps.isPublic === true;
+                        document.getElementById('staffOnly').checked = info.event.extendedProps.isStaffOnly === true;
 
                         // 削除ボタンの表示
                         deleteEventBtn.style.display = 'block';
@@ -151,7 +152,7 @@
 
                 calendar.render();
 
-             // 保存ボタンのクリック時の処理
+                // 保存ボタンのクリック時の処理
                 document.getElementById('eventForm').addEventListener('submit', function (e) {
                     e.preventDefault(); // フォームのデフォルト動作を防止
                     var eventID = document.getElementById('eventID').value;
