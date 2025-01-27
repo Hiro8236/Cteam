@@ -13,7 +13,7 @@ public class InstitutionDao extends Dao {
 
     public List<Institution> getAll() throws Exception {
         List<Institution> institutions = new ArrayList<>();
-        String sql = "SELECT ID, name, detail, video FROM institution";
+        String sql = "SELECT InstitutionID, name, detail, video FROM institution";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -21,7 +21,7 @@ public class InstitutionDao extends Dao {
 
             while (resultSet.next()) {
                 Institution institution = new Institution();
-                institution.setId(resultSet.getInt("ID"));
+                institution.setId(resultSet.getInt("InstitutionID"));
                 institution.setName(resultSet.getString("name"));
                 institution.setDetail(resultSet.getString("detail"));
                 institution.setVideo(resultSet.getString("video"));
@@ -34,7 +34,7 @@ public class InstitutionDao extends Dao {
 
     public Institution findById(int id) throws Exception {
         Institution institution = null;
-        String sql = "SELECT ID, name, detail, video FROM institution WHERE ID = ?"; // videoを追加
+        String sql = "SELECT InstitutionID, name, detail, video FROM institution WHERE InstitutionID = ?"; // videoを追加
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -44,7 +44,7 @@ public class InstitutionDao extends Dao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     institution = new Institution();
-                    institution.setId(resultSet.getInt("ID"));
+                    institution.setId(resultSet.getInt("InstitutionID"));
                     institution.setName(resultSet.getString("name"));
                     institution.setDetail(resultSet.getString("detail"));
                     institution.setVideo(resultSet.getString("video")); // videoを取得して設定
@@ -111,7 +111,7 @@ public class InstitutionDao extends Dao {
 
     public boolean deleteInstitutionById(int id) throws Exception {
         boolean isDeleted = false;
-        String sql = "DELETE FROM institution WHERE ID = ?";
+        String sql = "DELETE FROM institution WHERE InstitutionID = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -129,7 +129,7 @@ public class InstitutionDao extends Dao {
 
 
     public boolean updateInstitution(Integer id, String name, String detail) throws Exception {
-        String sql = "UPDATE institution SET name = ?, detail = ? WHERE id = ?";
+        String sql = "UPDATE institution SET name = ?, detail = ? WHERE InstitutionID = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {

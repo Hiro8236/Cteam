@@ -15,7 +15,7 @@ public class EventDao extends Dao {
     // ヘルパーメソッド: ResultSet から Event オブジェクトを作成
     private Event mapResultSetToEvent(ResultSet rs) throws SQLException {
         Event event = new Event();
-        event.setEventID(rs.getInt("event_id"));
+        event.setEventID(rs.getInt("EventID"));
         event.setTitle(rs.getString("title"));
         event.setDescription(rs.getString("description"));
         event.setStartTime(rs.getTimestamp("start_time"));
@@ -55,7 +55,7 @@ public class EventDao extends Dao {
 
     // すべてのイベントの取得*使用非推奨
     public List<Event> getEvents() throws Exception {
-    	String sql = "SELECT event_id, title, description, start_time, end_time, created_by, is_public, is_staff_only FROM events";
+    	String sql = "SELECT EventID, title, description, start_time, end_time, created_by, is_public, is_staff_only FROM events";
         List<Event> events = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -83,7 +83,7 @@ public class EventDao extends Dao {
 
     // 公開イベントの取得
     public List<Event> getPublicEvents() throws Exception {
-        String sql = "SELECT event_id, title, description, start_time, end_time, created_by, is_public, is_staff_only FROM events WHERE is_public = 1";
+        String sql = "SELECT EventID, title, description, start_time, end_time, created_by, is_public, is_staff_only FROM events WHERE is_public = 1";
         List<Event> events = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -116,7 +116,7 @@ public class EventDao extends Dao {
 
     // イベントの削除
     public boolean deleteEvent(int eventID) throws Exception {
-        String sql = "DELETE FROM events WHERE event_id = ?";
+        String sql = "DELETE FROM events WHERE EventID = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, eventID);
@@ -131,7 +131,7 @@ public class EventDao extends Dao {
 
     // イベントの更新
     public void updateEvent(Event event) throws Exception {
-        String sql = "UPDATE events SET title = ?, description = ?, start_time = ?, end_time = ?, is_public = ?, is_staff_only = ? WHERE event_id = ?";
+        String sql = "UPDATE events SET title = ?, description = ?, start_time = ?, end_time = ?, is_public = ?, is_staff_only = ? WHERE EventID = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -213,7 +213,7 @@ public class EventDao extends Dao {
 
     //ユーザー用の削除
     public void deleteEventForUser(int eventID, int userID) throws Exception {
-        String sql = "DELETE FROM events WHERE event_id = ? AND created_by = ?";
+        String sql = "DELETE FROM events WHERE EventID= ? AND created_by = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 

@@ -171,23 +171,26 @@ public class StaffDao extends Dao {
                 pstmt.setInt(i + 1, staffIds.get(i));
             }
             return pstmt.executeUpdate();
-            }
         }
+    }
+
+    /**
+     * 職員情報を更新する
+     *
+     * @param staff 更新する職員インスタンス
+     * @throws Exception
+     */
     public void update(Staff staff) throws Exception {
         String query = "UPDATE staff SET staffname = ?, staffrole = ? WHERE staffid = ?";
 
-        // getConnection() メソッドで接続を取得
-        try (Connection conn = getConnection(); // getConnection() で接続を取得
+        try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            // パラメータを設定
             stmt.setString(1, staff.getStaffName());
             stmt.setString(2, staff.getStaffRole());
             stmt.setInt(3, staff.getStaffID());
 
-            // クエリを実行
             stmt.executeUpdate();
         }
     }
-
-    }
+}

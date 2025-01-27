@@ -9,12 +9,6 @@ import bean.User;
 
 public class UserDao extends Dao {
 
-
-
-
-
-
-
 	public User get(Integer UserID) throws Exception {
 		// 教員インスタンスを初期化
 		User user = new User();
@@ -276,7 +270,7 @@ public class UserDao extends Dao {
      * 認証コードの検証
      */
     public boolean isValidOTP(String emailAddress, String otp) throws Exception {
-        String sql = "SELECT COUNT(*) FROM user_otp WHERE email_address = ? AND otp = ? AND expires_at > NOW()";
+        String sql = "SELECT COUNT(*) FROM user_otp WHERE emailaddress = ? AND otp = ? AND expires_at > NOW()";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, emailAddress);
@@ -328,7 +322,7 @@ public class UserDao extends Dao {
     }
 
     public void saveOTP(String emailAddress, String otp) throws Exception {
-        String sql = "INSERT INTO user_otp (email_address, otp, expires_at) " +
+        String sql = "INSERT INTO user_otp (emailaddress, otp, expires_at) " +
                      "VALUES (?, ?, NOW() + INTERVAL 10 MINUTE) " +
                      "ON DUPLICATE KEY UPDATE otp = VALUES(otp), expires_at = VALUES(expires_at)";
         try (Connection conn = getConnection();
@@ -365,10 +359,10 @@ public class UserDao extends Dao {
     public void EmailUpdateOTP(Integer userID, String emailAddress, String otp) throws Exception {
 
 
-    	String sql = "INSERT INTO Email_otp (user_ID, email_address, otp, expires_at) " +
+    	String sql = "INSERT INTO Email_otp (user_ID, emailaddress, otp, expires_at) " +
                 "VALUES (?, ?, ?, NOW() + INTERVAL 10 MINUTE) " +
                 "ON DUPLICATE KEY UPDATE " +
-                "email_address = VALUES(email_address), " +
+                "emailaddress = VALUES(emailaddress), " +
                 "otp = VALUES(otp), " +
                 "expires_at = VALUES(expires_at);";
 
@@ -395,7 +389,7 @@ public class UserDao extends Dao {
      * 認証コードの検証
      */
     public boolean EmailOTP(Integer userID, String emailAddress, String otp) throws Exception {
-    	 String sql = "SELECT COUNT(*) FROM Email_otp WHERE user_id = ? AND email_address = ? AND otp = ? AND expires_at > NOW()";        try (Connection conn = getConnection();
+    	 String sql = "SELECT COUNT(*) FROM Email_otp WHERE user_id = ? AND emailaddress = ? AND otp = ? AND expires_at > NOW()";        try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
     		 ps.setInt(1, userID);
