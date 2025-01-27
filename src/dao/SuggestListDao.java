@@ -13,43 +13,46 @@ public class SuggestListDao extends Dao {
 
     // 全ての支援を取得するメソッド
     public List<Suggest> getAll() throws Exception {
-        List<Suggest> suggestlists = new ArrayList<>();
-        String sql = "SELECT id, name, detail FROM Suggest";
+        List<Suggest> suggestLists = new ArrayList<>();
+        String sql = "SELECT id, name, detail FROM suggest";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                Suggest suggestlist = new Suggest();
-                suggestlist.setId(resultSet.getInt("id"));
-                suggestlist.setName(resultSet.getString("name"));
-                suggestlist.setDetail(resultSet.getString("detail"));
-                suggestlists.add(suggestlist);
+                Suggest suggest = new Suggest();
+                suggest.setId(resultSet.getInt("id"));
+                suggest.setName(resultSet.getString("name"));
+                suggest.setDetail(resultSet.getString("detail"));
+                suggestLists.add(suggest);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("支援リストの取得中にエラーが発生しました: " + e.getMessage());
         }
 
-        return suggestlists;
+        return suggestLists;
     }
 
     // 支援をデータベースに挿入するメソッド
-    public void insert(Integer userID, Integer InstitutionID) throws Exception {
+    public void insert(Integer userId, Integer institutionId) throws Exception {
         // SQLのINSERT文
-        String sql = "INSERT INTO Bookmark (userID, InstitutionID) VALUES (?, ?)";
+        String sql = "INSERT INTO bookmark (user_id, institution_id) VALUES (?, ?)";
 
         // データベース接続
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             // パラメータの設定
-            statement.setInt(1, userID);
-            statement.setInt(2, InstitutionID);
+            statement.setInt(1, userId);
+            statement.setInt(2, institutionId);
 
             // 実行
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();  // エラーが発生した場合
-            throw e;
+            e.printStackTrace(); // エラーが発生した場合
+            throw new Exception("支援の挿入中にエラーが発生しました: " + e.getMessage());
         }
     }
 }
