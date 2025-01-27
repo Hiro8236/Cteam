@@ -22,7 +22,7 @@
                                 <tr onclick="location.href='InstitutionsDetail.action?id=${institution.ID}'" style="cursor: pointer;">
                                     <td>${institution.name}</td>
                                     <td>${institution.detail}</td>
-                                    <td><a href="BookmarkCreate.action?id=${institution.ID}">登録</a></td>
+                                    <td><a href="BookmarkCreate.action?institutionID=${institution.ID}">登録</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

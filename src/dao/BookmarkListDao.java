@@ -82,4 +82,25 @@ public class BookmarkListDao extends Dao {
             throw new Exception("削除に失敗しました", e);
         }
     }
+
+    // ブックマークを挿入するメソッド
+    public boolean insert(Bookmark bookmark) throws Exception {
+        String sql = "INSERT INTO Bookmark (UserID, InstitutionID) VALUES (?, ?)";  // 必要なカラムを指定
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            // パラメータを設定
+            statement.setInt(1, bookmark.getUserID());
+            statement.setInt(2, bookmark.getInstitutionID());
+
+            // クエリの実行
+            int count = statement.executeUpdate();
+
+            // 挿入が成功したかを返す
+            return count > 0;
+        } catch (SQLException e) {
+            throw new Exception("ブックマークの挿入に失敗しました", e);
+        }
+    }
 }
