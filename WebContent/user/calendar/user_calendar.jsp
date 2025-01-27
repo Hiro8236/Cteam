@@ -25,7 +25,7 @@
                 // イベントデータを JavaScript 配列に変換
                 var events = [
                     <%
-                        List<Event> events = (List<Event>) request.getAttribute("events");
+                        List<Event> events = (List<Event>) request.getAttribute("eventｓ");
                         Integer userID = (Integer) session.getAttribute("userID");
                         if (events != null && !events.isEmpty()) {
                             for (int i = 0; i < events.size(); i++) {
