@@ -55,7 +55,7 @@ public class UserCalendarAction extends Action {
         	}
 
         	// JSPに渡す
-        	req.setAttribute("events", events);
+        	req.setAttribute("event", events);
         	req.getRequestDispatcher("user_calendar.jsp").forward(req, res);
 
         } catch (SQLException e) {
