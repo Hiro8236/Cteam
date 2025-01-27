@@ -4,26 +4,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.SuggestListDao;
+import bean.Bookmark;
+import dao.BookmarkListDao;
 import tool.Action;
 
 public class BookmarkCreateAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         // DAOの初期化
-        SuggestListDao suggestListDao = new SuggestListDao();
+        BookmarkListDao bookmarkListDao = new BookmarkListDao();
 
         // リクエストパラメータの取得と検証
-        String idParam = req.getParameter("id");
+        String idParam = req.getParameter("institutionID");
         if (idParam == null || idParam.isEmpty()) {
-            throw new IllegalArgumentException("idパラメータが指定されていません。");
+            throw new IllegalArgumentException("institutionIDパラメータが指定されていません。");
         }
 
         // 数値に変換
-        Integer InstitutionID;
+        Integer institutionID;
         try {
-            InstitutionID = Integer.parseInt(idParam);
+            institutionID = Integer.parseInt(idParam);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("idパラメータが数値として解釈できません: " + idParam, e);
+            throw new IllegalArgumentException("institutionIDパラメータが数値として解釈できません: " + idParam, e);
         }
 
         // セッションからuserIDを取得
@@ -33,10 +34,21 @@ public class BookmarkCreateAction extends Action {
         }
         Integer userID = (Integer) session.getAttribute("userID");
 
-        // DAOを使ってデータベースに登録
-        suggestListDao.insert(userID, InstitutionID);
+        // Bookmarkオブジェクトを作成
+        Bookmark bookmark = new Bookmark();
+        bookmark.setUserID(userID);  // userIDを設定
+        bookmark.setInstitutionID(institutionID);  // institutionIDを設定
 
-        // JSPへフォワード（登録完了画面など）
-        req.getRequestDispatcher("bookmark_create.jsp").forward(req, res);
+        // DAOを使ってデータベースに登録
+        boolean isInserted = bookmarkListDao.insert(bookmark);
+
+        // 挿入結果に応じて適切な画面に遷移
+        if (isInserted) {
+            // 登録が成功した場合、登録完了画面などへフォワード
+            req.getRequestDispatcher("bookmark_create.jsp").forward(req, res);
+        } else {
+            // 失敗した場合、エラーメッセージを表示するページに遷移
+            req.getRequestDispatcher("error.jsp").forward(req, res);
+        }
     }
 }
