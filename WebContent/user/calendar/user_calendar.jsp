@@ -62,7 +62,7 @@
                 var events = [
                     <%
                         List<Event> events = (List<Event>) request.getAttribute("event");
-                    	Integer userID = (Integer) session.getAttribute("userID");
+                    	 Integer userID = (Integer) session.getAttribute("userID");
                         if (events != null && !events.isEmpty()) {
                             for (int i = 0; i < events.size(); i++) {
                                 Event event = events.get(i);
@@ -81,7 +81,8 @@
                         start: "<%= start %>",
                         end: "<%= end %>",
                         extendedProps: {
-                            description: "<%= description %>"
+                            description: "<%= description %>",
+                            editable: <%= editable %>
                         }
                     }<%= (i < events.size() - 1) ? "," : "" %>
                     <%
@@ -126,7 +127,13 @@
                             : info.event.start.toISOString().slice(0, 16);
                         document.getElementById('eventID').value = info.event.id;
 
-                        deleteEventBtn.style.display = 'block';
+                     // 作成者のみ削除ボタンを表示
+                        if (info.event.extendedProps.editable) {
+                        	deleteEventBtn.style.display = 'block';
+                        }
+                        else {
+                        deleteEventBtn.style.display = 'none';
+                        }
                     }
                 });
 
