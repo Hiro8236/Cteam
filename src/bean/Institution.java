@@ -3,49 +3,40 @@ package bean;
 import java.io.Serializable;
 
 public class Institution implements Serializable {
+    private int id;
+    private String name;
+    private String detail;
+    private String video;
+    private String pdfPath; // PDFのパスを保存
 
-	/**
-	 * 支援ID:Int
-	 */
-	private int id;
-
-	/**
-	 * 支援名:String
-	 */
-	private String name;
-
-	/**
-	 * 支援詳細:String
-	 */
-	private String detail;
-
-	private String video;
-
-	/**
-	 * ゲッター、セッター
-	 */
-	public int getID() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDetail() {
-		return detail;
-	}
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-	public String getVideo(){
-		return video;
-	}
-	public void setVideo(String video)  {
-		this.video = video;
-	}
+    public int getID() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDetail() {
+        return detail;
+    }
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+    public String getVideo() {
+        return video;
+    }
+    public void setVideo(String video) {
+        this.video = video;
+    }
+    public String getPdfPath() {
+        return pdfPath;
+    }
+    public void setPdfPath(String pdfPath) {
+        this.pdfPath = pdfPath;
+    }
 }

@@ -1,102 +1,84 @@
 package staff.normalstaff.institution;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.File;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import bean.Institution;
-import bean.Staff;
 import dao.InstitutionDao;
 import tool.Action;
 
+@MultipartConfig(
+	    location = "/tmp", // 一時的なファイル保存場所（ディレクトリ）
+	    fileSizeThreshold = 1024 * 1024, // ファイルのしきい値、1MBを設定
+	    maxFileSize = 1024 * 1024 * 10,  // 最大ファイルサイズ、10MB
+	    maxRequestSize = 1024 * 1024 * 50 // 最大リクエストサイズ、50MB
+	)
+
 public class StaffInstitutionCreateExecuteAction extends Action {
 
-    @Override
-    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        System.out.println("支援登録開始");
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+/*	    // フォームからの入力値を取得
+	    String name = request.getParameter("institution_name");
+	    String detail = request.getParameter("institution_detail");
+	    String video = request.getParameter("institution_video");
 
-        // ローカル変数の宣言
-        HttpSession session = req.getSession();
-        InstitutionDao institutionDao = new InstitutionDao();
-        Map<String, String> errors = new HashMap<>();
+*/
 
-        // ログインユーザーの情報を取得
-        Staff staff = (Staff) session.getAttribute("user");
-        if (staff == null) {
-            res.sendRedirect("login.jsp");
-            return;
-        }
+	    Part pdfPart = request.getPart("institution_pdf"); // アップロードされたPDFファイル
 
-        // リクエストパラメータの取得
-        String institutionName = req.getParameter("institution_name");
-        String institutionDetail = req.getParameter("institution_detail");
-        String institutionVideo = req.getParameter("institution_video");
 
-        // 入力値の検証
-        if (institutionName == null || institutionName.trim().isEmpty()) {
-            errors.put("institution_name", "支援名を入力してください");
-        }
-        if (institutionDetail == null || institutionDetail.trim().isEmpty()) {
-            errors.put("institution_detail", "支援詳細を入力してください");
-        }
-        if (institutionVideo == null || institutionVideo.trim().isEmpty()) {
-            errors.put("institution_video", "動画URLを入力してください");
-        } else {
-            // YouTube動画IDを抽出
-            String videoId = extractYouTubeVideoId(institutionVideo);
-            if (videoId == null) {
-                errors.put("institution_video", "有効なYouTubeのURLを入力してください");
-            } else {
-                institutionVideo = videoId; // 動画IDに置き換える
-            }
-        }
+		Part namePart = request.getPart("institution_name");
+		Part detailPart = request.getPart("institution_detail");
+		Part videoPart = request.getPart("institution_video");
 
-        // エラーがある場合はJSPへフォワード
-        if (!errors.isEmpty()) {
-            System.out.println("入力にエラーがあります");
-            req.setAttribute("errors", errors);
-            req.setAttribute("institution_name", institutionName);
-            req.setAttribute("institution_detail", institutionDetail);
-            req.setAttribute("institution_video", institutionVideo);
-            req.getRequestDispatcher("staff_institution_create.jsp").forward(req, res);
-            return;
-        }
+		// Partから文字列データを取得
+		String name = namePart != null ? namePart.getSubmittedFileName() : "";
+		String detail = detailPart != null ? detailPart.getSubmittedFileName() : "";
+		String video = videoPart != null ? videoPart.getSubmittedFileName() : "";
 
-        // 支援インスタンスを作成して保存
-        Institution institution = new Institution();
-        institution.setName(institutionName);
-        institution.setDetail(institutionDetail);
-        institution.setVideo(institutionVideo);
 
-        // 支援を挿入して生成されたIDを取得
-        int institutionId = institutionDao.insert(institution);
+		System.out.println("。。。"+name);
 
-        // 職員と支援を関連付ける処理
-        institutionDao.insert(staff.getStaffID(), institutionId);
+	    // PDFファイルの保存先ディレクトリを定義
+	 // 現在のクラスの位置から相対的に保存ディレクトリを指定
+	    String uploadPath = getClass().getResource("").getPath() + "pdf/";
+	    File uploadDir = new File(uploadPath);
+	    if (!uploadDir.exists()) {
+	        uploadDir.mkdirs(); // ディレクトリが存在しない場合は作成
+	    }
 
-        // 完了ページへフォワード
-        req.getRequestDispatcher("staff_institution_create_done.jsp").forward(req, res);
-    }
+	    // PDFファイルのパスを設定
+	    String pdfPath = null;
+	    if (pdfPart != null && pdfPart.getSize() > 0) {
+	        String fileName = pdfPart.getSubmittedFileName();
+	        pdfPath = uploadPath + fileName;
+	        pdfPart.write(pdfPath); // PDFファイルを指定したディレクトリに保存
+	    }
 
-    /**
-     * YouTubeの動画URLから動画IDを抽出するメソッド
-     */
-    private String extractYouTubeVideoId(String url) {
-        // 正規表現パターン
-        String regex = "(?:https?://)?(?:www\\.)?(?:youtube\\.com/watch\\?v=|youtu\\.be/)([a-zA-Z0-9_-]{11})";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(url);
+	    // Institutionオブジェクトを作成し、値を設定
+	    Institution institution = new Institution();
+	    institution.setName(name);
+	    institution.setDetail(detail);
+	    institution.setVideo(video);
+	    institution.setPdfPath(pdfPath); // PdfPathを設定
 
-        if (matcher.find()) {
-            return matcher.group(1); // 動画IDを返す
-        }
-        return null; // マッチしない場合はnull
-    }
+
+	    System.out.println("Name: " + institution.getName());
+	    System.out.println("Detail: " + institution.getDetail());
+	    System.out.println("Video: " + institution.getVideo());
+	    System.out.println("PdfPath: " + institution.getPdfPath());
+
+
+	    // DAOを利用してデータベースに挿入
+	    InstitutionDao dao = new InstitutionDao();
+	    dao.insert(institution);
+
+	    // 完了ページへのリダイレクト処理
+	    response.sendRedirect("StaffInstitutionCreateComplete.action");
+	}
 }
-
-
