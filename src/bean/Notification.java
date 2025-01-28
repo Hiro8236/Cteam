@@ -2,52 +2,48 @@ package bean;
 
 import java.io.Serializable;
 
-public class Notification implements Serializable{
+public class Notification implements Serializable {
 
 	/**
-	 * NoticeID
+	 * お知らせID:Int
 	 */
-
-	private int id;
+	private int Noticeid;
 
 	/**
-	 * タイトル:String
+	 * お知らせ名:String
 	 */
 	private String title;
 
 	/**
-	 * 内容:Strin
-	 */
+	 *内容
+		*/
 	private String sentence;
 
 	/**
 	 * ゲッター、セッター
 	 */
 
-	 public int getId() {
-			return id;
-		}
+	public int getNoticeid(){
+		return Noticeid;
+	}
 
-	 public void setId(int id){
-		 this.id =id;
-	 }
+	public void setNoticeid(int Noticeid) {
+		this.Noticeid = Noticeid;
+	}
 
-	 public String getTitle() {
-			return title;
-		}
+	public String getTitle() {
+		return title;
+	}
 
-	 public void setTitle(String title){
-		 this.title=title;
-	 }
+	public void setTitle(String title){
+		this.title= title;
+	}
 
+	public String getSentence(){
+		return sentence;
+	}
 
-	 public String getSentence (){
-		 return sentence;
-	 }
-
-	 public void setSentence(String sentence){
-		 this.sentence=sentence;
-	 }
-
-
+	public void setSenrence(String sentence) {
+		this.sentence= sentence;
+	}
 }
