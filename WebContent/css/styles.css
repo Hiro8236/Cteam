@@ -335,12 +335,11 @@ a:hover {
 /*
 
 /* カレンダー全体の外観 */
-.calendar-container {
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 2400px; /* 幅を広げる */
-    width: 90%; /* ビューポートに対する相対幅 */
-}
+<style>
+    .fc {
+        width: 100% !important; /* カレンダー全体の幅を100%にする */
+        max-width: 1920px;      /* 必要に応じて最大幅を設定 */
+        margin: 0 auto;         /* カレンダーを中央に配置 */
+    }
+</style>
+

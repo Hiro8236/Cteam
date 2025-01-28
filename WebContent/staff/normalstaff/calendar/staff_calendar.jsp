@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar/locales/ja.js"></script>
 
         <h1 class="h3 mb-3 fw-normal text-center bg-secondary bg-opacity-10 py-2 px-4">スタッフ用イベント管理カレンダー</h1>
-        <div id="calendar" class="calendar-container" style="width: 95%; max-width: 1600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);"></div>
+        <div id="calendar" class="calendar-container" style="width: 120%; margin: 0 auto; margin-left: -10%; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); aspect-ratio: 16/9;"></div>
 
         <!-- モーダル -->
         <div id="eventModal" class="modal">
@@ -108,10 +108,15 @@
 
                 // カレンダー初期化
                 var calendar = new FullCalendar.Calendar(calendarEl, {
-                    initialView: 'dayGridMonth',
-                    locale: 'ja',
-                    timeZone: 'Asia/Tokyo',
-                    events: events,
+                    initialView: 'dayGridMonth', // 初期表示のビュー
+                    locale: 'ja',               // ロケール設定（日本語）
+                    timeZone: 'Asia/Tokyo',     // タイムゾーン
+                    events: events,             // イベントデータ
+                    height: 'auto',             // 高さを自動調整
+                    contentHeight: 600,         // カレンダー部分の高さを固定
+                    aspectRatio: 3,           // 幅:高さの比率を指定（デフォルトは1.35）
+
+                    // 日付クリック時の処理
                     dateClick: function (info) {
                         modal.style.display = 'block';
                         modalTitle.textContent = 'イベントを登録';
@@ -124,6 +129,8 @@
                         document.getElementById('isStaffOnly').checked = true;
                         deleteEventBtn.style.display = 'none';
                     },
+
+                    // イベントクリック時の処理
                     eventClick: function (info) {
                         modal.style.display = 'block'; // モーダルを表示
                         modalTitle.textContent = 'イベントを編集';
@@ -147,7 +154,6 @@
                         // 削除ボタンの表示
                         deleteEventBtn.style.display = 'block';
                     }
-
                 });
 
                 calendar.render();
@@ -163,7 +169,6 @@
                     form.action = formAction; // 適切なアクションを設定
                     form.submit();
                 });
-
 
                 // モーダルを閉じる
                 closeModal.onclick = function () {
