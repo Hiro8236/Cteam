@@ -2,30 +2,44 @@ package user;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import bean.Notification;
-import dao.NotificationDao;
-import tool.Action;
+import dao.NotificationDAO;
 
-public class NotificationAction extends Action {
+public class NotificationAction {
 
-    @Override
-    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        try {
-            NotificationDao notificationDao = new NotificationDao();
-            List<Notification> notificationList = notificationDao.getAll();
+    private NotificationDAO notificationDAO;
 
-            System.out.println("DAOから取得した通知リスト: " + notificationList);
-
-            req.setAttribute("notificationList", notificationList);
-            req.getRequestDispatcher("notification.jsp").forward(req, res);
-        } catch (Exception e) {
-            e.printStackTrace();
-            req.setAttribute("errorMessage", "通知情報の取得中にエラーが発生しました。");
-            req.getRequestDispatcher("error.jsp").forward(req, res);
-        }
+    public NotificationAction() {
+        notificationDAO = new NotificationDAO();
     }
 
+    /**
+     * 全ての通知を取得します。
+     * @return 通知のリスト
+     * @throws Exception
+     */
+    public List<Notification> getAllNotifications() throws Exception {
+        return notificationDAO.getAll();
+    }
+
+    /**
+     * 通知を新規作成します。
+     * @param title 通知のタイトル
+     * @param sentence 通知の内容
+     * @return 成功時はtrue、失敗時はfalse
+     * @throws Exception
+     */
+    public boolean createNotification(String title, String sentence) throws Exception {
+        return notificationDAO.saveNotification(title, sentence);
+    }
+
+    /**
+     * 指定されたIDの通知を削除します。
+     * @param id 通知ID
+     * @return 成功時はtrue、失敗時はfalse
+     * @throws Exception
+     */
+    public boolean deleteNotification(int id) throws Exception {
+        return notificationDAO.deleteNotification(id);
+    }
 }

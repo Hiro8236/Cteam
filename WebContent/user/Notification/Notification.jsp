@@ -1,80 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>通知一覧</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            color: #333;
-        }
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin: 20px auto;
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .no-data {
-            text-align: center;
-            padding: 20px;
-        }
-    </style>
+    <title>通知管理</title>
 </head>
 <body>
-
     <h1>通知一覧</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>タイトル</th>
+            <th>内容</th>
+            <th>操作</th>
+        </tr>
+        <c:forEach var="notification" items="${notifications}">
+     * 全ての通知を取得します。
+     * @return 通知のリスト
+     * @throws Exception
+     */
+    public List<Notification> getAllNotifications() throws Exception {
+        return notificationDAO.getAll();
+    }
 
-    <c:if test="${empty notificationList}">
-        <div class="no-data">
-            <p>現在、お知らせはありません。</p>
-        </div>
-    </c:if>
+    /**
+     * 通知を新規作成します。
+     * @param title 通知のタイトル
+     * @param sentence 通知の内容
+     * @return 成功時はtrue、失敗時はfalse
+     * @throws Exception
+     */
+    public boolean createNotification(String title, String sentence) throws Exception {
+        return notificationDAO.saveNotification(title, sentence);
+    }
 
-    <c:if test="${not empty notificationList}">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>タイトル</th>
-                    <th>内容</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- NotificationListをループで処理 -->
-                <c:forEach var="notification" items="${notificationList}">
-                    <tr>
-                        <td>${notification.id}</td>
-                        <td>${notification.title}</td>
-                        <td>${notification.sentence}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </c:if>
-
-</body>
-</html>
+    /**
+     * 指定されたIDの通知を削除します。
+     * @param id 通知ID
+     * @return 成功時はtrue、失敗時はfalse
+     * @throws Exception
+     */
+    public boolean deleteNotification(int id) throws Exception {
+        return notificationDAO.deleteNotification(id);
+    }
+}
