@@ -21,7 +21,7 @@
                 </ul>
             </c:if>
 
-            <!-- 新しい支援を登録するフォーム -->
+
             <h3 class="mt-5">新しい支援を登録</h3>
             <form action="StaffInstitutionCreateExecute.action" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
@@ -32,7 +32,6 @@
                     <label for="institution_detail" class="form-label">支援詳細:</label>
                     <textarea class="form-control" id="institution_detail" name="institution_detail" rows="3">${institution_detail}</textarea>
                 </div>
-                <!-- 動画URL入力フィールドを追加 -->
                 <div class="mb-3">
                     <label for="institution_video" class="form-label">動画URL:</label>
                     <input type="text" class="form-control" id="institution_video" name="institution_video" value="${institution_video}" />
