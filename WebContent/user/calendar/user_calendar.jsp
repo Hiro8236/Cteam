@@ -40,6 +40,13 @@
                         <input type="datetime-local" id="end" name="end" class="form-control" required>
                     </div>
 
+
+                    <!-- 追加: 通知設定のチェックボックス -->	<input type="hidden" id="eventID" name="eventID">
+					<div class="mb-3">
+						<input type="checkbox" id="notification" name="notification">
+						<label for="notification" class="form-label">イベント前日に通知を受け取る</label>
+					</div>
+
                     <input type="hidden" id="eventID" name="eventID">
 
                     <div style="display: flex; gap: 10px;">
@@ -51,140 +58,157 @@
         </div>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var calendarEl = document.getElementById('calendar');
-                var modal = document.getElementById('eventModal');
-                var closeModal = document.getElementsByClassName('close')[0];
-                var deleteEventBtn = document.getElementById('deleteEventBtn');
-                var modalTitle = document.getElementById('modalTitle');
+		    document.addEventListener('DOMContentLoaded', function () {
+		        var calendarEl = document.getElementById('calendar');
+		        var modal = document.getElementById('eventModal');
+		        var closeModal = document.getElementsByClassName('close')[0];
+		        var deleteEventBtn = document.getElementById('deleteEventBtn');
+		        var modalTitle = document.getElementById('modalTitle');
+		        var saveButton = document.querySelector('#eventForm button[type="submit"]'); // 保存ボタン取得
+		        var eventForm = document.getElementById('eventForm'); // フォーム全体
+		        var isLoggedIn = <%= (session.getAttribute("userID") != null) %>; //ログイン状態の確認
 
-                // イベントデータを JavaScript 配列に変換
-                var events = [
-                    <%
-                        List<Event> events = (List<Event>) request.getAttribute("event");
-                    	 Integer userID = (Integer) session.getAttribute("userID");
-                        if (events != null && !events.isEmpty()) {
-                            for (int i = 0; i < events.size(); i++) {
-                                Event event = events.get(i);
-                                String title = event.getTitle();
-                                String start = event.getStartTime().toString();
-                                String end = event.getEndTime().toString();
-                                String description = event.getDescription();
-                                int id = event.getEventID();
-                                int createdBy = event.getCreatedBy();
-                                boolean editable = (userID != null && userID == createdBy);
+		        // イベントデータを JavaScript 配列に変換
+		        var events = [
+		            <%
+		                List<Event> events = (List<Event>) request.getAttribute("event");
+		                Integer userID = (Integer) session.getAttribute("userID");
+		                if (events != null && !events.isEmpty()) {
+		                    for (int i = 0; i < events.size(); i++) {
+		                        Event event = events.get(i);
+		                        String title = event.getTitle();
+		                        String start = event.getStartTime().toString();
+		                        String end = event.getEndTime().toString();
+		                        String description = event.getDescription();
+		                        int id = event.getEventID();
+		                        int createdBy = event.getCreatedBy();
+		                        boolean editable = (userID != null && userID == createdBy);
+		                        boolean isPublic = event.isPublic();
+		            %>
+		            {
+		                id: <%= id %>,
+		                title: "<%= title %>",
+		                start: "<%= start %>",
+		                end: "<%= end %>",
+		                extendedProps: {
+		                    description: "<%= description %>",
+		                    editable: <%= editable %>,
+		                    isPublic: <%= isPublic %>
+		                }
+		            }<%= (i < events.size() - 1) ? "," : "" %>
+		            <%
+		                    }
+		                }
+		            %>
+		        ];
 
-                    %>
-                    {
-                        id: <%= id %>,
-                        title: "<%= title %>",
-                        start: "<%= start %>",
-                        end: "<%= end %>",
-                        extendedProps: {
-                            description: "<%= description %>",
-                            editable: <%= editable %>
-                        }
-                    }<%= (i < events.size() - 1) ? "," : "" %>
-                    <%
-                            }
-                        }
-                    %>
-                ];
+		        // カレンダー初期化
+		        var calendar = new FullCalendar.Calendar(calendarEl, {
+		            initialView: 'dayGridMonth',
+		            locale: 'ja',
+		            timeZone: 'Asia/Tokyo',
+		            events: events,
+		            height: 'auto',
+		            contentHeight: 600,
+		            aspectRatio: 3,
 
-                // カレンダー初期化
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    initialView: 'dayGridMonth', // 初期表示のビュー
-                    locale: 'ja',               // ロケール設定（日本語）
-                    timeZone: 'Asia/Tokyo',     // タイムゾーン
-                    events: events,             // イベントデータ
-                    height: 'auto',             // 高さを自動調整
-                    contentHeight: 600,         // カレンダー部分の高さを固定
-                    aspectRatio: 3,             // 幅:高さの比率を指定（デフォルトは1.35）
+		            // 日付クリック時の処理
+		            dateClick: function (info) {
+		                if (!isLoggedIn) {
+		                    alert("ログインしてください。");
+		                    return;
+		                }
+		                modal.style.display = 'block';
+		                modalTitle.textContent = 'イベントを登録';
+		                document.getElementById('title').value = '';
+		                document.getElementById('description').value = '';
+		                document.getElementById('start').value = info.dateStr + 'T00:00';
+		                document.getElementById('end').value = info.dateStr + 'T00:00';
+		                document.getElementById('eventID').value = '';
+		                saveButton.style.display = 'block';
+		                deleteEventBtn.style.display = 'none';
+		            },
 
-                    // 日付クリック時の処理
-                    dateClick: function (info) {
-                        modal.style.display = 'block';
-                        modalTitle.textContent = 'イベントを登録';
-                        document.getElementById('title').value = '';
-                        document.getElementById('description').value = '';
-                        document.getElementById('start').value = info.dateStr + 'T00:00';
-                        document.getElementById('end').value = info.dateStr + 'T00:00';
-                        document.getElementById('eventID').value = '';
-                        deleteEventBtn.style.display = 'none';
-                    },
+		            // イベントクリック時の処理
+		            eventClick: function (info) {
+		                modal.style.display = 'block'; // モーダルを表示
+		                modalTitle.textContent = 'イベント詳細';
 
-                    // イベントクリック時の処理
-                    eventClick: function (info) {
-                        modal.style.display = 'block'; // モーダルを表示
-                        modalTitle.textContent = 'イベント詳細';
+		                // データを設定
+		                document.getElementById('title').value = info.event.title;
+		                document.getElementById('description').value = info.event.extendedProps.description || '';
+		                document.getElementById('start').value = info.event.start.toISOString().slice(0, 16);
+		                document.getElementById('end').value = info.event.end
+		                    ? info.event.end.toISOString().slice(0, 16)
+		                    : info.event.start.toISOString().slice(0, 16);
+		                document.getElementById('eventID').value = info.event.id;
 
-                        // データを設定
-                        document.getElementById('title').value = info.event.title;
-                        document.getElementById('description').value = info.event.extendedProps.description || '';
-                        document.getElementById('start').value = info.event.start.toISOString().slice(0, 16);
-                        document.getElementById('end').value = info.event.end
-                            ? info.event.end.toISOString().slice(0, 16)
-                            : info.event.start.toISOString().slice(0, 16);
-                        document.getElementById('eventID').value = info.event.id;
+		                var isPublic = info.event.extendedProps.isPublic;
+		                var isEditable = info.event.extendedProps.editable;
 
-                     // 作成者のみ削除ボタンを表示
-                        if (info.event.extendedProps.editable) {
-                        	deleteEventBtn.style.display = 'block';
-                        }
-                        else {
-                        deleteEventBtn.style.display = 'none';
-                        }
-                    }
-                });
+		                // 公開イベントなら編集不可
+		                if (isPublic) {
+		                    saveButton.style.display = 'none';
+		                    deleteEventBtn.style.display = 'none';
+		                } else if (!isEditable) {
+		                    eventForm.style.display = 'none';
+		                    deleteEventBtn.style.display = 'none';
+		                } else {
+		                    eventForm.style.display = 'block';
+		                    saveButton.style.display = 'block';
+		                    deleteEventBtn.style.display = 'block';
+		                }
+		            }
+		        });
 
-                calendar.render();
+		        calendar.render();
 
-                // 保存ボタンのクリック時の処理
-                document.getElementById('eventForm').addEventListener('submit', function (e) {
-                    e.preventDefault(); // フォームのデフォルト動作を防止
-                    var eventID = document.getElementById('eventID').value;
-                    var formAction = eventID ? 'EventUpdate.action' : 'EventCreate.action'; // 更新か新規作成かを判定
+		        // 保存ボタンのクリック時の処理
+		        document.getElementById('eventForm').addEventListener('submit', function (e) {
+		            e.preventDefault();
+		            var eventID = document.getElementById('eventID').value;
+		            var formAction = eventID ? 'EventUpdate.action' : 'EventCreate.action';
 
-                    // フォームの action 属性を設定して送信
-                    var form = e.target;
-                    form.action = formAction; // 適切なアクションを設定
-                    form.submit();
-                });
+		            var form = e.target;
+		            form.action = formAction;
+		            form.submit();
+		        });
 
-                // モーダルを閉じる
-                closeModal.onclick = function () {
-                    modal.style.display = 'none';
-                    deleteEventBtn.style.display = 'none';
-                };
-                window.onclick = function (event) {
-                    if (event.target == modal) {
-                        modal.style.display = 'none';
-                        deleteEventBtn.style.display = 'none';
-                    }
-                };
+		        // モーダルを閉じる
+		        closeModal.onclick = function () {
+		            modal.style.display = 'none';
+		            deleteEventBtn.style.display = 'none';
+		        };
+		        window.onclick = function (event) {
+		            if (event.target == modal) {
+		                modal.style.display = 'none';
+		                deleteEventBtn.style.display = 'none';
+		            }
+		        };
 
-                // 削除処理
-                deleteEventBtn.addEventListener('click', function () {
-                    var eventID = document.getElementById('eventID').value;
-                    if (!eventID) {
-                        alert('イベントIDが取得できません。削除を中止します。');
-                        return;
-                    }
+		        // 削除処理
+		        deleteEventBtn.addEventListener('click', function () {
+		            var eventID = document.getElementById('eventID').value;
+		            if (!eventID) {
+		                alert('イベントIDが取得できません。削除を中止します。');
+		                return;
+		            }
 
-                    if (confirm('このイベントを削除しますか？')) {
-                        var form = document.createElement('form');
-                        form.method = 'post';
-                        form.action = 'EventDelete.action';
-                        var input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = 'eventID';
-                        input.value = eventID;
-                        form.appendChild(input);
-                        document.body.appendChild(form);
-                        form.submit();
-                    }
-                });
-            });
-        </script>
+		            if (confirm('このイベントを削除しますか？')) {
+		                var form = document.createElement('form');
+		                form.method = 'post';
+		                form.action = 'EventDelete.action';
+		                var input = document.createElement('input');
+		                input.type = 'hidden';
+		                input.name = 'eventID';
+		                input.value = eventID;
+		                form.appendChild(input);
+		                document.body.appendChild(form);
+		                form.submit();
+		            }
+		        });
+		    });
+		</script>
+
     </c:param>
 </c:import>

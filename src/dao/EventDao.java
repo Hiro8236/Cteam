@@ -83,7 +83,7 @@ public class EventDao extends Dao {
 
     // 公開イベントの取得
     public List<Event> getPublicEvents() throws Exception {
-        String sql = "SELECT EventID, title, description, start_time, end_time, created_by, is_public, is_staff_only FROM events WHERE is_public = 1";
+        String sql = "SELECT * FROM events WHERE is_public = 1";
         List<Event> events = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -179,7 +179,7 @@ public class EventDao extends Dao {
 
  //ユーザー用の更新
     public void updateEventForUser(Event event) throws Exception {
-        String sql = "UPDATE events SET title = ?, description = ?, start_time = ?, end_time = ? WHERE event_id = ? AND created_by = ?";
+        String sql = "UPDATE events SET title = ?, description = ?, start_time = ?, end_time = ? WHERE eventID = ? AND created_by = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
