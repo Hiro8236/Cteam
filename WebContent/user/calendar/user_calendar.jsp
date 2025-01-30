@@ -41,12 +41,14 @@
                     </div>
 
 
-                    <!-- 追加: 通知設定のチェックボックス -->	<input type="hidden" id="eventID" name="eventID">
-					<div class="mb-3">
-						<input type="checkbox" id="notification" name="notification">
-						<label for="notification" class="form-label">イベント前日に通知を受け取る</label>
-					</div>
-
+                    <!-- 追加: 通知設定のチェックボックス -->
+                    <input type="hidden" id="eventID" name="eventID">
+						<div class="mb-3">
+							<div id="notification-container">
+								<input type="checkbox" id="notification" name="notification">
+								<label for="notification" class="form-label">イベント前日に通知を受け取る</label>
+							</div>
+						</div>
                     <input type="hidden" id="eventID" name="eventID">
 
                     <div style="display: flex; gap: 10px;">
@@ -93,7 +95,8 @@
 		                extendedProps: {
 		                    description: "<%= description %>",
 		                    editable: <%= editable %>,
-		                    isPublic: <%= isPublic %>
+		                    isPublic: <%= isPublic %>,
+		                    notify: <%= event.isNotify() ? 1 : 0 %>
 		                }
 		            }<%= (i < events.size() - 1) ? "," : "" %>
 		            <%
@@ -142,6 +145,8 @@
 		                    ? info.event.end.toISOString().slice(0, 16)
 		                    : info.event.start.toISOString().slice(0, 16);
 		                document.getElementById('eventID').value = info.event.id;
+		             // 通知チェックボックスを設定
+		                document.getElementById('notification').checked = info.event.extendedProps.notify == 1;
 
 		                var isPublic = info.event.extendedProps.isPublic;
 		                var isEditable = info.event.extendedProps.editable;
@@ -150,13 +155,17 @@
 		                if (isPublic) {
 		                    saveButton.style.display = 'none';
 		                    deleteEventBtn.style.display = 'none';
+		                    document.getElementById('notification-container').style.display = 'none';
 		                } else if (!isEditable) {
 		                    eventForm.style.display = 'none';
 		                    deleteEventBtn.style.display = 'none';
+		                    document.getElementById('notification-container').style.display = 'none';
 		                } else {
 		                    eventForm.style.display = 'block';
 		                    saveButton.style.display = 'block';
 		                    deleteEventBtn.style.display = 'block';
+		                    document.getElementById('notification-container').style.display = 'block';
+		                    document.getElementById('notification').checked = info.event.extendedProps.notify == 1;
 		                }
 		            }
 		        });

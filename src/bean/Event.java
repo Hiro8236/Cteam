@@ -11,6 +11,7 @@ public class Event {
     private int createdBy;
     private boolean isPublic;     // 公開設定
     private boolean isStaffOnly;  // スタッフ限定公開設定
+    private boolean notify; // 通知設定
 
     // Getters and Setters
     public int getEventID() {
@@ -76,5 +77,15 @@ public class Event {
     public void setStaffOnly(boolean isStaffOnly) {
         this.isStaffOnly = isStaffOnly;
     }
+
+    public boolean isNotify() { // EL で `event.notify` を使うための getter
+        return notify;
+    }
+
+    public void setNotify(boolean notify) {
+        this.notify = notify;
+    }
+
+
 
 }

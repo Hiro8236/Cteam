@@ -21,6 +21,7 @@ public class EventCreateAction extends Action {
             String description = req.getParameter("description");
             String start = req.getParameter("start");
             String end = req.getParameter("end");
+            boolean notify = req.getParameter("notification") != null;  // 通知設定
 
             Integer userID = (Integer) req.getSession().getAttribute("userID");
             System.out.println("[DEBUG] userID: " + userID);
@@ -50,6 +51,7 @@ public class EventCreateAction extends Action {
             event.setStartTime(java.sql.Timestamp.valueOf(formattedStart));
             event.setEndTime(java.sql.Timestamp.valueOf(formattedEnd));
             event.setCreatedBy(userID);
+            event.setNotify(notify); // 通知設定を保存
 
             System.out.println("[DEBUG] イベントデータ: " + event);
 

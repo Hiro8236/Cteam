@@ -12,26 +12,23 @@ import bean.Event;
 
 public class EventDao extends Dao {
 
-    // ヘルパーメソッド: ResultSet から Event オブジェクトを作成
-    private Event mapResultSetToEvent(ResultSet rs) throws SQLException {
-        Event event = new Event();
-        event.setEventID(rs.getInt("EventID"));
-        event.setTitle(rs.getString("title"));
-        event.setDescription(rs.getString("description"));
-        event.setStartTime(rs.getTimestamp("start_time"));
-        event.setEndTime(rs.getTimestamp("end_time"));
-        event.setCreatedBy(rs.getInt("created_by"));
-
-     // is_public と is_staff_only を boolean に変換して設定
-        event.setPublic(rs.getInt("is_public") == 1); // 1ならtrue, それ以外はfalse
-        event.setStaffOnly(rs.getInt("is_staff_only") == 1); // 1ならtrue, それ以外はfalse
-
-        return event;
-    }
-
+	// ヘルパーメソッド: ResultSet から Event オブジェクトを作成
+	private Event mapResultSetToEvent(ResultSet rs) throws SQLException {
+	    Event event = new Event();
+	    event.setEventID(rs.getInt("EventID"));
+	    event.setTitle(rs.getString("title"));
+	    event.setDescription(rs.getString("description"));
+	    event.setStartTime(rs.getTimestamp("start_time"));
+	    event.setEndTime(rs.getTimestamp("end_time"));
+	    event.setCreatedBy(rs.getInt("created_by"));
+	    event.setPublic(rs.getInt("is_public") == 1);
+	    event.setStaffOnly(rs.getInt("is_staff_only") == 1);
+	    event.setNotify(rs.getInt("notify") == 1); // int → boolean に変換
+	    return event;
+	}
 
     public void createEvent(Event event) throws Exception {
-        String sql = "INSERT INTO events (title, description, start_time, end_time, created_by, is_public, is_staff_only) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO events (title, description, start_time, end_time, created_by, is_public, is_staff_only, notify) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
         	// タイトル、説明、日時、作成者IDをセット
@@ -44,6 +41,8 @@ public class EventDao extends Dao {
             // is_public と is_staff_only を boolean から int に変換してセット
             stmt.setInt(6, event.isPublic() ? 1 : 0);
             stmt.setInt(7, event.isStaffOnly() ? 1 : 0);
+            stmt.setInt(8, event.isNotify() ? 1 : 0); // 通知設定を追加
+
             stmt.executeUpdate();
             System.out.println("[成功] イベントがデータベースに登録されました。");
         } catch (SQLException e) {
@@ -111,6 +110,24 @@ public class EventDao extends Dao {
         return events;
     }
 
+    // 通知が有効なイベントを取得
+    public List<Event> getEventsWithNotification() throws Exception {
+        String sql = "SELECT * FROM events WHERE notify = 1";
+        List<Event> events = new ArrayList<>();
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                events.add(mapResultSetToEvent(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("[エラー] 通知対象のイベント取得中にエラー: " + e.getMessage());
+            throw new Exception("[エラー] 通知対象のイベント取得中にエラーが発生しました。詳細: " + e.getMessage(), e);
+        }
+
+        return events;
+    }
 
     //スタッフ用の削除、更新
 
@@ -177,9 +194,9 @@ public class EventDao extends Dao {
 
     //ユーザー用の削除、更新
 
- //ユーザー用の更新
+	// ユーザー用の更新
     public void updateEventForUser(Event event) throws Exception {
-        String sql = "UPDATE events SET title = ?, description = ?, start_time = ?, end_time = ? WHERE eventID = ? AND created_by = ?";
+        String sql = "UPDATE events SET title = ?, description = ?, start_time = ?, end_time = ?, notify = ? WHERE eventID = ? AND created_by = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -188,8 +205,9 @@ public class EventDao extends Dao {
             stmt.setString(2, event.getDescription());
             stmt.setTimestamp(3, new java.sql.Timestamp(event.getStartTime().getTime()));
             stmt.setTimestamp(4, new java.sql.Timestamp(event.getEndTime().getTime()));
-            stmt.setInt(5, event.getEventID()); // イベントID
-            stmt.setInt(6, event.getCreatedBy()); // 作成者（本人）であることを確認
+            stmt.setInt(5, event.isNotify() ? 1 : 0); // 通知設定を更新
+            stmt.setInt(6, event.getEventID()); // イベントID
+            stmt.setInt(7, event.getCreatedBy()); // 作成者（本人）であることを確認
 
             // クエリ実行
             int rowsUpdated = stmt.executeUpdate();
@@ -210,6 +228,7 @@ public class EventDao extends Dao {
             throw new Exception("[エラー] ユーザーイベント更新中にエラーが発生しました。詳細: " + e.getMessage(), e);
         }
     }
+
 
     //ユーザー用の削除
     public void deleteEventForUser(int eventID, int userID) throws Exception {
@@ -240,6 +259,4 @@ public class EventDao extends Dao {
             throw new Exception("[エラー] ユーザーイベント削除中にエラーが発生しました。詳細: " + e.getMessage(), e);
         }
     }
-
-
 }

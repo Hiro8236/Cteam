@@ -22,6 +22,7 @@ public class EventUpdateAction extends Action {
             String start = req.getParameter("start");
             String end = req.getParameter("end");
             int eventID = Integer.parseInt(req.getParameter("eventID"));
+            boolean notify = req.getParameter("notification") != null;  // 通知設定（チェックボックスの値）
 
             Integer userID = (Integer) req.getSession().getAttribute("userID"); // ログイン中のユーザーID
 
@@ -46,6 +47,9 @@ public class EventUpdateAction extends Action {
             event.setStartTime(java.sql.Timestamp.valueOf(formattedStart));
             event.setEndTime(java.sql.Timestamp.valueOf(formattedEnd));
             event.setCreatedBy(userID);
+            event.setNotify(notify); // 通知設定を保存
+
+            System.out.println("[DEBUG] 更新イベントデータ: " + event);
 
             // データベースを更新
             EventDao eventDao = new EventDao();
