@@ -9,9 +9,6 @@
             <!-- ログイン中の職員情報を表示 -->
             <p>ログイン中: <c:out value="${user.staffName}" /></p>
 
-
-
-
             <!-- エラーメッセージの表示 -->
             <c:if test="${not empty errors}">
                 <ul class="list-unstyled text-danger">
@@ -21,9 +18,8 @@
                 </ul>
             </c:if>
 
-
             <h3 class="mt-5">新しい支援を登録</h3>
-            <form action="StaffInstitutionCreateExecute.action" method="post" enctype="multipart/form-data">
+            <form action="StaffInstitutionCreateExecute.action" enctype="multipart/form-data" method="post">
                 <div class="mb-3">
                     <label for="institution_name" class="form-label">支援名:</label>
                     <input type="text" class="form-control" id="institution_name" name="institution_name" value="${institution_name}" />
@@ -36,7 +32,7 @@
                     <label for="institution_video" class="form-label">動画URL:</label>
                     <input type="text" class="form-control" id="institution_video" name="institution_video" value="${institution_video}" />
                 </div>
-                 <div class="mb-3">
+                <div class="mb-3">
                     <label for="institution_pdf" class="form-label">PDFファイル:</label>
                     <input type="file" class="form-control" id="institution_pdf" name="institution_pdf" accept=".pdf" />
                 </div>

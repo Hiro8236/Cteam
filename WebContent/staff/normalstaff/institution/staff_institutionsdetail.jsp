@@ -6,8 +6,9 @@
     <c:param name="title" value="支援詳細 - ぽシステム" />
     <c:param name="content">
         <h1>支援詳細</h1>
-
+		<a href=StaffInstitution.action>戻る</a>
         <section class="institution-details">
+
             <div class="institution-name">
                 <h2>支援名: ${institution.name != null ? institution.name : '支援名がありません'}</h2>
             </div>
