@@ -23,7 +23,7 @@ public class EventDao extends Dao {
 	    event.setCreatedBy(rs.getInt("created_by"));
 	    event.setPublic(rs.getInt("is_public") == 1);
 	    event.setStaffOnly(rs.getInt("is_staff_only") == 1);
-	    event.setNotify(rs.getInt("notify") == 1); // int → boolean に変換
+	    event.setNotify(rs.getInt("notify") == 1);
 	    return event;
 	}
 
@@ -107,25 +107,6 @@ public class EventDao extends Dao {
                 }
             }
         }
-        return events;
-    }
-
-    // 通知が有効なイベントを取得
-    public List<Event> getEventsWithNotification() throws Exception {
-        String sql = "SELECT * FROM events WHERE notify = 1";
-        List<Event> events = new ArrayList<>();
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                events.add(mapResultSetToEvent(rs));
-            }
-        } catch (SQLException e) {
-            System.err.println("[エラー] 通知対象のイベント取得中にエラー: " + e.getMessage());
-            throw new Exception("[エラー] 通知対象のイベント取得中にエラーが発生しました。詳細: " + e.getMessage(), e);
-        }
-
         return events;
     }
 
@@ -259,4 +240,26 @@ public class EventDao extends Dao {
             throw new Exception("[エラー] ユーザーイベント削除中にエラーが発生しました。詳細: " + e.getMessage(), e);
         }
     }
+
+    //お知らせ送信用、notify=1を取得
+    public List<Event> getUpcomingNotifiedEvents() throws Exception {
+        String sql = "SELECT e.*, u.EmailAddress FROM events e " +  // 修正: email → EmailAddress
+                     "JOIN `user` u ON e.created_by = u.UserID " +  // 修正: user をバッククォートで囲む
+                     "WHERE e.notify = 1 " +
+                     "AND TIMESTAMPDIFF(HOUR, NOW(), e.start_time) BETWEEN 0 AND 24";
+
+        List<Event> events = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Event event = mapResultSetToEvent(rs);
+                event.setEmail(rs.getString("EmailAddress")); // 修正: email → EmailAddress
+                events.add(event);
+            }
+        }
+        return events;
+    }
+
 }
