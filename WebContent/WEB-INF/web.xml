@@ -5,17 +5,20 @@
     http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
     version="3.1">
 
+    <!-- ServletContextListener (アプリケーションの起動時に実行) -->
+    <listener>
+        <listener-class>user.calendar.AppInitializer</listener-class>
+    </listener>
 
-
-<servlet>
-    <servlet-name>FrontController</servlet-name>
-    <multipart-config>
-        <location>/tmp</location>
-        <max-file-size>10485760</max-file-size> <!-- 10MB -->
-        <max-request-size>52428800</max-request-size> <!-- 50MB -->
-        <file-size-threshold>2097152</file-size-threshold> <!-- 2MB -->
-    </multipart-config>
-</servlet>
+	<servlet>
+	    <servlet-name>FrontController</servlet-name>
+	    <multipart-config>
+	        <location>/tmp</location>
+	        <max-file-size>10485760</max-file-size> <!-- 10MB -->
+	        <max-request-size>52428800</max-request-size> <!-- 50MB -->
+	        <file-size-threshold>2097152</file-size-threshold> <!-- 2MB -->
+	    </multipart-config>
+	</servlet>
 
 
 
