@@ -6,7 +6,7 @@
     <c:param name="content">
 
         <section class="me-4">
-            <h1>HOME</h1>
+            <h1>制度一覧</h1>
 
             <!-- エラーメッセージがある場合、表示 -->
             <c:if test="${not empty errorMessage}">

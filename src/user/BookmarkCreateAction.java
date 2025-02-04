@@ -34,6 +34,14 @@ public class BookmarkCreateAction extends Action {
         }
         Integer userID = (Integer) session.getAttribute("userID");
 
+        // 重複チェック
+        if (bookmarkListDao.isBookmarkExist(userID, institutionID)) {
+            // 重複があればエラーメッセージを表示
+            req.setAttribute("errorMessage", "このブックマークは既に登録されています。");
+            req.getRequestDispatcher("bookmark_create.jsp").forward(req, res);
+            return;
+        }
+
         // Bookmarkオブジェクトを作成
         Bookmark bookmark = new Bookmark();
         bookmark.setUserID(userID);  // userIDを設定

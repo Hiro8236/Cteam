@@ -12,31 +12,34 @@ import bean.Bookmark;
 public class BookmarkListDao extends Dao {
 
     // すべてのブックマークを取得するメソッド
-    public List<Bookmark> getAll() throws Exception {
-        List<Bookmark> bookmarkLists = new ArrayList<>();
-        String sql = "SELECT Bookmark.BookmarkID, Bookmark.UserID, Bookmark.InstitutionID, Institution.name, Institution.detail "
-                     + "FROM Bookmark "
-                     + "JOIN Institution ON Bookmark.InstitutionID = Institution.InstitutionID";
+	public List<Bookmark> getByUserID(int userID) throws Exception {
+	    List<Bookmark> bookmarkLists = new ArrayList<>();
+	    String sql = "SELECT Bookmark.BookmarkID, Bookmark.UserID, Bookmark.InstitutionID, Institution.name, Institution.detail "
+	                 + "FROM Bookmark "
+	                 + "JOIN Institution ON Bookmark.InstitutionID = Institution.InstitutionID "
+	                 + "WHERE Bookmark.UserID = ?"; // ログインユーザーのブックマークのみ取得
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
+	    try (Connection connection = getConnection();
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            while (resultSet.next()) {
-                Bookmark bookmark = new Bookmark();
-                bookmark.setBookmarkID(resultSet.getInt("BookmarkID"));
-                bookmark.setUserID(resultSet.getInt("UserID"));
-                bookmark.setInstitutionID(resultSet.getInt("InstitutionID"));
-                bookmark.setName(resultSet.getString("name"));
-                bookmark.setDetail(resultSet.getString("detail"));
-                bookmarkLists.add(bookmark);
-            }
-        } catch (SQLException e) {
-            throw new Exception("ブックマークの取得に失敗しました", e);
-        }
+	        statement.setInt(1, userID); // ログインユーザーのIDをセット
+	        try (ResultSet resultSet = statement.executeQuery()) {
+	            while (resultSet.next()) {
+	                Bookmark bookmark = new Bookmark();
+	                bookmark.setBookmarkID(resultSet.getInt("BookmarkID"));
+	                bookmark.setUserID(resultSet.getInt("UserID"));
+	                bookmark.setInstitutionID(resultSet.getInt("InstitutionID"));
+	                bookmark.setName(resultSet.getString("name"));
+	                bookmark.setDetail(resultSet.getString("detail"));
+	                bookmarkLists.add(bookmark);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        throw new Exception("ブックマークの取得に失敗しました", e);
+	    }
 
-        return bookmarkLists;
-    }
+	    return bookmarkLists;
+	}
 
     // BookmarkIDでブックマークを検索するメソッド
     public Bookmark findByID(int bookmarkID) throws Exception {
@@ -103,4 +106,23 @@ public class BookmarkListDao extends Dao {
             throw new Exception("ブックマークの挿入に失敗しました", e);
         }
     }
+
+public boolean isBookmarkExist(int userID, int institutionID) throws Exception {
+    String sql = "SELECT COUNT(*) FROM Bookmark WHERE UserID = ? AND InstitutionID = ?";
+
+    try (Connection con = getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setInt(1, userID);
+        ps.setInt(2, institutionID);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1) > 0;  // 既に存在する場合はtrue
+            }
+        }
+    }
+    return false;  // 存在しない場合はfalse
 }
+}
+
