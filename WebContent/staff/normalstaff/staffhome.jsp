@@ -19,7 +19,7 @@
         <nav class="vertical-nav">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-primary btn-sm" href="/Cteam1/staff/normalstaff/StaffHome.action">ホーム</a>
+                    <a class="nav-link btn btn-outline-primary btn-sm" href="/Cteam1/staff/normalstaff/notification/StaffNotification.action">お知らせ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-primary btn-sm" href="/Cteam1/staff/normalstaff/institution/StaffInstitution.action">制度</a>
