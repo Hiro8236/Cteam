@@ -9,6 +9,7 @@
 	<c:param name="content">
 	    <h1>StaffHOME</h1>
 
+
         <!-- メッセージが存在する場合、表示 -->
         <c:if test="${not empty message}">
             <div class="alert alert-info">
