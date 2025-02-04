@@ -15,6 +15,9 @@
                 </script>
             </c:if>
 
+            <!-- ログインしていない場合は「登録」ボタンを表示しない -->
+            <c:set var="userID" value="${sessionScope.userID}" />
+
             <c:choose>
                 <c:when test="${institutions != null && institutions.size() > 0}">
                     <!-- テーブルのスタイル変更 -->
@@ -23,6 +26,7 @@
                             <tr>
                                 <th>支援名</th>
                                 <th>支援詳細</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,7 +34,10 @@
                                 <tr onclick="location.href='InstitutionsDetail.action?id=${institution.ID}'" style="cursor: pointer;">
                                     <td>${institution.name}</td>
                                     <td>${institution.detail}</td>
-                                    <td><a href="BookmarkCreate.action?institutionID=${institution.ID}">登録</a></td>
+                                    <!-- ログインしている場合のみ「登録」ボタンを表示 -->
+                                    <c:if test="${not empty userID}">
+                                        <td><a href="BookmarkCreate.action?institutionID=${institution.ID}">登録</a></td>
+                                    </c:if>
                                 </tr>
                             </c:forEach>
                         </tbody>
