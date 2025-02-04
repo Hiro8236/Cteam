@@ -1,0 +1,535 @@
+[33mcommit 5b1a3a3558f08c0f723aa07616137d593398d41a[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Tue Feb 4 12:01:36 2025 +0900
+
+    nortification
+
+[33mcommit d3a704cf50de3b60e8135e75fa96c40c8ad26880[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Tue Feb 4 11:25:57 2025 +0900
+
+    ７sakujo
+
+[33mcommit 34af560f62d513bb4d1d750b20e5a5cc8ca9d670[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Tue Feb 4 11:20:08 2025 +0900
+
+    へっだー
+
+[33mcommit d2a03862aa6f95ea5f5f950f1feb34bdce9cdedb[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Tue Feb 4 10:55:40 2025 +0900
+
+    おしらせだおしゅうせい
+
+[33mcommit 5424b53753e06b10237c39d4d2f39a5bbb3c8fd8[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Tue Feb 4 10:53:38 2025 +0900
+
+    お知らせ
+
+[33mcommit 2d161d440e1b71adb0d1995dc39b7b4b371368d3[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Feb 4 10:50:34 2025 +0900
+
+    制度一覧を表示させたよ
+
+[33mcommit 7c5ec9049ffdd5cf00d8525ff91ddb316a746bf0[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Feb 4 10:42:40 2025 +0900
+
+    なおしたお
+
+[33mcommit b86ca07f3919d612342867ddc1603f88549ff0ae[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Feb 4 10:39:46 2025 +0900
+
+    登録ボタン消した
+
+[33mcommit 28a0495ffbde9b17095f6c820683578683c0dc74[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Feb 4 10:23:18 2025 +0900
+
+    bookmark重複治したお
+
+[33mcommit 1c2c80554e9f618d523bff3a32f51631996df81d[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Feb 4 10:09:05 2025 +0900
+
+    bookmarkを治したよ
+
+[33mcommit 0c66637cdbaee60dbfe3c5805d7218d1c7856b78[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Feb 4 09:29:09 2025 +0900
+
+    GPTにやらせてみろ
+
+[33mcommit 17fd369c48779e8f2844f7749c3bc0cab9991594[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Fri Jan 31 12:01:24 2025 +0900
+
+    スタッフ側制度詳細画面内に戻るボタンを追加しました
+
+[33mcommit 2f03b3d73fd9ab2f545978ebfe6188b39a56c0b3[m
+Author: Yuki <Yuki@osada>
+Date:   Fri Jan 31 11:43:53 2025 +0900
+
+    カレンダーお知らせ機能追加
+
+[33mcommit 2658818dd092cf13ffd5fff2bb39f4d52cc38b72[m
+Author: Yuki <Yuki@osada>
+Date:   Fri Jan 31 10:21:14 2025 +0900
+
+    web.xml修正
+
+[33mcommit a50dc98c0954c8cd58ab06e8d3c347345d5e39b6[m
+Author: Yuki <Yuki@osada>
+Date:   Fri Jan 31 04:41:28 2025 +0900
+
+    ユーザーカレンダーにチェックボックスを追加、メール送信機能途中
+
+[33mcommit 6ddb3afd5c04de1cefbc999c9edbd6f89cb587e1[m
+Author: Yuki <Yuki@osada>
+Date:   Thu Jan 30 09:35:31 2025 +0900
+
+    ユーザーカレンダー修正
+
+[33mcommit ad31351b205fc9add767c440eae08709dc7c27d1[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Wed Jan 29 09:35:15 2025 +0900
+
+    ｐｄｆ
+
+[33mcommit 754cb7e10b07c3f10637c978787042357d0ed492[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Tue Jan 28 12:29:32 2025 +0900
+
+    やれるもんならやってみろ
+
+[33mcommit 79d056a1e9bf908f2891a1e734ad538ed5f570e4[m
+Author: Yuki <Yuki@osada>
+Date:   Tue Jan 28 12:12:25 2025 +0900
+
+    ユーザー用のカレンダー修正
+
+[33mcommit 52d7e32dd7d16568da30d144a0d12f4875d3319c[m
+Author: Yuki <Yuki@osada>
+Date:   Tue Jan 28 11:56:12 2025 +0900
+
+    なにもしてない
+
+[33mcommit b701cc97e24edd32dce2f4349a0aa93ac36ad39d[m
+Merge: b9be285 e45234f
+Author: Yuki <Yuki@osada>
+Date:   Tue Jan 28 11:55:36 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit b9be2857f60b5c172ba3a51331c354be058ba9c9[m
+Author: Yuki <Yuki@osada>
+Date:   Tue Jan 28 11:54:47 2025 +0900
+
+    ユーザー用のカレンダーを修正
+
+[33mcommit e45234f43524b56bef778bc04347d3aea65f191e[m
+Merge: 0e2fd38 fc744c8
+Author: Hiro8236 <mcd2376073@stu.o-hara.ac.jp>
+Date:   Tue Jan 28 11:34:28 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit 0e2fd38342109d88c46803ad804fa71a25e2c09a[m
+Author: Hiro8236 <mcd2376073@stu.o-hara.ac.jp>
+Date:   Tue Jan 28 11:33:59 2025 +0900
+
+    notification途中
+
+[33mcommit fc744c87c467e5ff516ab65574764c98eeaa6476[m
+Author: Yuki <Yuki@osada>
+Date:   Tue Jan 28 11:27:02 2025 +0900
+
+    スタッフ用のカレンダー修正
+
+[33mcommit 7384f8093b8d2d44509f62fcad345b00905ac0c1[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Mon Jan 27 13:59:05 2025 +0900
+
+    iiiiii
+
+[33mcommit 475968a8128867b56f2d31a5671719e5aecb1c19[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Mon Jan 27 13:58:50 2025 +0900
+
+    uuuuu
+
+[33mcommit dba4b80ff9d70c6284316891b1ffe7a1f3f814fc[m
+Author: Yuki <Yuki@osada>
+Date:   Mon Jan 27 12:34:16 2025 +0900
+
+    カレンダー修正！！！
+
+[33mcommit de078cda94488d35c241d628195f2c798613d4c8[m
+Author: Yuki <Yuki@osada>
+Date:   Mon Jan 27 12:26:31 2025 +0900
+
+    カレンダー修正
+
+[33mcommit 2b46c96ecd0e7953e5b1122999bab8a55bfc6f33[m
+Merge: e55db8c 9de0417
+Author: Yuki <Yuki@osada>
+Date:   Mon Jan 27 12:26:08 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit e55db8cee92c51f5ee46a0bafa3c19d8edb7e53c[m
+Author: Yuki <Yuki@osada>
+Date:   Mon Jan 27 12:25:47 2025 +0900
+
+    カレンダー修正
+
+[33mcommit 9de0417de8ad84d2688b4fe9632abc5511d514e9[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Mon Jan 27 12:13:24 2025 +0900
+
+    なんもしてない２
+
+[33mcommit d491c1bb264708a8c8e92e54015156a7b59be040[m
+Merge: 7ddb08d ec9994a
+Author: Yuki <Yuki@osada>
+Date:   Mon Jan 27 12:09:52 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit ec9994addf503e432d59a79a1333f8c7ffc0b77f[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Mon Jan 27 10:24:41 2025 +0900
+
+    DAO変えたお
+
+[33mcommit 7ddb08d2184a70f58b6bc13524f3e4870bb92538[m
+Merge: 5384925 f13ddcd
+Author: Yuki <Yuki@osada>
+Date:   Fri Jan 24 14:59:18 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit f13ddcd4aad5f15fc373fff8a9ddf47560a1b74f[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Fri Jan 24 13:49:00 2025 +0900
+
+    ログアウト！
+
+[33mcommit 5384925d4333d8b0547d29706b486e5fc201126b[m
+Author: Yuki <Yuki@osada>
+Date:   Fri Jan 24 13:46:53 2025 +0900
+
+    つかってないあくしょんけした
+
+[33mcommit 94317ae18311879f7fcb9ba67d6b8f9e9bd7e5b3[m
+Author: Yuki <Yuki@osada>
+Date:   Fri Jan 24 10:02:40 2025 +0900
+
+    cssちょっとかえた
+
+[33mcommit 90fb3e77c1a4b6891b5f643d35d527cd7c5c349e[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Thu Jan 23 14:00:52 2025 +0900
+
+    デバック用の
+
+[33mcommit bf69d9c9f803311e42c7bb06e5949e47083902b0[m
+Author: Yuki <Yuki@osada>
+Date:   Thu Jan 23 12:22:42 2025 +0900
+
+    カレンダーのcss追加
+
+[33mcommit 6d07d08d11e3fa44c3f1a8907b1c8fa3f584713b[m
+Merge: 52119c1 f591350
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Thu Jan 23 12:16:50 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit 52119c13fd0929d89fd542a37c0d6a188906f70e[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Thu Jan 23 12:16:43 2025 +0900
+
+    bookmark削除しました
+
+[33mcommit f59135062b05d63e3272c68338d6369aba7b0521[m
+Author: Yuki <Yuki@osada>
+Date:   Thu Jan 23 11:43:44 2025 +0900
+
+    なんもしてない
+
+[33mcommit 4bec839aaee1f03403477b2e3f2e50d2c54500ef[m
+Merge: 710511d 00cbfb0
+Author: masaki524 <mcd2376058@stu.o-hara.ac.jp>
+Date:   Thu Jan 23 11:40:02 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit 710511dbf770dbdd019b3c8a1be04a6a720aed69[m
+Author: masaki524 <mcd2376058@stu.o-hara.ac.jp>
+Date:   Thu Jan 23 11:39:41 2025 +0900
+
+    ブックマーク削除未完成
+
+[33mcommit 00cbfb0203a651288f396564b9ac5a86da8feb28[m
+Author: Yuki <Yuki@osada>
+Date:   Thu Jan 23 11:08:27 2025 +0900
+
+    スタッフ用のヘッダーリンク修正
+
+[33mcommit 9beec5f054e903f72318e616dc06fbb37a5b440b[m
+Author: Yuki <Yuki@osada>
+Date:   Thu Jan 23 11:02:44 2025 +0900
+
+    スタッフ用のカレンダーにbaseを適用
+
+[33mcommit ac46cf795542183d4770f01f57315348716c07c4[m
+Author: Yuki <Yuki@osada>
+Date:   Thu Jan 23 10:46:15 2025 +0900
+
+    ユーザーヘッダーリンク修正
+
+[33mcommit 3cd9509de1355e6708e12068bef1c5e7515f3ebc[m
+Merge: 50daedd b1f4b40
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Thu Jan 23 10:43:33 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit 50daedd40fb9f98cdafcd4ae353790a8c50cb0c4[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Thu Jan 23 10:43:24 2025 +0900
+
+    ああ
+
+[33mcommit b1f4b40e9f29b835ca4825c2e6f408395ba6f4df[m
+Author: Yuki <Yuki@osada>
+Date:   Thu Jan 23 10:42:32 2025 +0900
+
+    カレンダーちょっと修正
+
+[33mcommit b85154ac11f99543ab53e3ebced0453181cd1497[m
+Author: Yuki <Yuki@osada>
+Date:   Thu Jan 23 10:36:53 2025 +0900
+
+    スタッフ用、ユーザー用カレンダーたぶん完成
+
+[33mcommit 7ca3edd1fb3a10817d03e615808b0bba22986854[m
+Merge: c8de27c 514094b
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Thu Jan 23 10:03:17 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit c8de27c4d89ef5f51d83490b79c80f7c9ae2f470[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Thu Jan 23 10:02:32 2025 +0900
+
+    ヘッダー関係いじったよー
+
+[33mcommit 514094b0ec8cb875a3d36fd977d67db882876969[m
+Author: stamp <stamp@GALLERIA-stamp>
+Date:   Wed Jan 22 21:14:03 2025 +0900
+
+    ヘッダー関係直したよ
+
+[33mcommit b02dd70205928211c615d7f7cada2d7a6e363f14[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 15:01:49 2025 +0900
+
+    cssいじったよ０
+
+[33mcommit 310a49d9351297dc4e931cec2b0dc91ec0e508e7[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 14:39:29 2025 +0900
+
+    ヘッダーを治したよ！
+
+[33mcommit d17707e9662e5d1d6d77cf048b55cfadea592e64[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 14:20:38 2025 +0900
+
+    css作ったよ！
+
+[33mcommit 1c8a7fa0b5862ffddcc50148bb500b05e79a9bd2[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Wed Jan 22 14:19:55 2025 +0900
+
+    めんご
+
+[33mcommit 6f529e6563e45e24cf4430f36697e615cb0ff737[m
+Author: Yuki <Yuki@osada>
+Date:   Wed Jan 22 14:18:16 2025 +0900
+
+    スタッフカレンダーのセキュリティを向上
+
+[33mcommit 27e850fe85e8129f20f0687264cca69acd39ab2b[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 13:48:31 2025 +0900
+
+    ユーザー側にも動画を追加しておいてます
+
+[33mcommit 7a1cfd7a6716365bcaa8c60f3e09c7b2d315e20d[m
+Merge: 0d931f1 61b5089
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 12:42:28 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit 0d931f185fd4e507941bd254af8e31fae68865a5[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 12:42:09 2025 +0900
+
+    動画を表示できるようにしました
+
+[33mcommit 61b50893da8464ad167591718db5863d45869fb7[m
+Author: Yuki <Yuki@osada>
+Date:   Wed Jan 22 12:29:57 2025 +0900
+
+    カレンダー関係のIdをIDにしたよ
+
+[33mcommit 57472b3830e07c5badb552cc3b59187ef0b06ad3[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 11:50:54 2025 +0900
+
+    なんか修正
+
+[33mcommit 6dfb1ad9a0625684f14cd6626bf617e69c823d14[m
+Merge: 3676133 9255ceb
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 11:41:02 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit 36761334426798e99f4e8d7c7fa88a7db0637167[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 11:40:55 2025 +0900
+
+    aaaaaaaa
+
+[33mcommit 24d95401f2801a5a99ba60ed2b9c897b61ad2779[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 11:40:35 2025 +0900
+
+    aaaaaaaa
+
+[33mcommit 9255ceb09391f9a2b348ed4274b721317deac4d1[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Wed Jan 22 11:22:24 2025 +0900
+
+    編集機能
+
+[33mcommit f494dd764476dd1309f3d6ba3c46121be8e21257[m
+Merge: ee587b9 206b4ea
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 10:46:13 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit ee587b9446120f2e07f880d54813b3538dc7b056[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 10:46:04 2025 +0900
+
+    動画投稿
+
+[33mcommit 206b4ea142c550b27b72d6ad5661786396de51ba[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Wed Jan 22 10:12:53 2025 +0900
+
+    削除修正
+
+[33mcommit c6a5687413eef26a7cc5b03c38bdf3123087af01[m
+Merge: 1ff95f0 343ce4a
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 10:07:20 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit 1ff95f0b7d0bf710c0a6f2d7ecc777c41b43b105[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Wed Jan 22 10:07:11 2025 +0900
+
+    youtubeにするぞ！
+
+[33mcommit 343ce4add812461c91d9de5f75de5856601dc8b6[m
+Author: Yuki <Yuki@osada>
+Date:   Wed Jan 22 09:40:45 2025 +0900
+
+    ヘッダーにユーザーカレンダーへのリンクを追加
+
+[33mcommit f33a0af5d8ff800672d46210bea19a91e735ea37[m
+Author: Yuki <Yuki@osada>
+Date:   Wed Jan 22 01:50:40 2025 +0900
+
+    スタッフカレンダーに公開設定を追加、ユーザーカレンダー途中
+
+[33mcommit 261bc09b9591d8bd72fc8b33bd36508110a61196[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Jan 21 14:52:43 2025 +0900
+
+    制度の新規投稿を追加しました
+
+[33mcommit 00a91a90ac2e3ddd268f3707c71d844f4558e6c9[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Tue Jan 21 14:27:02 2025 +0900
+
+    さくじょおおおおおおおおおおおおおおおおおおおおおおおおお
+
+[33mcommit 0f873084f03317e5b6f1293893323d49de585d74[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Jan 21 14:14:14 2025 +0900
+
+    べーす！
+
+[33mcommit 8bddb29b20016e02a1e7c284c782301049ca73b2[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Jan 21 14:07:51 2025 +0900
+
+    うおおおおおおおおおおおおおお
+
+[33mcommit b7cfb701b449d5e6da3c88102fd6e49a8fd7fb4a[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Jan 21 11:59:02 2025 +0900
+
+    周世い！
+
+[33mcommit ce21b22586e35f2639ecc83dfe8a318db157dac3[m
+Author: masaki524 <mcd2376058@stu.o-hara.ac.jp>
+Date:   Tue Jan 21 11:40:07 2025 +0900
+
+    へっだーいじりました
+
+[33mcommit 1792d2aed9eff026540f195c104e0e9136c275c7[m
+Author: takekubo <takekubo@LAPTOP-H1D53K7T>
+Date:   Tue Jan 21 11:37:37 2025 +0900
+
+    すたっふのせいどかんけいとちゅう
+
+[33mcommit 701c592522085d85133abcb1e58d50e43abbbe08[m
+Author: masaki524 <mcd2376058@stu.o-hara.ac.jp>
+Date:   Tue Jan 21 11:19:54 2025 +0900
+
+    home.jspとInstitutionDao.java最新版です
+
+[33mcommit c2e0b06c4a54d553be1bea8a82eb81754953a9cb[m
+Author: Yuki <Yuki@osada>
+Date:   Tue Jan 21 11:00:18 2025 +0900
+
+    スタッフカレンダーたぶん完成
+
+[33mcommit a495cb039ac1136b2b9d1a92aa346ee136b225c7[m
+Merge: 01161e6 7d37600
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Jan 21 10:57:08 2025 +0900
+
+    Merge branch 'master' of https://github.com/Hiro8236/Cteam.git
+
+[33mcommit 01161e6d376c1e18da402084edefab7e010ec75e[m
+Author: mcd2376072@stu.o-hara.ac.jp <mcd2376072@stu.o-hara.ac.jp>
+Date:   Tue Jan 21 10:56:51 2025 +0900
+
+    支援詳細画面を作成しました
