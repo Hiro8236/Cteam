@@ -15,7 +15,7 @@
                 </script>
             </c:if>
 
-            <!-- ログインしていない場合は「登録」ボタンを表示しない -->
+            <!-- ログインしていない場合は「登録」ボタンと「操作」列を表示しない -->
             <c:set var="userID" value="${sessionScope.userID}" />
 
             <c:choose>
@@ -26,7 +26,10 @@
                             <tr>
                                 <th>支援名</th>
                                 <th>支援詳細</th>
-                                <th>操作</th>
+                                <!-- ログインしている場合のみ「操作」列を表示 -->
+                                <c:if test="${not empty userID}">
+                                    <th>操作</th>
+                                </c:if>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,7 +37,7 @@
                                 <tr onclick="location.href='InstitutionsDetail.action?id=${institution.ID}'" style="cursor: pointer;">
                                     <td>${institution.name}</td>
                                     <td>${institution.detail}</td>
-                                    <!-- ログインしている場合のみ「登録」ボタンを表示 -->
+                                    <!-- ログインしている場合のみ「登録」ボタンと「操作」列を表示 -->
                                     <c:if test="${not empty userID}">
                                         <td><a href="BookmarkCreate.action?institutionID=${institution.ID}">登録</a></td>
                                     </c:if>
