@@ -34,33 +34,6 @@ public class NotificationDao extends Dao {
         return notifications;
     }
 
-    // IDを指定して支援情報を取得
-    public Notification findById(int id) throws Exception {
-        Notification notification = null;
-        String sql = "SELECT NotificationID, name, detail, video, PdfPath FROM notification WHERE NotificationID = ?";
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, id);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    notification = new Notification();
-                    notification.setId(resultSet.getInt("NotificationID"));
-                    notification.setName(resultSet.getString("name"));
-                    notification.setDetail(resultSet.getString("detail"));
-                    notification.setVideo(resultSet.getString("video"));
-                    notification.setPdfPath(resultSet.getString("PdfPath")); // PdfPathを取得して設定
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println("Error executing query: " + e.getMessage());
-            throw e;
-        }
-
-        return notification;
-    }
 
     // 支援をデータベースに挿入し、自動生成されたIDを返す
     public int insert(Notification notification) throws Exception {
