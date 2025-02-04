@@ -106,4 +106,23 @@ public class BookmarkListDao extends Dao {
             throw new Exception("ブックマークの挿入に失敗しました", e);
         }
     }
+
+public boolean isBookmarkExist(int userID, int institutionID) throws Exception {
+    String sql = "SELECT COUNT(*) FROM Bookmark WHERE UserID = ? AND InstitutionID = ?";
+
+    try (Connection con = getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setInt(1, userID);
+        ps.setInt(2, institutionID);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1) > 0;  // 既に存在する場合はtrue
+            }
+        }
+    }
+    return false;  // 存在しない場合はfalse
 }
+}
+

@@ -4,9 +4,17 @@
 <c:import url="/common/base.jsp">
     <c:param name="title" value="ぽシステム" />
     <c:param name="content">
-        <h1>HOME</h1>
 
         <section class="me-4">
+            <h1>HOME</h1>
+
+            <!-- エラーメッセージがある場合、表示 -->
+            <c:if test="${not empty errorMessage}">
+                <script type="text/javascript">
+                    alert("${errorMessage}");
+                </script>
+            </c:if>
+
             <c:choose>
                 <c:when test="${institutions != null && institutions.size() > 0}">
                     <!-- テーブルのスタイル変更 -->
@@ -38,5 +46,6 @@
                 <a href="SuggestList.action">おすすめ一覧</a>
             </div>
         </section>
+
     </c:param>
 </c:import>
