@@ -7,7 +7,7 @@ public class Notification implements Serializable {
 	/**
 	 * お知らせID:Int
 	 */
-	private int Noticeid;
+	private int NotificationID;
 
 	/**
 	 * お知らせ名:String
@@ -17,18 +17,18 @@ public class Notification implements Serializable {
 	/**
 	 *内容
 		*/
-	private String sentence;
+	private String Detail;
 
 	/**
 	 * ゲッター、セッター
 	 */
 
-	public int getNoticeid(){
-		return Noticeid;
+	public int getNotificationID(){
+		return NotificationID;
 	}
 
-	public void setNoticeid(int Noticeid) {
-		this.Noticeid = Noticeid;
+	public void setNotificationID(int NotificationID) {
+		this.NotificationID = NotificationID;
 	}
 
 	public String getTitle() {
@@ -39,11 +39,11 @@ public class Notification implements Serializable {
 		this.title= title;
 	}
 
-	public String getSentence(){
-		return sentence;
+	public String getDetail(){
+		return Detail;
 	}
 
-	public void setSenrence(String sentence) {
-		this.sentence= sentence;
+	public void setDetail(String Detail) {
+		this.Detail= Detail;
 	}
 }
