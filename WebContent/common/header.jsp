@@ -4,7 +4,7 @@
 <div class="header-container">
     <ul class="navigation-list">
         <li><a href="/Cteam1/user/Home.action">ホーム</a></li>
-        <li><a href="#制度">制度</a></li>
+        <li><a href="/Cteam1/user/InstitutionList.action">制度</a></li>
         <li><a href="/Cteam1/user/calendar/UserCalendar.action">カレンダー</a></li>
         <li><a href="#お知らせ">お知らせ</a></li>
         <li><a href="/Cteam1/user/BookmarkList.action">ブックマーク一覧</a></li>
