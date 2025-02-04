@@ -22,7 +22,7 @@ public class MailUtil {
     static {
         try {
             // `execute()` メソッドと同じ方法で `mail.properties` を読み込む
-            FileReader reader = new FileReader("C:\\pleiades\\workspace\\Cteam1\\WebContent\\META-INF\\mail.properties");
+            FileReader reader = new FileReader("C:\\work\\pleiades\\workspace\\Cteam1\\WebContent\\META-INF\\mail.properties");
             mailProperties.load(reader);
             System.out.println("[DEBUG] mail.properties の読み込み成功");
         } catch (IOException e) {
