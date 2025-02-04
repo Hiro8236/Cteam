@@ -22,7 +22,7 @@
             <form action="StaffInstitutionCreateExecute.action" enctype="multipart/form-data" method="post">
                 <div class="mb-3">
                     <label for="institution_name" class="form-label">支援名:</label>
-                    <input type="text" class="form-control" id="institution_name" name="institution_name" value="${institution_name}" />
+                    <input type="text" class="form-control" id="institution_name" name="institution_name" value="${institution_name}" required />
                 </div>
                 <div class="mb-3">
                     <label for="institution_detail" class="form-label">支援詳細:</label>
