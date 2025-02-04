@@ -21,7 +21,7 @@
             <div class="notification-detail">
                 <h3>お知らせ内容</h3>
                 <p><%= (detail != null && !detail.isEmpty()) ? detail : "お知らせ内容がありません" %></p>
-            </div>7
+            </div>
 
         </section>
 
