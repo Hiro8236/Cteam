@@ -12,23 +12,29 @@ import tool.Action;
 
 public class BookmarkListAction extends Action {
 
-	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-
-		HttpSession session=req.getSession();
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+        HttpSession session = req.getSession();
         Integer userID = (Integer) session.getAttribute("userID");
-		req.setAttribute("UserID",userID);
 
-		 // DAOの初期化
+        // 未ログインの場合はメッセージのみ表示
+        if (userID == null) {
+            req.setAttribute("loginMessage", "ログインしてください");
+            req.getRequestDispatcher("bookmark_list.jsp").forward(req, res);
+            return;
+        }
+
+        req.setAttribute("UserID", userID);
+
+        // DAOの初期化
         BookmarkListDao bookmarklistDao = new BookmarkListDao();
 
-        // 全件取得メソッドを使用
-        List<Bookmark> bookmarklists = bookmarklistDao.getAll();
+        // ログインユーザーのブックマークのみ取得
+        List<Bookmark> bookmarklists = bookmarklistDao.getByUserID(userID);
 
         // 結果をリクエストに設定
         req.setAttribute("bookmarklists", bookmarklists);
 
-
-		req.getRequestDispatcher("bookmark_list.jsp").forward(req, res);
-	}
+        req.getRequestDispatcher("bookmark_list.jsp").forward(req, res);
+    }
 }
