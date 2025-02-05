@@ -15,7 +15,7 @@
 
             <!-- ログインしていない場合、メッセージを表示し、ログインリンクを追加 -->
             <c:if test="${empty userID}">
-                <div> <a href="login/Login.action">ログイン</a>してください</div>
+                <div> <a href="../login/Login.action">ログイン</a>してください</div>
             </c:if>
 
             <!-- ログインしている場合、ブックマーク一覧を表示 -->

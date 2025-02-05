@@ -1,4 +1,4 @@
-package user;
+package user.suggest;
 
 import java.util.List;
 

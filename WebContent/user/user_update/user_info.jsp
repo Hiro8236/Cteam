@@ -27,6 +27,7 @@
     <a class="nav-item px-2" href="/Cteam1/user/user_update/UserUpdate.action?action=2&cd=${UserID}">変更</a>
 
     <h2>詳細情報</h2>
+    <div><a href="UserSuggestInfo.action">詳細情報登録</a></div>
 
 
 	</c:param>
