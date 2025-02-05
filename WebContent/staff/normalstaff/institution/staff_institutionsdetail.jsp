@@ -27,6 +27,25 @@
                     <p>動画がありません</p>
                 </c:if>
             </div>
+
+            <div class="pdf-section">
+			    <h3>PDF ファイル</h3>
+
+			    <!-- pdfPath が空ではない場合 (ファイルパスが存在する場合) -->
+			    <c:if test="${not empty institution.pdfPath}">
+			        <!-- ダウンロード用のアクションにIDをパラメータとして付与 -->
+			        <a href="StaffInstitutionDownload.action?id=${institution.ID}" target="_blank">
+			            PDFをダウンロード
+			        </a>
+			    </c:if>
+
+			    <!-- pdfPath が空の場合 (PDFファイルが登録されていない場合) -->
+			    <c:if test="${empty institution.pdfPath}">
+			        <p>PDFファイルはありません</p>
+			    </c:if>
+			</div>
+
+
         </section>
     </c:param>
 </c:import>

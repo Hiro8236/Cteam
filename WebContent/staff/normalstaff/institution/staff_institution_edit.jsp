@@ -106,18 +106,23 @@
 	                <p>${institution.detail != null ? institution.detail : '詳細がありません'}</p>
 	            </div>
 
-	            <!-- PDF ダウンロードセクション -->
 	            <div class="pdf-section">
-	                <h3>PDF ファイル</h3>
-	                <c:choose>
-	                    <c:when test="${institution.pdf != null}">
-	                        <a href="downloadPDF.action?id=${institution.ID}" target="_blank">PDF をダウンロード</a>
-	                    </c:when>
-	                    <c:otherwise>
-	                        <p>PDF ファイルはありません。</p>
-	                    </c:otherwise>
-	                </c:choose>
-	            </div>
+			    <h3>PDF ファイル</h3>
+
+			    <!-- pdfPath が空ではない場合 (ファイルパスが存在する場合) -->
+			    <c:if test="${not empty institution.pdfPath}">
+			        <!-- ダウンロード用のアクションにIDをパラメータとして付与 -->
+			        <a href="StaffInstitutionDownload.action?id=${institution.ID}" target="_blank">
+			            PDFをダウンロード
+			        </a>
+			    </c:if>
+
+			    <!-- pdfPath が空の場合 (PDFファイルが登録されていない場合) -->
+			    <c:if test="${empty institution.pdfPath}">
+			        <p>PDFファイルはありません</p>
+			    </c:if>
+			</div>
+
 
 	            <!-- 動画URL表示セクション -->
 	            <div class="video-section">
@@ -144,8 +149,8 @@
 	                    <label for="detail">支援詳細</label>
 	                    <textarea id="detail" name="detail" rows="4" required>${institution.detail}</textarea>
 
-	                    <label for="pdf">PDF アップロード</label>
-	                    <input type="file" id="pdf" name="pdf" accept="application/pdf" />
+	                    <label for="institution_pdf">PDFファイル</label>
+				        <input type="file" id="institution_pdf" name="institution_pdf" accept=".pdf" />
 
 	                    <label for="video">動画URL</label>
 	                    <input type="url" id="video" name="video" value="${institution.video}" placeholder="https://example.com/video" />

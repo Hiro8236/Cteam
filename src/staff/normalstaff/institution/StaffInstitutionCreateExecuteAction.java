@@ -80,8 +80,8 @@ public class StaffInstitutionCreateExecuteAction extends Action {
             InstitutionDao dao = new InstitutionDao();
             dao.insert(institution);
 
-            // 完了ページへリダイレクト
-            response.sendRedirect("StaffInstitutionCreateComplete.action");
+            // 完了ページへフォワード
+            request.getRequestDispatcher("staff_institution_create_done.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

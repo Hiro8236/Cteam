@@ -42,6 +42,7 @@ public class StaffInstitutionsDetailAction extends Action {
             System.out.println("Name: " + InsFromDb.getName());
             System.out.println("Detail: " + InsFromDb.getDetail());
             System.out.println("Video: " + InsFromDb.getVideo());
+            System.out.println("PdfPath: " + InsFromDb.getPdfPath());
         } else {
             System.out.println("No institution found with ID: " + insId);
         }

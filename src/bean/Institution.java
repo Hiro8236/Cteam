@@ -12,7 +12,7 @@ public class Institution implements Serializable {
     public int getID() {
         return id;
     }
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
     public String getName() {

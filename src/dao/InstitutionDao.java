@@ -22,7 +22,7 @@ public class InstitutionDao extends Dao {
 
             while (resultSet.next()) {
                 Institution institution = new Institution();
-                institution.setId(resultSet.getInt("InstitutionID"));
+                institution.setID(resultSet.getInt("InstitutionID"));
                 institution.setName(resultSet.getString("name"));
                 institution.setDetail(resultSet.getString("detail"));
                 institution.setVideo(resultSet.getString("video"));
@@ -47,7 +47,7 @@ public class InstitutionDao extends Dao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     institution = new Institution();
-                    institution.setId(resultSet.getInt("InstitutionID"));
+                    institution.setID(resultSet.getInt("InstitutionID"));
                     institution.setName(resultSet.getString("name"));
                     institution.setDetail(resultSet.getString("detail"));
                     institution.setVideo(resultSet.getString("video"));
