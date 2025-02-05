@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.Enumeration;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -16,11 +15,6 @@ import bean.Institution;
 import dao.InstitutionDao;
 import tool.Action;
 
-@MultipartConfig(
-    fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-    maxFileSize = 1024 * 1024 * 10,      // 10MB
-    maxRequestSize = 1024 * 1024 * 50    // 50MB
-)
 public class StaffInstitutionCreateExecuteAction extends Action {
 
     @Override
