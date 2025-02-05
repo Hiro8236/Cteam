@@ -34,7 +34,7 @@ ${param.scripts}
 			</c:choose>
 		</div>
 
-		<footer class="py-2 my-4 bg-dark bg-opacity-10 border-top border-3 align-bottom">
+		<footer class="footer">
 			<c:import url="/common/footer.jsp" />
 		</footer>
 

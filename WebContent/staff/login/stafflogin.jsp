@@ -7,24 +7,50 @@
 		Cシステム
 	</c:param>
 
-	<c:param name="scripts">
-		<script type="text/javascript">
-			$(function() {
-				// 「パスワードを表示」が変更された時の処理
-				$('#password-display').change(function() {
-					if ($(this).prop('checked')) {
-						// チェックが入っている場合
-						// パスワード入力欄をテキストにする
-						$('#password-input').attr('type', 'text');
-					} else {
-						// チェックが外れている場合
-						// パスワード入力欄をパスワードにする
-						$('#password-input').attr('type', 'password');
-					}
-				});
-			});
-		</script>
-	</c:param>
+	<c:param name="content">
+    <section class="login-container">
+        <form action="StaffLoginExecute.action" method="post" class="login-form">
+            <h2 class="login-title">ログイン</h2>
+
+            <!-- エラーメッセージ -->
+            <c:if test="${errors.size()>0}">
+                <div class="error-messages">
+                    <ul>
+                        <c:forEach var="error" items="${errors}">
+                            <li>${error}</li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </c:if>
+
+            <!-- スタッフID -->
+            <div class="form-floating">
+                <input class="form-control" id="id-input" maxlength="20" name="StaffId"
+                    placeholder="スタッフIDを入力" type="text" value="${EmailAddress}" required />
+                <label for="id-input">スタッフID</label>
+            </div>
+
+            <!-- パスワード -->
+            <div class="form-floating">
+                <input class="form-control" id="password-input" maxlength="20" name="password"
+                    placeholder="パスワードを入力" type="password" required />
+                <label for="password-input">パスワード</label>
+            </div>
+
+            <!-- パスワード表示チェックボックス -->
+            <div class="password-toggle">
+                <input type="checkbox" id="password-display" />
+                <label for="password-display">パスワードを表示</label>
+            </div>
+
+            <!-- ログインボタン -->
+            <div>
+                <button type="submit" class="login-button">ログイン</button>
+            </div>
+        </form>
+    </section>
+</c:param>
+
 
 	<c:param name="content">
 		<section class="w-75 text-center m-auto border pb-3">

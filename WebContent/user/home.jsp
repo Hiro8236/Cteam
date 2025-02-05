@@ -34,7 +34,7 @@
                         </thead>
                         <tbody>
                             <c:forEach var="institution" items="${institutions}">
-                                <tr onclick="location.href='InstitutionsDetail.action?id=${institution.ID}'" style="cursor: pointer;">
+                                <tr onclick="location.href='institution/InstitutionsDetail.action?id=${institution.ID}'" style="cursor: pointer;">
                                     <td>${institution.name}</td>
                                     <td>${institution.detail}</td>
                                     <!-- ログインしている場合のみ「登録」ボタンと「操作」列を表示 -->

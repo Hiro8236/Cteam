@@ -1,84 +1,658 @@
+/* 基本設定 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e9f7e9; /* 淡い緑 */
+  color: #2f6c2b; /* ダークグリーン */
+  line-height: 1.6;
+}
+
 /* ヘッダー全体のスタイル */
 .header-container {
-    display: flex;
-    justify-content: space-between; /* 左右に配置 */
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #e8f5e9; /* 薄い緑 */
-    border-bottom: 1px solid #c8e6c9; /* 明るい緑 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #e8f5e9;
+  border-bottom: 1px solid #c8e6c9;
 }
 
 /* 左側メニュー */
 .navigation-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: flex-start; /* 左寄せ */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .navigation-list li {
-    margin: 0 15px; /* アイテム間の横のスペース */
+  margin: 0 15px;
 }
 
 .navigation-list a {
-    text-decoration: none;
-    color: #388e3c; /* 緑色 */
-    font-size: 16px;
-    font-weight: bold;
+  text-decoration: none;
+  color: #388e3c;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .navigation-list a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* 右側のログイン/ログアウト部分 */
 .auth-links {
-    display: flex; /* 横並び */
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .auth-links .user-id {
-    font-size: 16px;
-    color: #388e3c; /* 緑色 */
-    margin-right: 15px;
+  font-size: 16px;
+  color: #388e3c;
+  margin-right: 15px;
 }
 
 .auth-link {
-    font-size: 16px;
-    color: #388e3c;
-    text-decoration: none;
-    font-weight: bold;
+  font-size: 16px;
+  color: #388e3c;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .auth-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-/* ログインしていないときのタイトル */
-.auth-links h1 {
-    font-size: 18px;
-    color: #388e3c;
-    font-weight: normal;
-    margin: 0;
+/* メインコンテンツ */
+section {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* ページタイトル */
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #2c3e50;
+  border-left: 6px solid #388e3c;
+  padding-left: 15px;
+  margin-bottom: 20px;
+}
+
+/* 職員一覧ヘッダー */
+.staff-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* 職員一覧タイトル */
+.staff-list-title {
+  font-size: 22px;
+  color: #34495e;
+  font-weight: bold;
+}
+
+/* 新規登録ボタン */
+.btn-success {
+  background-color: #388e3c;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-success:hover {
+  background-color: #2c6f2d;
+}
+
+/* テーブル */
+.staff-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.staff-table th, .staff-table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.staff-table th {
+  background-color: #eaf0f8;
+  color: #333;
+  font-weight: 600;
+}
+
+/* 操作ボタンを横並びに */
+.staff-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ボタン共通 */
+.btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+/* 変更ボタン */
+.btn-edit {
+  background-color: #388e3c;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #2c6f2d;
+}
+
+/* 削除ボタン */
+.btn-delete {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #b71c1c;
+}
+
+/* エラーメッセージ */
+.alert {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.alert ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.alert li {
+  line-height: 1.5;
+}
+
+/* ボタンの中央揃え */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* adminstaff css */
+.admin-button {
+  display: inline-block;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 20px 40px;
+  color: #ffffff;
+  background-color: #388e3c;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(56, 142, 60, 0.2);
+  transition: all 0.3s ease;
+}
+
+.admin-button:hover {
+  background-color: #2c6f2d;
+  box-shadow: 0 6px 15px rgba(56, 142, 60, 0.3);
+  transform: translateY(-2px);
+}
+
+.admin-button:active {
+  background-color: #1b4d25;
+  box-shadow: 0 2px 8px rgba(56, 142, 60, 0.2);
+  transform: translateY(0);
 }
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
-    .header-container {
-        flex-direction: column; /* ヘッダーが縦並びに */
-        align-items: flex-start;
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navigation-list {
+    flex-direction: column;
+  }
+
+  .navigation-list li {
+    margin: 10px 0;
+  }
+
+  .auth-links {
+    margin-top: 10px;
+  }
+
+  section {
+    padding: 20px;
+  }
+
+  .staff-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .staff-actions {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .table th, .table td {
+    padding: 10px 12px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .suggest-link a {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+}
+
+/* ログインフォーム全体 */
+.login-container {
+  width: 50%;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* ログインタイトル */
+.login-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  border-bottom: 2px solid #388e3c;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* 入力フィールド */
+.login-form .form-floating {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.login-form .form-control {
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.login-form label {
+  font-size: 14px;
+  color: #555;
+}
+
+/* パスワード表示チェックボックス */
+.password-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.password-toggle input {
+  margin-right: 8px;
+}
+
+/* エラーメッセージ */
+.error-messages {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.error-messages ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* ログインボタン */
+.login-button {
+  width: 100%;
+  font-size: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #388e3c;
+  color: white;
+  font-weight: bold;
+  border: none;
+  transition: 0.3s;
+}
+
+.login-button:hover {
+  background-color: #2c6f2d;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .login-container {
+    width: 90%;
+  }
+
+  .login-button {
+    font-size: 16px;
+  }
+}
+
+/* ======== Homeページ専用のCSS ======== */
+
+/* Homeページのコンテナ */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #e9f7e9; /* 背景色：淡い緑 */
+  padding: 20px;
+}
+
+/* タイトル */
+.home-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ナビゲーションコンテナ */
+.home-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ナビゲーションリスト */
+.home-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.home-nav-item {
+  margin: 10px 0;
+}
+
+/* ボタンスタイル */
+.home-nav-btn {
+  display: block;
+  width: 220px;
+  font-size: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #388e3c;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.home-nav-btn:hover {
+  background-color: #2c6f2d;
+  transform: scale(1.05);
+}
+
+.home-nav-btn-outline {
+  background-color: transparent;
+  border: 2px solid #388e3c;
+  color: #388e3c;
+}
+
+.home-nav-btn-outline:hover {
+  background-color: #388e3c;
+  color: white;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .home-container {
+    width: 90%;
+  }
+
+  .home-nav-btn {
+    width: 100%;
+  }
+}
+
+/* ログアウトページのスタイル */
+.logout-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.logout-title {
+    font-size: 28px;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.logout-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+.back-to-login {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.back-to-login a {
+    text-decoration: none;
+    color: #388e3c;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #e8f5e9;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.back-to-login a:hover {
+    background-color: #388e3c;
+    color: white;
+}
+
+
+
+/* カレンダーコンテナ */
+.calendar-container {
+    width: 100%;
+    max-width: 100%;  /* 幅を100%に設定 */
+    margin: 0 auto;   /* 水平中央揃え */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 16/9; /* 幅:高さの比率 */
+    box-sizing: border-box;  /* ボックスサイズを調整 */
+    display: block;  /* ブロック要素として表示 */
+}
+
+/* FullCalendarの設定調整 */
+#calendar {
+    width: 100% !important;  /* FullCalendarの幅を100%に設定 */
+    margin: 0 auto;   /* カレンダーを中央に配置 */
+    display: block;
+}
+
+/* モーダルのスタイル */
+.modal {
+    display: none; /* 初期状態は非表示 */
+    position: fixed;
+    z-index: 1; /* モーダルを前面に表示 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* 背景を半透明に */
+}
+
+/* モーダルコンテンツ */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* モーダル内の閉じるボタン */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* イベント登録・編集フォーム */
+.institution-details input.form-control,
+.institution-details select.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ラジオボタンのスタイル */
+.institution-details fieldset {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.institution-details label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+/* ボタン */
+button.btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-primary {
+    background-color: #388e3c;
+    color: white;
+    border: none;
+}
+
+button.btn-primary:hover {
+    background-color: #2c6f2d;
+}
+
+button.btn-danger {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+}
+
+button.btn-danger:hover {
+    background-color: #c62828;
+}
+
+/* モーダル表示時のカレンダーサイズ調整 */
+.fullcalendar {
+    max-width: 100%;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .calendar-container {
+        width: 100%;
+        max-width: 100%;  /* 幅を100%に設定 */
+        margin-left: 0; /* 左側の余白を削除 */
+        padding: 10px;
+        aspect-ratio: 16/9;  /* アスペクト比を維持 */
     }
 
-    .navigation-list {
-        flex-direction: column; /* メニューを縦並び */
+    .modal-content {
+        width: 90%;  /* モーダルの幅を調整 */
     }
 
-    .navigation-list li {
-        margin: 10px 0; /* アイテム間の縦のスペース */
-    }
-
-    .auth-links {
-        margin-top: 10px;
+    .home-nav-btn {
+        width: 100%;
     }
 }
