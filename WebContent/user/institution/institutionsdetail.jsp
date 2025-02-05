@@ -40,7 +40,7 @@
 			    <!-- pdfPath が空ではない場合 (ファイルパスが存在する場合) -->
 			    <c:if test="${not empty institution.pdfPath}">
 			        <!-- ダウンロード用のアクションにIDをパラメータとして付与 -->
-			        <a href="StaffInstitutionDownload.action?id=${institution.id}" target="_blank">
+			        <a href="InstitutionDownload.action?id=${institution.ID}" target="_blank">
 			            PDFをダウンロード
 			        </a>
 			    </c:if>
