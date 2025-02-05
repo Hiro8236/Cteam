@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/Cteam1/css/styles.css">
 
 <title>${param.title}</title>
 
@@ -15,8 +16,7 @@ ${param.scripts}
 </head>
 <body>
 	<div id="wrapper" class="container">
-		<header
-			class="d-flex flex-wrap justify-content-center py-3 px-5 mb-4 border-bottom border-2 bg-primary bg-opacity-10 bg-gradient">
+		<header>
 			<c:import url="/staffcommon/header.jsp" />
 		</header>
 

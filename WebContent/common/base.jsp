@@ -16,8 +16,7 @@ ${param.scripts}
 </head>
 <body>
 	<div id="wrapper" class="container">
-		<header
-			class="d-flex flex-wrap justify-content-center py-3 px-5 mb-4 border-bottom border-2 bg-primary bg-opacity-10 bg-gradient">
+		<header>
 			<c:import url="/common/header.jsp" />
 		</header>
 

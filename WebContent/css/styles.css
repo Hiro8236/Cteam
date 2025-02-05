@@ -3,402 +3,82 @@
     display: flex;
     justify-content: space-between; /* 左右に配置 */
     align-items: center;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #ddd;
+    padding: 15px 20px;
+    background-color: #e8f5e9; /* 薄い緑 */
+    border-bottom: 1px solid #c8e6c9; /* 明るい緑 */
 }
 
-/* ナビゲーションリストを横並びにする */
+/* 左側メニュー */
 .navigation-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
     display: flex;
-    flex-wrap: wrap;  /* 横並びにしたボタンが折り返す */
-    justify-content: space-around; /* ボタン間のスペースを均等に */
+    justify-content: flex-start; /* 左寄せ */
 }
 
 .navigation-list li {
-    margin: 10px 0; /* アイテム間の縦のスペース */
+    margin: 0 15px; /* アイテム間の横のスペース */
 }
 
 .navigation-list a {
     text-decoration: none;
-    color: #007bff;
+    color: #388e3c; /* 緑色 */
     font-size: 16px;
+    font-weight: bold;
 }
 
 .navigation-list a:hover {
     text-decoration: underline;
 }
 
-/* 認証情報部分 */
+/* 右側のログイン/ログアウト部分 */
 .auth-links {
-    display: flex;   /* 横並び */
+    display: flex; /* 横並び */
     align-items: center;
 }
 
-/* 各リンクのスタイル */
-.auth-link {
-    padding: 0 10px;
-    text-decoration: none;
-    color: #007bff;
+.auth-links .user-id {
     font-size: 16px;
+    color: #388e3c; /* 緑色 */
+    margin-right: 15px;
+}
+
+.auth-link {
+    font-size: 16px;
+    color: #388e3c;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .auth-link:hover {
     text-decoration: underline;
 }
 
-/* UserIDの表示 */
-.user-id {
-    font-size: 14px;
-    color: #333;
-    margin-right: 15px;
-}
-
-/* ナビゲーションボタンのスタイル */
-.nav-link.btn {
-    font-size: 22px !important;  /* フォントサイズを大きく */
-    padding: 20px 30px !important; /* パディングを大きくしてボタンをさらに大きく */
-    text-align: center; /* ボタン内のテキストを中央揃え */
-    width: auto !important;  /* 横幅自動調整 */
-    margin: 15px 0; /* ボタン間のスペース */
-    background-color: #007bff; /* ボタンの色 */
-    color: white; /* 文字色 */
-    border-radius: 8px; /* ボタンの角を丸く */
-    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.2); /* ボタンに影をつける */
-    transition: all 0.2s ease-in-out; /* ホバー時のエフェクト */
-}
-
-.nav-link.btn:hover {
-    background-color: #0056b3 !important; /* ホバー時のボタン色 */
-    color: white !important; /* ホバー時に文字色を白に保つ */
-    transform: scale(1.1) !important; /* ホバー時にボタンをさらに大きく */
-}
-
-.nav-link.btn:active {
-    transform: scale(1) !important; /* クリック時のサイズを戻す */
-}
-
-/* ボタンを横並びにする */
-.vertical-nav .nav {
-    display: flex !important; /* 横並びにする */
-    flex-direction: row !important; /* 横並びにする */
-    justify-content: space-around !important; /* アイテム間に均等なスペース */
-    padding: 0 !important;
-}
-
-.vertical-nav .nav-item {
-    margin: 10px 15px !important; /* アイテム間のスペース */
-}
-
-/* ボタンスタイル */
-.nav-link.btn {
-    font-size: 22px !important; /* フォントサイズを大きく */
-    padding: 20px 30px !important; /* ボタンの大きさを調整 */
-    text-align: center !important;
-    border-radius: 8px !important; /* 角丸 */
-    transition: all 0.2s ease-in-out !important; /* ホバー時のエフェクト */
-    width: auto !important; /* 横幅を自動調整 */
-    background-color: #007bff !important; /* ボタン色 */
-    color: white !important; /* 文字色 */
-}
-
-/* ホバー時のボタン色と文字色 */
-.nav-link.btn:hover {
-    background-color: #0056b3 !important;
-    color: white !important; /* 文字色を白に */
-    transform: scale(1.1) !important; /* ホバー時に少し拡大 */
-}
-
-/* クリック時のエフェクト */
-.nav-link.btn:active {
-    transform: scale(1) !important; /* クリック時のサイズを戻す */
-}
-
-/* さらに良い視覚効果を作成する */
-.nav-link.btn:focus {
-    outline: none !important; /* フォーカス時の枠線を消す */
-    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5) !important; /* 輪郭を作成 */
-}
-
-/* 追加したレスポンシブ対応：モバイルなど小さい画面でボタンが縦並びになる */
-@media (max-width: 768px) {
-    .vertical-nav .nav {
-        flex-direction: column !important; /* 縦並び */
-    }
-
-    .vertical-nav .nav-item {
-        margin: 10px 0 !important; /* アイテム間のスペースを狭く */
-    }
-}
-
-
-/* 制度詳細css */
-.institution-details {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 30px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-/* 支援名 */
-.institution-name {
-    margin-bottom: 25px;
-}
-
-.institution-name h2 {
-    font-size: 28px;
-    color: #2c3e50;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
-
-/* 支援詳細 */
-.institution-detail {
-    margin-bottom: 35px;
-}
-
-.institution-detail h3 {
-    font-size: 22px;
-    color: #34495e;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.institution-detail p {
+/* ログインしていないときのタイトル */
+.auth-links h1 {
     font-size: 18px;
-    line-height: 1.8;
-    color: #7f8c8d;
-    word-wrap: break-word;
-}
-
-/* 動画セクション */
-.video-section {
-    margin-top: 50px;
-    padding-top: 30px;
-    border-top: 3px solid #ecf0f1;
-    text-align: center;
-}
-
-.video-section h3 {
-    font-size: 22px;
-    color: #2c3e50;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.video-section iframe {
-    width: 100%;
-    max-width: 800px;
-    height: 450px;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* ボタンやリンクのスタイル */
-a {
-    font-size: 16px;
-    color: #2980b9;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-    .institution-details {
-        padding: 20px;
-    }
-
-    .institution-name h2 {
-        font-size: 24px;
-    }
-
-    .institution-detail h3 {
-        font-size: 20px;
-    }
-
-    .institution-detail p {
-        font-size: 16px;
-    }
-
-    .video-section iframe {
-        max-width: 100%;
-        height: 350px;
-    }
-}
-
-/* ユーザーHomeのcss */
-
-.table {
-    width: 100% !important;
-    margin-top: 30px !important;
-    border-collapse: collapse !important;
-    background-color: #fff !important;
-    border-radius: 8px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-}
-
-.table th, .table td {
-    padding: 14px 18px !important;
-    text-align: left !important;
-    border-bottom: 1px solid #f1f1f1 !important;
-}
-
-.table th {
-    background-color: #eaf0f8 !important;
-    color: #333 !important;
-    font-weight: 600 !important;
-}
-
-.table tr:hover {
-    background-color: #f8f9fa !important;
-    cursor: pointer !important;
-}
-
-.table a {
-    color: #007bff !important;
-    font-weight: 500 !important;
-    text-decoration: none !important;
-}
-
-.table a:hover {
-    text-decoration: underline !important;
-    color: #0056b3 !important;
-}
-
-/* おすすめ一覧リンク */
-.suggest-link {
-    margin-top: 25px;
-}
-
-.suggest-link a {
-    font-size: 18px;
-    padding: 12px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
-    transition: all 0.3s ease;
-}
-
-.suggest-link a:hover {
-    background-color: #0056b3;
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-    .table th, .table td {
-        padding: 10px 12px;
-    }
-
-    .suggest-link a {
-        font-size: 16px;
-        padding: 10px 15px;
-    }
-}
-
-/* ユーザーHomeのcssここまで */
-
-/* adminstaff css */
-.admin-button {
-    display: inline-block;
-    font-size: 24px;
-    font-weight: bold;
-    padding: 20px 40px;
-    color: #ffffff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 8px;
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
-    transition: all 0.3s ease;
-}
-
-.admin-button:hover {
-    background-color: #0056b3;
-    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
-    transform: translateY(-2px);
-}
-
-.admin-button:active {
-    background-color: #004494;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
-    transform: translateY(0);
-}
-
-/* ボタンの中央揃え */
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-}
-/* adminstaff css ここまで */
-
-/* 職員削除ページのcss */
-
-/* セクション全体のスタイル */
-.me-4 {
-    margin: 20px auto;
-    max-width: 800px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* タイトルスタイル */
-.h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    border-left: 6px solid #007bff;
-    padding-left: 10px;
-    background-color: #e9ecef;
-    border-radius: 4px;
-}
-
-/* エラー表示のスタイル */
-.alert {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-}
-.alert ul {
+    color: #388e3c;
+    font-weight: normal;
     margin: 0;
-    padding-left: 20px;
-}
-.alert li {
-    line-height: 1.5;
 }
 
-/* カレンダー全体の外観 */
-<style>
-    .fc {
-        width: 100% !important; /* カレンダー全体の幅を100%にする */
-        max-width: 1920px;      /* 必要に応じて最大幅を設定 */
-        margin: 0 auto;         /* カレンダーを中央に配置 */
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column; /* ヘッダーが縦並びに */
+        align-items: flex-start;
     }
-</style>
+
+    .navigation-list {
+        flex-direction: column; /* メニューを縦並び */
+    }
+
+    .navigation-list li {
+        margin: 10px 0; /* アイテム間の縦のスペース */
+    }
+
+    .auth-links {
+        margin-top: 10px;
+    }
+}
