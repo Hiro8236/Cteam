@@ -1,4 +1,4 @@
-package user;
+package user.institution;
 
 import java.util.List;
 

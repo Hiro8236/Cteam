@@ -1,4 +1,4 @@
-package user;
+package user.bookmark;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
