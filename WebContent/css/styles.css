@@ -22,6 +22,51 @@ body {
   border-bottom: 1px solid #c8e6c9;
 }
 
+/* ヘッダー全体の装飾は既存の .header-container や .navigation-list を流用 */
+
+/* ▼▼ ドロップダウン用のサンプルCSS ▼▼ */
+
+/* 親メニュー (li.dropdown) 自体はinline-blockにする */
+.navigation-list li.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* サブメニュー (ul.dropdown-content) は初期状態非表示 */
+.navigation-list li.dropdown .dropdown-content {
+  display: none;
+  position: absolute;   /* 親要素からの相対位置 */
+  background-color: #fff;   /* 例: 背景色を白に */
+  min-width: 120px;    /* 横幅など調整 */
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 9999;       /* ドロップダウンが前面に来るように */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* サブメニュー内の各li・aのスタイル */
+.navigation-list li.dropdown .dropdown-content li {
+  padding: 6px 12px;
+}
+.navigation-list li.dropdown .dropdown-content li a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* li.dropdown:hover でサブメニューを表示 */
+.navigation-list li.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* ホバー時の背景色など */
+.navigation-list li.dropdown .dropdown-content li:hover {
+  background-color: #eee;
+}
+
+
 /* 左側メニュー */
 .navigation-list {
   list-style-type: none;
