@@ -9,13 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import bean.Staff;
 import dao.StaffDao;
+import dao.UserDao;
 import tool.Action;
 
 public class StaffCreateExecuteAction extends Action {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        System.out.println("ココイルヨー");
         // ローカル変数の宣言
         HttpSession session = req.getSession();
         StaffDao staffDao = new StaffDao();
@@ -46,7 +46,6 @@ public class StaffCreateExecuteAction extends Action {
 
         // エラーがある場合はJSPへフォワード
         if (!errors.isEmpty()) {
-        	System.out.print("えらーだよー");
             req.setAttribute("errors", errors);
             req.setAttribute("staff_name", staffName);
             req.setAttribute("staff_role", staffRole);
@@ -54,11 +53,18 @@ public class StaffCreateExecuteAction extends Action {
             return;
         }
 
+
+
+        UserDao userDao = new UserDao();
+        String hashedPassword = userDao.hashPassword(password);
+
+
         // 職員インスタンスを作成して保存
         Staff newStaff = new Staff();
         newStaff.setStaffName(staffName);
         newStaff.setStaffRole(staffRole);
-        newStaff.setPassword(password);
+        newStaff.setPassword(hashedPassword);
+
 
         // 職員IDを自動インクリメントに任せる
         staffDao.save(newStaff);
