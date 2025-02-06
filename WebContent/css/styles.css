@@ -595,19 +595,20 @@ section {
         }
 
         /* モーダルのスタイル */
-        .modal {
-            display: none; /* 初期状態で非表示 */
-            position: fixed;
-            z-index: 10;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+		.modal {
+		    display: none; /* 初期状態で非表示 */
+		    position: fixed;
+		    z-index: 10;
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    height: 100%;
+		    background-color: rgba(0, 0, 0, 0.4);
+		    /* display: flex; は削除 */
+		    justify-content: center;
+		    align-items: center;
+		}
+
 
         .modal-content {
             background-color: #fff;
