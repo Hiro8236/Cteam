@@ -520,139 +520,38 @@ section {
     color: white;
 }
 
-
-
-/* カレンダーコンテナ */
-.calendar-container {
-    width: 100%;
-    max-width: 100%;  /* 幅を100%に設定 */
-    margin: 0 auto;   /* 水平中央揃え */
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    aspect-ratio: 16/9; /* 幅:高さの比率 */
-    box-sizing: border-box;  /* ボックスサイズを調整 */
-    display: block;  /* ブロック要素として表示 */
-}
-
-/* FullCalendarの設定調整 */
-#calendar {
-    width: 100% !important;  /* FullCalendarの幅を100%に設定 */
-    margin: 0 auto;   /* カレンダーを中央に配置 */
-    display: block;
-}
-
 /* モーダルのスタイル */
 .modal {
-    display: none; /* 初期状態は非表示 */
+    display: none;  /* 🔹 初期状態で非表示 */
     position: fixed;
-    z-index: 1; /* モーダルを前面に表示 */
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4); /* 背景を半透明に */
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* モーダルコンテンツ */
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
+    background-color: #fff;
     padding: 20px;
-    border: 1px solid #888;
-    width: 60%;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
-/* モーダル内の閉じるボタン */
+/* 閉じるボタン */
 .close {
-    color: #aaa;
     float: right;
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 24px;
     cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
 
-/* イベント登録・編集フォーム */
-.institution-details input.form-control,
-.institution-details select.form-control {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
 
-/* ラジオボタンのスタイル */
-.institution-details fieldset {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
 
-.institution-details label {
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-/* ボタン */
-button.btn {
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-}
-
-button.btn-primary {
-    background-color: #388e3c;
-    color: white;
-    border: none;
-}
-
-button.btn-primary:hover {
-    background-color: #2c6f2d;
-}
-
-button.btn-danger {
-    background-color: #d32f2f;
-    color: white;
-    border: none;
-}
-
-button.btn-danger:hover {
-    background-color: #c62828;
-}
-
-/* モーダル表示時のカレンダーサイズ調整 */
-.fullcalendar {
-    max-width: 100%;
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-    .calendar-container {
-        width: 100%;
-        max-width: 100%;  /* 幅を100%に設定 */
-        margin-left: 0; /* 左側の余白を削除 */
-        padding: 10px;
-        aspect-ratio: 16/9;  /* アスペクト比を維持 */
-    }
-
-    .modal-content {
-        width: 90%;  /* モーダルの幅を調整 */
-    }
-
-    .home-nav-btn {
-        width: 100%;
-    }
-}
