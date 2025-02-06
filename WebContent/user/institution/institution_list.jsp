@@ -39,7 +39,7 @@
                                     <td>${institutions.detail}</td>
                                     <!-- ログインしている場合のみ「登録」ボタンと「操作」列を表示 -->
                                     <c:if test="${not empty userID}">
-                                        <td><a href="../bookmark/BookmarkCreate.action?id=${institutions.ID}">登録</a></td>
+                                        <td><a href="../bookmark/BookmarkCreate.action?institutionID=${institutions.ID}">登録</a></td>
                                     </c:if>
                                 </tr>
                             </c:forEach>
