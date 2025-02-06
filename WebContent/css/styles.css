@@ -22,49 +22,63 @@ body {
   border-bottom: 1px solid #c8e6c9;
 }
 
-/* ヘッダー全体の装飾は既存の .header-container や .navigation-list を流用 */
-
 /* ▼▼ ドロップダウン用のサンプルCSS ▼▼ */
 
-/* 親メニュー (li.dropdown) 自体はinline-blockにする */
+/* ▼▼ ドロップダウン全体 ▼▼ */
 .navigation-list li.dropdown {
   position: relative;
   display: inline-block;
 }
 
-/* サブメニュー (ul.dropdown-content) は初期状態非表示 */
+/* ▼ サブメニュー初期状態 ▼ */
 .navigation-list li.dropdown .dropdown-content {
-  display: none;
-  position: absolute;   /* 親要素からの相対位置 */
-  background-color: #fff;   /* 例: 背景色を白に */
-  min-width: 120px;    /* 横幅など調整 */
+  display: block;
+  position: absolute;
+  background-color: #004400;       /* 濃い緑色など */
+  min-width: 120px;
   box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  z-index: 9999;       /* ドロップダウンが前面に来るように */
+  z-index: 9999;
   margin: 0;
   padding: 0;
   list-style: none;
+
+  /* アニメーション準備 */
+  opacity: 0;                      /* 透明にしておく */
+  visibility: hidden;             /* hoverしてない時は非表示 */
+  transform: translateY(-10px);    /* 「上から」なので初期位置は -10px (上) */
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+
+  /* 文字の改行を行わない */
+  white-space: nowrap;             /* 長すぎる文字も改行しない */
 }
 
-/* サブメニュー内の各li・aのスタイル */
+/* ▼ サブメニューのアイテム ▼ */
 .navigation-list li.dropdown .dropdown-content li {
-  padding: 6px 12px;
+  padding: 8px 12px;
+  white-space: nowrap;             /* リスト各行でも改行をしない */
 }
+
 .navigation-list li.dropdown .dropdown-content li a {
   display: block;
-  color: #333;
+  color: #fff;
   text-decoration: none;
-  white-space: nowrap;
+  white-space: nowrap;             /* リンク自体にも改行制御 */
 }
 
-/* li.dropdown:hover でサブメニューを表示 */
+/* ▼ ホバーで表示 & 上からふわっと ▼ */
 .navigation-list li.dropdown:hover .dropdown-content {
-  display: block;
+  visibility: visible;        /* visible に切り替え */
+  opacity: 1;                 /* 不透明 */
+  transform: translateY(0);   /* 位置を 0 にして、上から降りてくるアニメーション */
 }
 
-/* ホバー時の背景色など */
+/* ▼ ホバー時の背景など ▼ */
 .navigation-list li.dropdown .dropdown-content li:hover {
-  background-color: #eee;
+  background-color: #006600;  /* 好みで変えてください */
 }
+
+
+/*ここまでドロップダウン*/
 
 
 /* 左側メニュー */
