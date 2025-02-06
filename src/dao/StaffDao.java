@@ -25,8 +25,13 @@ public class StaffDao extends Dao {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
+    	    String hashedPassword = hashPassword(password);
+    	    System.out.println(hashedPassword);
+
             statement.setInt(1, staffId);
-            statement.setString(2, password);
+            statement.setString(2, hashedPassword);
+
+
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -193,4 +198,20 @@ public class StaffDao extends Dao {
             stmt.executeUpdate();
         }
     }
+
+
+	// パスワードのハッシュ化
+	public String hashPassword(String password) {
+	    try {
+	        java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
+	        byte[] hashedBytes = md.digest(password.getBytes());
+	        StringBuilder sb = new StringBuilder();
+	        for (byte b : hashedBytes) {
+	            sb.append(String.format("%02x", b));
+	        }
+	        return sb.toString();
+	    } catch (Exception e) {
+	        throw new RuntimeException("パスワードのハッシュ化に失敗しました。", e);
+	    }
+	}
 }

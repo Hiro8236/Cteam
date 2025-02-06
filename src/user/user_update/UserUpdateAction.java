@@ -36,6 +36,8 @@ public class UserUpdateAction extends Action {
                 case 2:
                     req.getRequestDispatcher("password_update.jsp").forward(req, res);
                     break;
+                case 3:
+                    req.getRequestDispatcher("user_delete.jsp").forward(req, res);
                 default:
                     // 無効な値の場合、デフォルト画面（例: ユーザー情報更新画面）
                     req.getRequestDispatcher("user_info.jsp").forward(req, res);
