@@ -635,5 +635,137 @@ section {
             cursor: pointer;
         }
 
+/* ===============================
+   スタッフ用支援一覧ページ用スタイル
+   =============================== */
 
+/* ページ全体の背景・フォント */
+body {
+  background-color: #f5f5f5; /* 薄いグレー背景 */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 支援一覧セクションのスタイル */
+section.me-4 {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 1200px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* テーブル全体のスタイル */
+table.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* テーブルヘッダー */
+table.table thead th {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-bottom: 2px solid #dee2e6;
+  text-align: left;
+}
+
+/* テーブルボディ */
+table.table tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* 行ホバー時の背景色 */
+table.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* 編集・削除リンクのスタイル */
+table.table tbody tr a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+table.table tbody tr a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+/* アラート（メッセージ）のスタイル */
+.alert.alert-info {
+  background-color: #d1ecf1;
+  border: 1px solid #bee5eb;
+  color: #0c5460;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* 投稿ボタン（リンク）のスタイル */
+a.btn-post {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+a.btn-post:hover {
+  background-color: #218838;
+}
+
+a.btn-post {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745; /* ボタンの背景色（緑） */
+    color: #fff;             /* テキスト色 */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    float: right;            /* 右寄せ */
+    margin-bottom: 20px;     /* 下側の余白 */
+}
+
+a.btn-post:hover {
+    background-color: #218838; /* ホバー時の背景色 */
+}
+
+/* 編集ボタンのスタイル */
+a.btn-edit {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #007bff;  /* 青系 */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+    margin: 5px 0; /* 適度な上下余白 */
+}
+
+a.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+/* 削除ボタンのスタイル */
+a.btn-delete {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #dc3545;  /* 赤系 */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+    margin: 5px 0; /* 適度な上下余白 */
+}
+
+a.btn-delete:hover {
+    background-color: #c82333;
+}
 
