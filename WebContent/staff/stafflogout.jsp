@@ -3,7 +3,7 @@
 
 <c:import url="/staffcommon/base.jsp">
     <c:param name="title">
-        Staffシステム
+        サポ助
     </c:param>
 
     <c:param name="scripts"></c:param>

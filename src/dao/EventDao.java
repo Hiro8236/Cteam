@@ -96,7 +96,7 @@ public class EventDao extends Dao {
 
     // 特定のユーザーが登録したイベントを取得
     public List<Event> getEventsByUserID(int userID) throws Exception {
-        String sql = "SELECT * FROM events WHERE created_by = ?";
+    	String sql = "SELECT * FROM events WHERE Created_by = ? AND Is_staff_only = 0";
         List<Event> events = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

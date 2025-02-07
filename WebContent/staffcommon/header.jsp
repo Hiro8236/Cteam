@@ -1,11 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!-- セッション情報の取得 -->
 <%@ page session="true" %>
 
 <!-- ヘッダー部分の共通処理 -->
-<header class="header-container">
+<c:choose>
+    <c:when test="${user != null && user.staffRole == 1}">
+        <c:set var="headerClass" value="normal-header" />
+    </c:when>
+    <c:when test="${user != null && user.staffRole == 2}">
+        <c:set var="headerClass" value="admin-header" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="headerClass" value="" />
+    </c:otherwise>
+</c:choose>
+
+<header class="header-container ${headerClass}">
     <!-- 左側メニュー -->
     <ul class="navigation-list">
         <c:if test="${user != null && user.staffRole == 1}">
@@ -13,11 +24,10 @@
             <li><a href="/Cteam1/staff/normalstaff/institution/StaffInstitution.action">制度</a></li>
             <li><a href="/Cteam1/staff/normalstaff/calendar/StaffCalendar.action">カレンダー</a></li>
             <li><a href="/Cteam1/staff/normalstaff/notification/StaffNotification.action">お知らせ</a></li>
-            <li><a href="#お知らせ">これは職員です</a></li>
         </c:if>
         <c:if test="${user != null && user.staffRole == 2}">
             <li><a href="/Cteam1/staff/adminstaff/AdminStaffHome.action">ホーム</a></li>
-            <li><a href="#お知らせ">これは管理者です</a></li>
+            <li><a href="/Cteam1/staff/adminstaff/StaffList.action">職員一覧</a></li>
         </c:if>
     </ul>
 
@@ -34,4 +44,3 @@
         </c:if>
     </div>
 </header>
-

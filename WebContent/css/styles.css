@@ -18,9 +18,21 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  background-color: #e8f5e9;
+  /*background-color: #e8f5e9;*/
   border-bottom: 1px solid #c8e6c9;
 }
+
+
+/* 職員用のヘッダー背景色 */
+.normal-header {
+    background-color: #cce7f8;  /* ライトブルー */
+}
+
+/* 管理者用のヘッダー背景色 */
+.admin-header {
+    background-color: #ffcccc;  /* ライトコーラル */
+}
+
 
 /* ▼▼ ドロップダウン用のサンプルCSS ▼▼ */
 
@@ -604,7 +616,6 @@ section {
 		    width: 100%;
 		    height: 100%;
 		    background-color: rgba(0, 0, 0, 0.4);
-		    /* display: flex; は削除 */
 		    justify-content: center;
 		    align-items: center;
 		}
