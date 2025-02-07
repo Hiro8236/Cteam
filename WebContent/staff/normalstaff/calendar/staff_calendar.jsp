@@ -124,7 +124,7 @@
                 aspectRatio: 3,
 
                 dateClick: function (info) {
-                    modal.style.display = 'block';
+                    modal.style.display = 'flex';
                     modalTitle.textContent = 'イベントを登録';
                     document.getElementById('title').value = '';
                     document.getElementById('description').value = '';
@@ -136,7 +136,7 @@
                 },
 
                 eventClick: function (info) {
-                    modal.style.display = 'block';
+                    modal.style.display = 'flex';
                     modalTitle.textContent = 'イベント詳細';
 
                     document.getElementById('title').value = info.event.title;

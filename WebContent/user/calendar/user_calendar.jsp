@@ -121,7 +121,7 @@
 		                    alert("ログインしてください。");
 		                    return;
 		                }
-		                modal.style.display = 'block';
+		                modal.style.display = 'flex';
 		                modalTitle.textContent = 'イベントを登録';
 		                document.getElementById('title').value = '';
 		                document.getElementById('description').value = '';
@@ -134,7 +134,7 @@
 
 		            // イベントクリック時の処理
 		            eventClick: function (info) {
-		                modal.style.display = 'block'; // モーダルを表示
+		                modal.style.display = 'flex'; // モーダルを表示
 		                modalTitle.textContent = 'イベント詳細';
 
 		                // データを設定
