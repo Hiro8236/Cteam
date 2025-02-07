@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.Event;
+import bean.Staff;
 import dao.EventDao;
 import tool.Action;
 
@@ -24,6 +25,17 @@ public class EventCreateAction extends Action{
             String description = req.getParameter("description");
             String start = req.getParameter("start");
             String end = req.getParameter("end");
+
+            // セッションからスタッフ情報を取得
+            // 【修正箇所】セッションに格納されているキーは "user" になっているため、"user" で取得する
+            Staff staff = (Staff) req.getSession().getAttribute("user");
+            if (staff == null) {
+                System.err.println("[ERROR] セッションにスタッフ情報が存在しません。スタッフがログインしていない可能性があります。");
+                res.sendRedirect("error.jsp"); // 適切なログインページに変更してください
+                return;
+            }
+            int createdBy = staff.getStaffID();
+            System.out.println("[DEBUG] staffID: " + createdBy);
 
          // チェックボックスの値を取得
             boolean isPublic = req.getParameter("isPublic") != null; // チェックされていれば true
@@ -54,8 +66,6 @@ public class EventCreateAction extends Action{
                 throw new IllegalArgumentException("終了時は開始時より後である必要があります。");
             }
 
-            // 仮の作成者ID（ログイン情報がある場合に変更）
-            int createdBy = 1;
 
             // Eventオブジェクトを作成
             Event event = new Event();
