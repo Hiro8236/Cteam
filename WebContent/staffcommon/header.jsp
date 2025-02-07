@@ -24,11 +24,10 @@
             <li><a href="/Cteam1/staff/normalstaff/institution/StaffInstitution.action">制度</a></li>
             <li><a href="/Cteam1/staff/normalstaff/calendar/StaffCalendar.action">カレンダー</a></li>
             <li><a href="/Cteam1/staff/normalstaff/notification/StaffNotification.action">お知らせ</a></li>
-            <li><a href="#お知らせ">これは職員です</a></li>
         </c:if>
         <c:if test="${user != null && user.staffRole == 2}">
             <li><a href="/Cteam1/staff/adminstaff/AdminStaffHome.action">ホーム</a></li>
-            <li><a href="#お知らせ">これは管理者です</a></li>
+            <li><a href="/Cteam1/staff/adminstaff/StaffList.action">職員一覧</a></li>
         </c:if>
     </ul>
 
