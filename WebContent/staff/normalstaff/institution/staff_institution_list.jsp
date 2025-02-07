@@ -4,9 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="/staffcommon/base.jsp">
-    <c:param name="title">
-        サポ助
-    </c:param>
+    <c:param name="title">支援一覧</c:param>
     <c:param name="content">
         <h1>StaffHOME</h1>
 
@@ -36,34 +34,47 @@
         <c:set var="startIndex" value="${(page - 1) * itemsPerPage}" />
         <c:set var="endIndex" value="${startIndex + itemsPerPage}" />
 
-        <section class="me-4">
+        <!-- 以下、スタッフ一覧の見た目を適用 -->
+        <section class="staff-management">
+            <!-- ページタイトル -->
+            <h2 class="page-title">支援管理</h2>
+
+            <!-- 支援一覧ヘッダー（タイトル + 新規登録ボタン） -->
+            <div class="staff-list-header">
+                <h3 class="staff-list-title">支援一覧</h3>
+                <a href="StaffInstitutionCreate.action" class="btn btn-success">+ 新規登録</a>
+            </div>
+
             <c:choose>
                 <c:when test="${institutions != null and institutions.size() > 0}">
-                    <!-- 投稿ボタンは上部に表示 -->
-                    <a href="StaffInstitutionCreate.action" class="btn-post">投稿</a>
-                    <table class="table table-hover">
+                    <table class="staff-table">
                         <thead>
                             <tr>
+                                <th>支援ID</th>
                                 <th>支援名</th>
                                 <th>支援詳細</th>
-                                <th style="text-align: right;">操作</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- ループ変数名を "institution" とし、varStatusでインデックスを取得 -->
                             <c:forEach var="institution" items="${institutions}" varStatus="status">
-                                <!-- インデックスがstartIndex～endIndex未満の場合のみ表示 -->
                                 <c:if test="${status.index >= startIndex and status.index < endIndex}">
+                                    <!-- 行全体に詳細画面へのリンクを設定 -->
                                     <tr style="cursor: pointer;" onclick="location.href='StaffInstitutionsDetail.action?id=${institution.ID}'">
+                                        <td>${institution.ID}</td>
                                         <td>${institution.name}</td>
                                         <td>${institution.detail}</td>
-                                        <td style="text-align: right;">
-                                            <a href="StaffInstitutionEdit.action?id=${institution.ID}"
-                                               class="btn-edit"
-                                               onclick="event.stopPropagation();">編集</a>
-                                            <a href="StaffInstitutionDelete.action?id=${institution.ID}"
-                                               class="btn-delete"
-                                               onclick="if(!confirm('本当に削除しますか？')) { event.stopPropagation(); return false; } else { event.stopPropagation(); }">削除</a>
+                                        <td class="staff-actions">
+                                            <!-- 変更ボタン -->
+                                            <form action="StaffInstitutionEdit.action" method="post" style="display:inline;">
+                                                <input type="hidden" name="id" value="${institution.ID}" />
+                                                <button type="submit" class="btn btn-edit" onclick="event.stopPropagation();">変更</button>
+                                            </form>
+                                            <!-- 削除ボタン -->
+                                            <form action="StaffInstitutionDelete.action" method="post" style="display:inline;">
+                                                <input type="hidden" name="id" value="${institution.ID}" />
+                                                <button type="submit" class="btn btn-delete" onclick="return confirm('本当に削除しますか？');">削除</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </c:if>
@@ -74,7 +85,7 @@
                 <c:otherwise>
                     <div class="empty-container">
                         <div>支援情報が存在しませんでした</div>
-                        <a href="StaffInstitutionCreate.action" class="btn-post">投稿</a>
+                        <a href="StaffInstitutionCreate.action" class="btn btn-success">+ 新規登録</a>
                     </div>
                 </c:otherwise>
             </c:choose>
@@ -82,12 +93,10 @@
 
         <!-- ページネーションリンク -->
         <div class="pagination" style="text-align: center; margin: 20px 0;">
-            <!-- 前ページリンク（1ページより大きい場合のみ表示） -->
             <c:if test="${page > 1}">
                 <a href="?page=${page - 1}" style="margin-right: 10px;">&laquo; 前へ</a>
             </c:if>
             ページ ${page} / <fmt:formatNumber value="${totalPages}" type="number" maxFractionDigits="0" />
-            <!-- 次ページリンク（現在のページが総ページ数未満の場合のみ表示） -->
             <c:if test="${page < totalPages}">
                 <a href="?page=${page + 1}" style="margin-left: 10px;">次へ &raquo;</a>
             </c:if>
