@@ -3,7 +3,7 @@
 
 
 <c:import url="/common/base.jsp">
-    <c:param name="title" value="支援詳細 - ぽシステム" />
+    <c:param name="title" value="支援詳細 " />
     <c:param name="content">
         <h1>支援詳細</h1>
 

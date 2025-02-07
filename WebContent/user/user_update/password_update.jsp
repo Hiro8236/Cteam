@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:import url="/common/base.jsp">
-    <c:param name="title">Cシステム</c:param>
+    <c:param name="title">サポ助</c:param>
     <c:param name="content">
         <section class="w-75 text-center m-auto border pb-3">
             <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2">パスワード更新</h2>

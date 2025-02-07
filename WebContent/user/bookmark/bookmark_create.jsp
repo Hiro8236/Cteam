@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="/common/base.jsp">
-    <c:param name="title" value="ぽシステム" />
+    <c:param name="title" value="サポ助" />
     <c:param name="scripts"></c:param>
 
 	<%-- コンテンツセクション --%>
