@@ -37,10 +37,10 @@
         <c:set var="endIndex" value="${startIndex + itemsPerPage}" />
 
         <section class="me-4">
-            <!-- 投稿ボタンを常に表示 -->
-            <a href="StaffInstitutionCreate.action" class="btn-post">投稿</a>
             <c:choose>
                 <c:when test="${institutions != null and institutions.size() > 0}">
+                    <!-- 投稿ボタンは上部に表示 -->
+                    <a href="StaffInstitutionCreate.action" class="btn-post">投稿</a>
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -72,7 +72,10 @@
                     </table>
                 </c:when>
                 <c:otherwise>
-                    <div>支援情報が存在しませんでした</div>
+                    <div class="empty-container">
+                        <div>支援情報が存在しませんでした</div>
+                        <a href="StaffInstitutionCreate.action" class="btn-post">投稿</a>
+                    </div>
                 </c:otherwise>
             </c:choose>
         </section>

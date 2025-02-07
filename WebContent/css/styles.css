@@ -769,3 +769,14 @@ a.btn-delete:hover {
     background-color: #c82333;
 }
 
+/* 制度が存在しない場合の空状態用コンテナ */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* 必要に応じて高さを調整 */
+  text-align: center;
+}
+
+
