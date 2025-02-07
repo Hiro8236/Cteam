@@ -37,10 +37,10 @@
         <c:set var="endIndex" value="${startIndex + itemsPerPage}" />
 
         <section class="me-4">
+            <!-- 投稿ボタンを常に表示 -->
+            <a href="StaffInstitutionCreate.action" class="btn-post">投稿</a>
             <c:choose>
                 <c:when test="${institutions != null and institutions.size() > 0}">
-                    <!-- 投稿ボタン -->
-                    <a href="StaffInstitutionCreate.action" class="btn-post">投稿</a>
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -78,17 +78,16 @@
         </section>
 
         <!-- ページネーションリンク -->
-		<div class="pagination" style="text-align: center; margin: 20px 0;">
-		    <!-- 前ページリンク（1ページより大きい場合のみ表示） -->
-		    <c:if test="${page > 1}">
-		        <a href="?page=${page - 1}" style="margin-right: 10px;">&laquo; 前へ</a>
-		    </c:if>
-		    ページ ${page} / <fmt:formatNumber value="${totalPages}" type="number" maxFractionDigits="0" />
-		    <!-- 次ページリンク（現在のページが総ページ数未満の場合のみ表示） -->
-		    <c:if test="${page < totalPages}">
-		        <a href="?page=${page + 1}" style="margin-left: 10px;">次へ &raquo;</a>
-		    </c:if>
-		</div>
-
+        <div class="pagination" style="text-align: center; margin: 20px 0;">
+            <!-- 前ページリンク（1ページより大きい場合のみ表示） -->
+            <c:if test="${page > 1}">
+                <a href="?page=${page - 1}" style="margin-right: 10px;">&laquo; 前へ</a>
+            </c:if>
+            ページ ${page} / <fmt:formatNumber value="${totalPages}" type="number" maxFractionDigits="0" />
+            <!-- 次ページリンク（現在のページが総ページ数未満の場合のみ表示） -->
+            <c:if test="${page < totalPages}">
+                <a href="?page=${page + 1}" style="margin-left: 10px;">次へ &raquo;</a>
+            </c:if>
+        </div>
     </c:param>
 </c:import>
