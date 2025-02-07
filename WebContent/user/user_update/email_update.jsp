@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/base.jsp">
     <c:param name="title">
-        Cシステム
+        サポ助
     </c:param>
 
     <c:param name="content">
