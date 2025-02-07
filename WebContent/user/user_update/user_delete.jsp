@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <c:import url="/common/base.jsp">
     <c:param name="title">Cシステム</c:param>
     <c:param name="content">
@@ -18,7 +17,7 @@
                     </div>
                 </c:if>
 
-                <form id="delete-form" action="UserPasswordUpdateExecute.action" method="post">
+                <form id="delete-form" action="UserDelete.action" method="post">
                     <!-- パスワード入力 -->
                     <div class="form-floating mx-5">
                         <input class="form-control px-5 fs-5" autocomplete="off" id="password" maxlength="20" name="Password"

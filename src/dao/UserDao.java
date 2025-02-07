@@ -356,13 +356,13 @@ public class UserDao extends Dao {
 
 
 
-    public void EmailUpdateOTP(Integer userID, String emailAddress, String otp) throws Exception {
+    public void EmailUpdateOTP(Integer userID, String email_Address, String otp) throws Exception {
 
 
-    	String sql = "INSERT INTO Email_otp (user_ID, emailaddress, otp, expires_at) " +
+    	String sql = "INSERT INTO Email_otp (user_ID, email_address, otp, expires_at) " +
                 "VALUES (?, ?, ?, NOW() + INTERVAL 10 MINUTE) " +
                 "ON DUPLICATE KEY UPDATE " +
-                "emailaddress = VALUES(emailaddress), " +
+                "email_address = VALUES(email_address), " +
                 "otp = VALUES(otp), " +
                 "expires_at = VALUES(expires_at);";
 
@@ -370,11 +370,11 @@ public class UserDao extends Dao {
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
         	ps.setInt(1, userID);
-            ps.setString(2, emailAddress);
+            ps.setString(2, email_Address);
             ps.setString(3, otp);
 
             // ログを追加
-            System.out.println("Saving OTP: email = " + emailAddress + ", otp = " + otp);
+            System.out.println("Saving OTP: email = " + email_Address + ", otp = " + otp);
 
             ps.executeUpdate();
         } catch (Exception e) {
@@ -389,7 +389,7 @@ public class UserDao extends Dao {
      * 認証コードの検証
      */
     public boolean EmailOTP(Integer userID, String emailAddress, String otp) throws Exception {
-    	 String sql = "SELECT COUNT(*) FROM Email_otp WHERE user_id = ? AND emailaddress = ? AND otp = ? AND expires_at > NOW()";        try (Connection conn = getConnection();
+    	 String sql = "SELECT COUNT(*) FROM Email_otp WHERE user_id = ? AND email_address = ? AND otp = ? AND expires_at > NOW()";        try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
     		 ps.setInt(1, userID);
@@ -466,5 +466,26 @@ public class UserDao extends Dao {
     }
 
 
-}
+    public boolean DeleteUser(int userID, String password) throws Exception {
+        boolean isDeleted = false;
+        // ユーザーID と パスワードが一致するレコードを削除する
+        String sql = "DELETE FROM user WHERE userID = ? AND password = ?";
 
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            // 渡された平文のパスワードをハッシュ化
+            String hashedPassword = hashPassword(password);
+
+            stmt.setInt(1, userID);
+            stmt.setString(2, hashedPassword);
+
+            int rowsAffected = stmt.executeUpdate();
+            isDeleted = rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isDeleted;
+    }
+
+}

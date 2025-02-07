@@ -22,7 +22,7 @@
 
 
         <!-- ホームへ戻るボタン -->
-        <a href="/Cteam1/home" class="btn btn-success fs-5">ホームへ戻る</a>
+        <a href="/Cteam1/user/Home.action" class="btn btn-success fs-5">ホームへ戻る</a>
 </body>
 
 </html>
