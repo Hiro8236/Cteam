@@ -1,11 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!-- セッション情報の取得 -->
 <%@ page session="true" %>
 
 <!-- ヘッダー部分の共通処理 -->
-<header class="header-container">
+<c:choose>
+    <c:when test="${user != null && user.staffRole == 1}">
+        <c:set var="headerClass" value="normal-header" />
+    </c:when>
+    <c:when test="${user != null && user.staffRole == 2}">
+        <c:set var="headerClass" value="admin-header" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="headerClass" value="" />
+    </c:otherwise>
+</c:choose>
+
+<header class="header-container ${headerClass}">
     <!-- 左側メニュー -->
     <ul class="navigation-list">
         <c:if test="${user != null && user.staffRole == 1}">
@@ -34,4 +45,3 @@
         </c:if>
     </div>
 </header>
-
