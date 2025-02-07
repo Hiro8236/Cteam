@@ -85,7 +85,6 @@
                 <c:otherwise>
                     <div class="empty-container">
                         <div>支援情報が存在しませんでした</div>
-                        <a href="StaffInstitutionCreate.action" class="btn btn-success">+ 新規登録</a>
                     </div>
                 </c:otherwise>
             </c:choose>
