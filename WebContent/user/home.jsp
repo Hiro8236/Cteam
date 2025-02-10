@@ -39,8 +39,6 @@
             <!-- 表示開始／終了インデックス -->
             <c:set var="startIndex" value="${(page - 1) * itemsPerPage}" />
             <c:set var="endIndex" value="${startIndex + itemsPerPage}" />
-
-<<<<<<< HEAD
             <!-- 支援一覧セクション -->
             <section class="staff-management">
                 <!-- ヘッダー部分：一覧タイトルと新規登録ボタン -->
