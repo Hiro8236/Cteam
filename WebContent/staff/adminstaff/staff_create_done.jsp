@@ -11,13 +11,13 @@
 
 	<c:param name="content">
 		<section class="me-4">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">推奨情報登録</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">新規登録</h2>
 			<div class="bg-success bg-opacity-50 text-center lh-lg">
-				<p>推奨情報を登録しました</p>
+				<p>新規登録しました</p>
 			</div>
 			<div class="lh-lg row" style="margin-top: 4rem;">
 				<div class="mx-3 col-2">
-					<a href="Home.action">ホームへ</a>
+					<a href="StaffList.action">職員一覧へ</a>
 				</div>
 			</div>
 		</section>
