@@ -78,7 +78,7 @@
                                             </td>
                                             <c:if test="${not empty userID}">
                                                 <td class="staff-actions">
-                                                    <a href="bookmark/BookmarkCreate.action?institutionID=${institution.ID}">登録</a>
+                                                    <a href="../bookmark/BookmarkCreate.action?institutionID=${institution.ID}">登録</a>
                                                 </td>
                                             </c:if>
                                         </tr>
