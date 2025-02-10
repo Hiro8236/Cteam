@@ -12,23 +12,26 @@ import tool.Action;
 
 public class SuggestListAction extends Action {
 
-	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-
-		HttpSession session=req.getSession();
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+        HttpSession session = req.getSession();
         Integer userID = (Integer) session.getAttribute("userID");
 
-		req.setAttribute("UserID",userID);
+        // ユーザーIDをリクエスト属性に設定
+        req.setAttribute("UserID", userID);
 
-		 // DAOの初期化
-        SuggestListDao suggestlistDao = new SuggestListDao();
+        if (userID != null) {
+            // DAOの初期化
+            SuggestListDao suggestlistDao = new SuggestListDao();
 
-        // 全件取得メソッドを使用
-        List<Suggest> suggestlists = suggestlistDao.getAll();
+            // ユーザーのIDを基に適用可能な制度を取得
+            List<Suggest> suggestlists = suggestlistDao.getByUserId(userID);
 
-        // 結果をリクエストに設定
-        req.setAttribute("suggestlists", suggestlists);
+            // 結果をリクエストに設定
+            req.setAttribute("suggestlists", suggestlists);
+        }
 
-		req.getRequestDispatcher("suggest_list.jsp").forward(req, res);
-	}
+        // JSPへフォワード
+        req.getRequestDispatcher("suggest_list.jsp").forward(req, res);
+    }
 }

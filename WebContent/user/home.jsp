@@ -53,7 +53,7 @@
 
             <!-- おすすめ一覧リンクのスタイル変更 -->
             <div class="suggest-link">
-                <a href="SuggestList.action">おすすめ一覧</a>
+                <a href="suggest/SuggestList.action">おすすめ一覧</a>
             </div>
         </section>
 
