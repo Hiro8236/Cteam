@@ -43,7 +43,6 @@
             </div>
 
             <c:choose>
-                <!-- お知らせ情報が存在する場合 -->
                 <c:when test="${notifications != null and notifications.size() > 0}">
                     <table class="staff-table">
                         <thead>
@@ -74,7 +73,6 @@
                         </tbody>
                     </table>
                 </c:when>
-                <!-- お知らせ情報が存在しない場合 -->
                 <c:otherwise>
                     <div class="empty-container">
                         <div>お知らせが存在しませんでした</div>
