@@ -15,7 +15,7 @@
     <c:param name="content">
         <h1>お知らせ詳細</h1>
 
-        <section class="institution-details">
+        <section class="notification-details">
              <div class="notification-name">
                 <h2>件名: <%= (name != null && !name.isEmpty()) ? name : "件名がありません" %></h2>
             </div>

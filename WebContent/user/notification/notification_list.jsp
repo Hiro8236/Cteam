@@ -17,29 +17,38 @@
         </c:if>
 
         <!-- ページネーションの設定 -->
-<c:set var="itemsPerPage" value="5" />
-<c:choose>
-    <c:when test="${not empty param.page}">
-        <c:set var="page" value="${param.page}" />
-    </c:when>
-    <c:otherwise>
-        <c:set var="page" value="1" />
-    </c:otherwise>
-</c:choose>
-<!-- 総件数 -->
-<c:set var="totalItems" value="${fn:length(institutions)}" />
-<!-- 総ページ数の計算： (totalItems + itemsPerPage - 1) div itemsPerPage -->
-<c:set var="totalPages" value="${(totalItems + itemsPerPage - 1) div itemsPerPage}" />
-<!-- 小数点以下を切り捨てた整数値 -->
-<c:set var="totalPagesInt" value="${totalPages - (totalPages mod 1)}" />
-<!-- 表示開始／終了インデックス -->
-<c:set var="startIndex" value="${(page - 1) * itemsPerPages}" />
-<c:set var="endIndex" value="${startIndex + itemsPerPages}" />
+        <c:set var="itemsPerPage" value="5" />
+        <c:choose>
+            <c:when test="${not empty param.page}">
+                <!-- 数値として扱うために (* 1) -->
+                <c:set var="page" value="${param.page * 1}" />
+            </c:when>
+            <c:otherwise>
+                <c:set var="page" value="1" />
+            </c:otherwise>
+        </c:choose>
 
+        <!-- 総件数 -->
+        <c:set var="totalItems" value="${fn:length(institutions)}" />
 
-        <!-- お知らせ一覧セクション（スタッフ管理の見た目を統一） -->
+        <!-- 総ページ数の計算： (totalItems + itemsPerPage - 1) div itemsPerPage -->
+        <c:set var="totalPages" value="${(totalItems + itemsPerPage - 1) div itemsPerPage}" />
+
+        <!-- 小数点以下を切り捨てた整数値（totalPagesInt）
+             ※ totalPages から (totalPages mod 1) を引く方法でもOKですが、
+                JSTL では除算結果が整数になるため、このままでも多くの場合問題ありません。
+                必要なら <c:set var="totalPagesInt" value="${totalPages - (totalPages mod 1)}" /> のようにしてもOKです。
+        -->
+        <c:set var="totalPagesInt" value="${totalPages}" />
+
+        <!-- 表示開始／終了インデックス
+             ※ itemsPerPages → itemsPerPage に修正 -->
+        <c:set var="startIndex" value="${(page - 1) * itemsPerPage}" />
+        <c:set var="endIndex" value="${startIndex + itemsPerPage}" />
+
+        <!-- お知らせ一覧セクション -->
         <section class="staff-management">
-            <!-- ヘッダー部分：一覧タイトルと新規投稿ボタン -->
+            <!-- ヘッダー部分：一覧タイトル（新規投稿ボタンが必要なら追加） -->
             <div class="staff-list-header">
                 <h3 class="staff-list-title">お知らせ一覧</h3>
             </div>
@@ -57,7 +66,8 @@
                             <c:forEach var="notification" items="${notifications}" varStatus="status">
                                 <!-- 現在のページの範囲内の場合のみ表示 -->
                                 <c:if test="${status.index >= startIndex and status.index < endIndex}">
-                                    <tr style="cursor: pointer;" onclick="location.href='notification_detail.jsp?id=${notification.notificationID}'">
+                                    <tr style="cursor: pointer;"
+                                        onclick="location.href='notification_detail.jsp?id=${notification.notificationID}'">
                                         <td>
                                             <c:choose>
                                                 <c:when test="${fn:length(notification.title) > 10}">
@@ -94,11 +104,12 @@
 
         <!-- ページネーションリンク -->
         <div class="pagination" style="text-align: center; margin: 20px 0;">
-            <c:if test="${page > 1}">
+            <c:if test="${page gt 1}">
                 <a href="?page=${page - 1}" style="margin-right: 10px;">&laquo; 前へ</a>
             </c:if>
-            ページ ${page} / <fmt:formatNumber value="${totalPageInt}" type="number" maxFractionDigits="0" />
-            <c:if test="${page < totalPageInt}">
+            <!-- totalPagesInt を使用 -->
+            ページ ${page} / <fmt:formatNumber value="${totalPagesInt}" type="number" maxFractionDigits="0" />
+            <c:if test="${page lt totalPagesInt}">
                 <a href="?page=${page + 1}" style="margin-left: 10px;">次へ &raquo;</a>
             </c:if>
         </div>
