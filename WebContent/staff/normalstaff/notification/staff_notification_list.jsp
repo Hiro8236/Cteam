@@ -27,13 +27,11 @@
         </c:choose>
         <!-- 総件数 -->
         <c:set var="totalItems" value="${fn:length(notifications)}" />
-        <!-- 総ページ数（割り切れるかどうかで切り上げ） -->
+        <!-- 総ページ数 -->
         <c:set var="totalPages" value="${(totalItems mod itemsPerPage == 0) ? (totalItems div itemsPerPage) : ((totalItems div itemsPerPage) + 1)}" />
-        <!-- 総ページ数が1未満の場合は1に固定 -->
         <c:if test="${totalPages < 1}">
             <c:set var="totalPages" value="1" />
         </c:if>
-        <!-- リクエストされたページが総ページ数より大きい場合は1に戻す -->
         <c:if test="${page > totalPages}">
             <c:set var="page" value="1" />
         </c:if>
@@ -65,8 +63,26 @@
                             <c:forEach var="notification" items="${notifications}" varStatus="status">
                                 <c:if test="${status.index >= startIndex and status.index < endIndex}">
                                     <tr style="cursor: pointer;" onclick="location.href='StaffNotificationDetail.action?id=${notification.notificationID}'">
-                                        <td>${notification.title}</td>
-                                        <td>${notification.detail}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${fn:length(notification.title) > 10}">
+                                                    ${fn:substring(notification.title, 0, 10)}&hellip;
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${notification.title}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${fn:length(notification.detail) > 20}">
+                                                    ${fn:substring(notification.detail, 0, 20)}&hellip;
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${notification.detail}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
                                         <td class="staff-actions" style="text-align: right;">
                                             <a href="StaffNotificationDelete.action?id=${notification.notificationID}"
                                                class="btn btn-delete"

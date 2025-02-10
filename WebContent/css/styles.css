@@ -1220,3 +1220,11 @@ a.btn-delete:hover {
   font-size: 24px;
   cursor: pointer;
 }
+
+/* テーブルセルのテキストを一行に固定して省略表示 */
+.staff-table tbody td,
+table.table tbody td {
+    white-space: nowrap;       /* 改行させず一行で表示 */
+    overflow: hidden;          /* 溢れた部分は非表示 */
+    text-overflow: ellipsis;   /* 溢れた部分に「…」を表示 */
+}

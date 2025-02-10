@@ -11,13 +11,12 @@
         <!-- メッセージが存在する場合、表示 -->
         <c:if test="${not empty message}">
             <div class="alert alert-info">
-                <c:out value="${message}"/>
+                <c:out value="${message}" />
             </div>
         </c:if>
 
         <!-- ページネーションの設定 -->
         <c:set var="itemsPerPage" value="5" />
-        <!-- ページ番号をリクエストパラメータから取得。なければ1 -->
         <c:choose>
             <c:when test="${not empty param.page}">
                 <c:set var="page" value="${param.page}" />
@@ -34,7 +33,7 @@
         <c:set var="startIndex" value="${(page - 1) * itemsPerPage}" />
         <c:set var="endIndex" value="${startIndex + itemsPerPage}" />
 
-        <!-- 以下、スタッフ一覧の見た目を適用 -->
+        <!-- 以下、スタッフ管理の見た目を適用 -->
         <section class="staff-management">
             <!-- ページタイトル -->
             <h2 class="page-title">支援管理</h2>
@@ -62,8 +61,26 @@
                                     <!-- 行全体に詳細画面へのリンクを設定 -->
                                     <tr style="cursor: pointer;" onclick="location.href='StaffInstitutionsDetail.action?id=${institution.ID}'">
                                         <td>${institution.ID}</td>
-                                        <td>${institution.name}</td>
-                                        <td>${institution.detail}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${fn:length(institution.name) > 10}">
+                                                    ${fn:substring(institution.name, 0, 10)}&hellip;
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${institution.name}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${fn:length(institution.detail) > 20}">
+                                                    ${fn:substring(institution.detail, 0, 20)}&hellip;
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${institution.detail}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
                                         <td class="staff-actions">
                                             <!-- 変更ボタン -->
                                             <form action="StaffInstitutionEdit.action" method="post" style="display:inline;">

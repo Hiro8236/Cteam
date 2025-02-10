@@ -7,7 +7,7 @@
     <c:param name="title" value="サポ助" />
     <c:param name="scripts"></c:param>
     <c:param name="content">
-        <h1>StaffHOME</h1>
+        <h1>支援一覧</h1>
 
         <!-- メッセージが存在する場合、表示 -->
         <c:if test="${not empty message}">
