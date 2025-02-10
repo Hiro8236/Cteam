@@ -79,9 +79,11 @@
                                                 </c:choose>
                                             </td>
                                             <c:if test="${not empty userID}">
-                                                <td class="staff-actions">
-                                                    <a href="../bookmark/BookmarkCreate.action?institutionID=${institution.ID}">登録</a>
-                                                </td>
+                                                <td>
+		                                            <!-- 登録ボタンのクリックで行クリックを止める -->
+		                                            <a href="/Cteam1/user/bookmark/BookmarkCreate.action?institutionID=${suggest.institutionID}"
+		                                               onclick="event.stopPropagation();">登録</a>
+		                                        </td>
                                             </c:if>
                                         </tr>
                                     </c:if>
