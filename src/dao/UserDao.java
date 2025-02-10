@@ -502,45 +502,44 @@ public User getUserSuggestInfo(Integer userID) throws Exception {
 
     return user;
 }
-public boolean saveUserSuggestInfo(Integer userID, int annualIncome, int childrenCount, String employmentStatus,
-        String singleParentReason, String childSchoolStatus) throws Exception {
-    Connection connection = getConnection();
-    PreparedStatement statement = null;
+public boolean saveUserSuggestInfo(Integer userID, Integer annualIncome, Integer childrenCount,
+        String employmentStatus, String singleParentReason, String childSchoolStatus) throws Exception {
 
-    try {
-        // ユーザーの推奨情報を保存するSQL文
-        String sql = "UPDATE user SET AnnualIncome = ?, ChildrenCount = ?, EmploymentStatus = ?, " +
-                     "SingleParentReason = ?, ChildSchoolStatus = ? WHERE userID = ?";
+    // nullチェック（もし、nullならそのままデータベースに保存する）
+    if (userID == null) {
+        throw new IllegalArgumentException("UserID cannot be null");
+    }
 
-        statement = connection.prepareStatement(sql);
-        statement.setInt(1, annualIncome); // 年収
-        statement.setInt(2, childrenCount); // 子供の数
-        statement.setString(3, employmentStatus); // 雇用状態
-        statement.setString(4, singleParentReason); // ひとり親理由
-        statement.setString(5, childSchoolStatus); // 子供の学校の状態
-        statement.setInt(6, userID); // userID
+    // SQLクエリを準備
+    String sql = "UPDATE user SET AnnualIncome = ?, ChildrenCount = ?, EmploymentStatus = ?, " +
+                 "SingleParentReason = ?, ChildSchoolStatus = ? WHERE userID = ?";
 
-        // SQLを実行し、更新が成功したか確認
-        int rowsAffected = statement.executeUpdate();
-        return rowsAffected > 0; // 成功した場合はtrueを返す
-    } catch (Exception e) {
+    try (Connection connection = getConnection()) {
+        if (connection == null) {
+            throw new SQLException("Failed to establish database connection.");
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            // パラメータ設定（nullのまま挿入する）
+            statement.setObject(1, annualIncome, java.sql.Types.INTEGER); // 年収（nullもOK）
+            statement.setObject(2, childrenCount, java.sql.Types.INTEGER); // 子供の数（nullもOK）
+            statement.setObject(3, employmentStatus, java.sql.Types.VARCHAR); // 雇用状態（nullもOK）
+            statement.setObject(4, singleParentReason, java.sql.Types.VARCHAR); // ひとり親理由（nullもOK）
+            statement.setObject(5, childSchoolStatus, java.sql.Types.VARCHAR); // 子供の学校の状態（nullもOK）
+            statement.setInt(6, userID); // userID
+
+            // 更新を実行
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0; // 成功した場合はtrueを返す
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("ユーザーの推奨情報の保存に失敗しました。", e);
+        }
+    } catch (SQLException e) {
+        // コネクションの取得に失敗した場合の処理
         e.printStackTrace();
-        throw new Exception("ユーザーの推奨情報の保存に失敗しました。");
-    } finally {
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException sqle) {
-                throw sqle;
-            }
-        }
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException sqle) {
-                throw sqle;
-            }
-        }
+        throw new Exception("データベース接続に失敗しました。", e);
     }
 }
 
