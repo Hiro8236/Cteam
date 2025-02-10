@@ -31,7 +31,7 @@
 
         <div class="form-floating">
             <input class="form-control" name="childSchoolStatus" type="text" />
-            <label>子供の学歴状況</label>
+            <label>子供の学習状況</label>
         </div>
 
         <input type="submit" value="保存" class="btn btn-primary mt-3" />

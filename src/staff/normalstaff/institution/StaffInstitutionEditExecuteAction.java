@@ -19,6 +19,134 @@ public class StaffInstitutionEditExecuteAction extends Action {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+        // リクエストのエンコーディングを設定
+        req.setCharacterEncoding("UTF-8");
+
+        // **1) フォームデータを取得**
+        String idParam = req.getParameter("institutionId");
+        String name    = req.getParameter("name");
+        String detail  = req.getParameter("detail");
+        String video   = req.getParameter("video");
+        String pdfPath = req.getParameter("pdfPath");
+
+        // **追加情報の取得**
+        Integer annualIncome = parseInteger(req.getParameter("incomeRequirement"));
+        Integer eligibleChildrenCount = parseInteger(req.getParameter("eligibleChildrenCount"));
+        String requiredEmploymentStatus = req.getParameter("requiredEmploymentStatus");
+        String eligibilityReason = req.getParameter("eligibilityReason");
+        String requiredSchoolStatus = req.getParameter("requiredSchoolStatus");
+
+        // **2) PDFファイルの取得**
+        Part pdfPart = req.getPart("institution_pdf");
+
+        // **3) バリデーション**
+        if (idParam == null || idParam.isEmpty() ||
+            name == null    || name.isEmpty()    ||
+            detail == null  || detail.isEmpty()) {
+            req.setAttribute("message", "入力された情報が不完全です");
+            req.getRequestDispatcher("staff_institution_edit.jsp").forward(req, res);
+            return;
+        }
+
+        try {
+            // **4) IDを数値に変換**
+            int id = Integer.parseInt(idParam);
+
+            // **5) PDFの再アップロードがあった場合、サーバに保存し、pdfPathを上書き**
+            if (pdfPart != null && pdfPart.getSize() > 0) {
+                String uploadPath = req.getServletContext().getRealPath("/WEB-INF/pdf");
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
+                }
+
+                String fileName = extractFileName(pdfPart);
+                String newPdfFullPath = uploadPath + File.separator + fileName;
+                pdfPart.write(newPdfFullPath);
+                pdfPath = newPdfFullPath;
+            }
+
+            // **6) InstitutionDaoを使用して更新処理**
+            InstitutionDao institutionDao = new InstitutionDao();
+            boolean isUpdated = institutionDao.updateInstitution(
+                id, name, detail, video, pdfPath,
+                annualIncome, eligibleChildrenCount,
+                requiredEmploymentStatus, eligibilityReason, requiredSchoolStatus
+            );
+
+            if (isUpdated) {
+                req.setAttribute("message", "支援情報が正常に更新されました");
+                req.getRequestDispatcher("StaffInstitution.action").forward(req, res);
+            } else {
+                req.setAttribute("message", "支援情報の更新に失敗しました");
+                req.getRequestDispatcher("staff_institution_edit.jsp").forward(req, res);
+            }
+
+        } catch (NumberFormatException e) {
+            req.setAttribute("message", "無効な支援IDです");
+            req.getRequestDispatcher("staff_institution_edit.jsp").forward(req, res);
+        }
+    }
+
+    /**
+     * Tomcat8向け: Partのヘッダからファイル名を取り出す
+     */
+    private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        if (contentDisp == null) {
+            return "unknown_file.pdf";
+        }
+        for (String cd : contentDisp.split(";")) {
+            cd = cd.trim();
+            if (cd.startsWith("filename")) {
+                return cd.substring(cd.indexOf('=') + 1).replace("\"", "");
+            }
+        }
+        return "unknown_file.pdf";
+    }
+
+    /**
+     * 空文字または `null` を `null` に変換する安全な数値パースメソッド
+     */
+    private Integer parseInteger(String value) {
+        if (value == null || value.isEmpty()) {
+            return null;
+        }
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return null; // 無効な数値なら `null` を返す
+        }
+    }
+}
+
+
+
+
+
+/*
+ *
+package staff.normalstaff.institution;
+
+import java.io.File;
+
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import dao.InstitutionDao;
+import tool.Action;
+
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+    maxFileSize = 1024 * 1024 * 10,      // 10MB
+    maxRequestSize = 1024 * 1024 * 50    // 50MB
+)
+public class StaffInstitutionEditExecuteAction extends Action {
+
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
         // ▼ 1) 文字項目（id, name, detail, pdfPath）は request.getParameter(...) で取得
         //    ※ ただし multipart/form-data だと Tomcatのバージョンや設定によっては
@@ -92,9 +220,11 @@ public class StaffInstitutionEditExecuteAction extends Action {
         }
     }
 
+*/
+
     /**
      * Tomcat8向け: Partのヘッダからファイル名を取り出す
-     */
+     *//*
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
         if (contentDisp == null) {
@@ -109,3 +239,4 @@ public class StaffInstitutionEditExecuteAction extends Action {
         return "unknown_file.pdf";
     }
 }
+*/
