@@ -55,7 +55,7 @@
                             <c:forEach var="notification" items="${notifications}" varStatus="status">
                                 <!-- 現在のページの範囲内の場合のみ表示 -->
                                 <c:if test="${status.index >= startIndex and status.index < endIndex}">
-                                    <tr style="cursor: pointer;" onclick="location.href='NotificationDetail.action?id=${notification.notificationID}'">
+                                    <tr style="cursor: pointer;" onclick="location.href='notification_detail.jsp?id=${notification.notificationID}'">
                                         <td>
                                             <c:choose>
                                                 <c:when test="${fn:length(notification.title) > 10}">
@@ -85,7 +85,6 @@
                 <c:otherwise>
                     <div class="empty-container">
                         <div>お知らせが存在しませんでした</div>
-                        <a href="NotificationCreate.action" class="btn btn-success">+ 投稿</a>
                     </div>
                 </c:otherwise>
             </c:choose>
