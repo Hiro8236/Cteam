@@ -41,7 +41,6 @@
         <c:set var="startIndex" value="${(page - 1) * itemsPerPage}" />
         <c:set var="endIndex" value="${startIndex + itemsPerPage}" />
 
-        <!-- お知らせ一覧セクション（スタッフ管理の見た目を統一） -->
         <section class="staff-management">
             <!-- ページタイトル -->
             <h2 class="page-title">お知らせ管理</h2>
