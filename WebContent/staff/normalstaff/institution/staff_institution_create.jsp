@@ -36,6 +36,31 @@
                     <label for="institution_pdf" class="form-label">PDFファイル:</label>
                     <input type="file" class="form-control" id="institution_pdf" name="institution_pdf" accept=".pdf" />
                 </div>
+
+                 <div class="form-floating">
+            <input class="form-control" name="annualIncome" type="number" />
+            <label>年間収入</label>
+        </div>
+
+        <div class="form-floating">
+            <input class="form-control" name="childrenCount" type="number" />
+            <label>子供の人数</label>
+        </div>
+
+        <div class="form-floating">
+            <input class="form-control" name="employmentStatus" type="text" />
+            <label>雇用状況</label>
+        </div>
+
+        <div class="form-floating">
+            <input class="form-control" name="singleParentReason" type="text" />
+            <label>ひとり親の理由</label>
+        </div>
+
+        <div class="form-floating">
+            <input class="form-control" name="childSchoolStatus" type="text" />
+            <label>子供の学歴状況</label>
+        </div>
                 <button type="submit" class="btn btn-primary">登録</button>
             </form>
         </section>

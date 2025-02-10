@@ -52,13 +52,16 @@ public class UserDeleteAction extends Action {
                 session.invalidate();
                 req.setAttribute("isDeleted", true);
             } else {
-                req.setAttribute("errorMessage", "現在のパスワードが正しくありません。");
+            	errors.add("現在のパスワードが正しくありません。");
+            	req.setAttribute("errors", errors);
             }
             req.getRequestDispatcher("user_delete_done.jsp").forward(req, res);
         } catch (Exception e) {
             e.printStackTrace();
-            req.setAttribute("errorMessage", "予期せぬエラーが発生しました。");
-            req.getRequestDispatcher("user_delete_done.jsp").forward(req, res);
+            errors.add("予期せぬエラーが発生しました。");
+            req.setAttribute("errors", errors);
+
+            req.getRequestDispatcher("user_delete.jsp").forward(req, res);
         }
 
     }
