@@ -110,11 +110,9 @@
                 <c:if test="${page < totalPagesInt}">
                     <a href="?page=${page + 1}" style="margin-left: 10px;">次へ &raquo;</a>
                 </c:if>
-=======
             <!-- おすすめ一覧リンクのスタイル変更 -->
             <div class="suggest-link">
                 <a href="suggest/SuggestList.action">おすすめ一覧</a>
->>>>>>> branch 'master' of https://github.com/Hiro8236/Cteam.git
             </div>
         </section>
     </c:param>
