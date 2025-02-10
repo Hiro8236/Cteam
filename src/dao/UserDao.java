@@ -415,31 +415,30 @@ public class UserDao extends Dao {
              PreparedStatement selectStmt = con.prepareStatement(selectQuery);
              PreparedStatement updateStmt = con.prepareStatement(updateQuery)) {
 
-            // 現在の情報を確認
             selectStmt.setInt(1, userID);
             selectStmt.setString(2, EmailAddress);
             selectStmt.setString(3, password);
 
             try (ResultSet rs = selectStmt.executeQuery()) {
                 if (rs.next()) {
-                    // 新しいメールアドレスを更新
+
                     updateStmt.setString(1, NewEmailAddress);
                     updateStmt.setInt(2, userID);
                     int rowsAffected = updateStmt.executeUpdate();
                     isUpdated = rowsAffected > 0;
                     if (rowsAffected > 0) {
-                        isUpdated = true; // 更新成功
+                        isUpdated = true;
                         System.out.println("メールアドレスの更新が完了しました。");
                     }
                 } else {
-                    // パスワードが一致しない場合、更新しない
+
                     isUpdated = false;
                     System.out.println("パスワードが一致しません。メールアドレスは更新されません。");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            isUpdated = false; // エラー時にはfalse
+            isUpdated = false;
         }
 
         return isUpdated;
@@ -447,7 +446,7 @@ public class UserDao extends Dao {
 
     public boolean DeleteUser(int userID, String password) throws Exception {
         boolean isDeleted = false;
-        // ユーザーID と パスワードが一致するレコードを削除する
+
         String sql = "DELETE FROM user WHERE userID = ? AND password = ?";
 
         try (Connection connection = getConnection();
@@ -485,11 +484,11 @@ public User getUserSuggestInfo(Integer userID) throws Exception {
             user.setUserID(rSet.getInt("userID"));
             user.setEmailAddress(rSet.getString("EmailAddress"));
             user.setPassword(rSet.getString("Password"));
-            user.setIncomeRequirement(rSet.getInt("AnnualIncome")); // 修正されたカラム
-            user.setEligibleChildrenCount(rSet.getInt("ChildrenCount")); // 修正されたカラム
-            user.setRequiredEmploymentStatus(rSet.getString("EmploymentStatus")); // 修正されたカラム
-            user.setEligibilityReason(rSet.getString("SingleParentReason")); // 修正されたカラム
-            user.setRequiredSchoolStatus(rSet.getString("ChildSchoolStatus")); // 修正されたカラム
+            user.setIncomeRequirement(rSet.getInt("AnnualIncome"));
+            user.setEligibleChildrenCount(rSet.getInt("ChildrenCount"));
+            user.setRequiredEmploymentStatus(rSet.getString("EmploymentStatus"));
+            user.setEligibilityReason(rSet.getString("SingleParentReason"));
+            user.setRequiredSchoolStatus(rSet.getString("ChildSchoolStatus"));
         } else {
             user = null;
         }
@@ -502,45 +501,41 @@ public User getUserSuggestInfo(Integer userID) throws Exception {
 
     return user;
 }
-public boolean saveUserSuggestInfo(Integer userID, int annualIncome, int childrenCount, String employmentStatus,
-        String singleParentReason, String childSchoolStatus) throws Exception {
-    Connection connection = getConnection();
-    PreparedStatement statement = null;
+public boolean saveUserSuggestInfo(Integer userID, Integer annualIncome, Integer childrenCount,
+        String employmentStatus, String singleParentReason, String childSchoolStatus) throws Exception {
 
-    try {
-        // ユーザーの推奨情報を保存するSQL文
-        String sql = "UPDATE user SET AnnualIncome = ?, ChildrenCount = ?, EmploymentStatus = ?, " +
-                     "SingleParentReason = ?, ChildSchoolStatus = ? WHERE userID = ?";
+    if (userID == null) {
+        throw new IllegalArgumentException("UserID cannot be null");
+    }
 
-        statement = connection.prepareStatement(sql);
-        statement.setInt(1, annualIncome); // 年収
-        statement.setInt(2, childrenCount); // 子供の数
-        statement.setString(3, employmentStatus); // 雇用状態
-        statement.setString(4, singleParentReason); // ひとり親理由
-        statement.setString(5, childSchoolStatus); // 子供の学校の状態
-        statement.setInt(6, userID); // userID
+    String sql = "UPDATE user SET AnnualIncome = ?, ChildrenCount = ?, EmploymentStatus = ?, " +
+                 "SingleParentReason = ?, ChildSchoolStatus = ? WHERE userID = ?";
 
-        // SQLを実行し、更新が成功したか確認
-        int rowsAffected = statement.executeUpdate();
-        return rowsAffected > 0; // 成功した場合はtrueを返す
-    } catch (Exception e) {
+    try (Connection connection = getConnection()) {
+        if (connection == null) {
+            throw new SQLException("Failed to establish database connection.");
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            // パラメータ設定
+            statement.setObject(1, annualIncome, java.sql.Types.INTEGER);
+            statement.setObject(2, childrenCount, java.sql.Types.INTEGER);
+            statement.setObject(3, employmentStatus, java.sql.Types.VARCHAR);
+            statement.setObject(4, singleParentReason, java.sql.Types.VARCHAR);
+            statement.setObject(5, childSchoolStatus, java.sql.Types.VARCHAR);
+            statement.setInt(6, userID);
+
+            // 更新を実行
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("ユーザーの推奨情報の保存に失敗しました。", e);
+        }
+    } catch (SQLException e) {
         e.printStackTrace();
-        throw new Exception("ユーザーの推奨情報の保存に失敗しました。");
-    } finally {
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException sqle) {
-                throw sqle;
-            }
-        }
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException sqle) {
-                throw sqle;
-            }
-        }
+        throw new Exception("データベース接続に失敗しました。", e);
     }
 }
 

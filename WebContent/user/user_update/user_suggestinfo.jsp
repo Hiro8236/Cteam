@@ -10,30 +10,31 @@
 
     <form action="UserSuggestInfoExecute.action" method="post">
         <div class="form-floating">
-            <input class="form-control" name="annualIncome" type="number" required />
+            <input class="form-control" name="annualIncome" type="number" />
             <label>年間収入</label>
         </div>
 
         <div class="form-floating">
-            <input class="form-control" name="childrenCount" type="number" required />
+            <input class="form-control" name="childrenCount" type="number" />
             <label>子供の人数</label>
         </div>
 
         <div class="form-floating">
-            <input class="form-control" name="employmentStatus" type="text" required />
+            <input class="form-control" name="employmentStatus" type="text" />
             <label>雇用状況</label>
         </div>
 
         <div class="form-floating">
-            <input class="form-control" name="singleParentReason" type="text" required />
+            <input class="form-control" name="singleParentReason" type="text" />
             <label>ひとり親の理由</label>
         </div>
 
         <div class="form-floating">
-            <input class="form-control" name="childSchoolStatus" type="text" required />
+            <input class="form-control" name="childSchoolStatus" type="text" />
             <label>子供の学歴状況</label>
         </div>
 
         <input type="submit" value="保存" class="btn btn-primary mt-3" />
     </form>
 </div>
+
