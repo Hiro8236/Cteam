@@ -6,7 +6,7 @@
 <c:import url="/staffcommon/base.jsp">
     <c:param name="title">お知らせ一覧</c:param>
     <c:param name="content">
-        <h1>サポ助</h1>
+        <h1>お知らせ一覧</h1>
 
         <!-- メッセージが存在する場合、表示 -->
         <c:if test="${not empty message}">
