@@ -37,19 +37,23 @@
                                     <c:otherwise>不明</c:otherwise>
                                 </c:choose>
                             </td>
-                            <td class="staff-actions">
-                                <!-- 変更ボタン -->
-                                <form action="StaffUpdate.action" method="post">
-                                    <input type="hidden" name="staffId" value="${staff.staffID}" />
-                                    <button type="submit" class="btn btn-edit">変更</button>
-                                </form>
 
-                                <!-- 削除ボタン -->
-                                <form action="StaffDelete.action" method="post">
-                                    <input type="hidden" name="staffId" value="${staff.staffID}" />
-                                    <button type="submit" class="btn btn-delete">削除</button>
-                                </form>
-                            </td>
+                            <!-- 管理者の場合は「操作」列を非表示 -->
+                            <c:if test="${staff.staffRole != 2}">
+                                <td class="staff-actions">
+                                    <!-- 変更ボタン -->
+                                    <form action="StaffUpdate.action" method="post" style="display:inline;">
+                                        <input type="hidden" name="staffId" value="${staff.staffID}" />
+                                        <button type="submit" class="btn btn-edit">変更</button>
+                                    </form>
+
+                                    <!-- 削除ボタン -->
+                                    <form action="StaffDelete.action" method="post" style="display:inline;">
+                                        <input type="hidden" name="staffId" value="${staff.staffID}" />
+                                        <button type="submit" class="btn btn-delete">削除</button>
+                                    </form>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                 </tbody>
