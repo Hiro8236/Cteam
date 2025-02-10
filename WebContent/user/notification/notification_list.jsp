@@ -37,9 +37,6 @@
 
         <!-- お知らせ一覧セクション（スタッフ管理の見た目を統一） -->
         <section class="staff-management">
-            <!-- ページタイトル -->
-            <h2 class="page-title">お知らせ管理</h2>
-
             <!-- ヘッダー部分：一覧タイトルと新規投稿ボタン -->
             <div class="staff-list-header">
                 <h3 class="staff-list-title">お知らせ一覧</h3>

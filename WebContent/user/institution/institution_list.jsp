@@ -6,7 +6,7 @@
 <c:import url="/common/base.jsp">
     <c:param name="title" value="サポ助" />
     <c:param name="content">
-        <section class="me-4">
+        <section class="staff-management">
             <h1>支援一覧</h1>
 
             <!-- エラーメッセージがある場合、表示 -->
@@ -33,17 +33,12 @@
             <!-- 総件数 -->
             <c:set var="totalItems" value="${fn:length(institutions)}" />
             <!-- 総ページ数の計算： (totalItems + itemsPerPage - 1) div itemsPerPage -->
-            <c:set var="totalPagesInt" value="${totalPages - (totalPages mod 1)}" />
+            <c:set var="totalPages" value="${(totalItems + itemsPerPage - 1) div itemsPerPage}" />
+            <!-- ここで総ページ数を数値型に変換（totalPagesInt） -->
+            <c:set var="totalPagesInt" value="${totalPages * 1}" />
             <!-- 表示開始／終了インデックス -->
             <c:set var="startIndex" value="${(page - 1) * itemsPerPage}" />
             <c:set var="endIndex" value="${startIndex + itemsPerPage}" />
-
-            <!-- 支援一覧セクション -->
-            <section class="staff-management">
-                <!-- ヘッダー部分：一覧タイトルと新規登録ボタン（ログイン時のみ） -->
-                <div class="staff-list-header">
-                    <h3 class="staff-list-title">支援一覧</h3>
-                </div>
 
                 <c:choose>
                     <c:when test="${institutions != null and institutions.size() > 0}">
@@ -100,11 +95,11 @@
 
             <!-- ページネーションリンク -->
             <div class="pagination" style="text-align: center; margin: 20px 0;">
-                <c:if test="${page > 1}">
+                <c:if test="${page gt 1}">
                     <a href="?page=${page - 1}" style="margin-right: 10px;">&laquo; 前へ</a>
                 </c:if>
                 ページ ${page} / <fmt:formatNumber value="${totalPagesInt}" type="number" maxFractionDigits="0" />
-                <c:if test="${page < totalPagesInt}">
+                <c:if test="${page lt totalPagesInt}">
                     <a href="?page=${page + 1}" style="margin-left: 10px;">次へ &raquo;</a>
                 </c:if>
             </div>
