@@ -27,9 +27,12 @@
 
             <!-- スタッフ情報フォーム -->
             <form action="StaffUpdateExecute.action" method="post">
+                <!-- 現在の職員IDを隠しフィールドで送信 -->
+                <input type="hidden" name="staffId" value="${staff.staffID}" />
+
                 <div class="mb-3">
                     <label for="staffId" class="form-label">職員ID:</label>
-                    <input type="text" class="form-control" id="staffId" name="staffId" value="${staff.staffID}" required />
+                    <input type="text" class="form-control" id="staffId" name="staffId" value="${staff.staffID}" readonly />
                 </div>
 
                 <div class="mb-3">
@@ -50,5 +53,3 @@
         </section>
     </c:param>
 </c:import>
-
-

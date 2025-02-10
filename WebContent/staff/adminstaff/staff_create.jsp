@@ -7,7 +7,7 @@
             <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">職員登録</h2>
 
             <!-- ログイン中の職員情報を表示 -->
-            <p>ログイン中: <c:out value="${user.staffName}" />
+            <p>ログイン中: <c:out value="${user.staffName}" /> </p>
 
             <!-- エラーメッセージの表示 -->
             <c:if test="${not empty errors}">
@@ -45,9 +45,15 @@
             <!-- 新しい職員を登録するフォーム -->
             <h3 class="mt-5">新しい職員を登録</h3>
             <form action="StaffCreateExecute.action" method="post">
+                <!-- 職員ID（ユーザーが手動で入力）-->
+                <div class="mb-3">
+                    <label for="staff_id" class="form-label">職員ID:</label>
+                    <input type="text" class="form-control" id="staff_id" name="staff_id" value="${staff_id}" required />
+                </div>
+
                 <div class="mb-3">
                     <label for="staff_name" class="form-label">氏名:</label>
-                    <input type="text" class="form-control" id="staff_name" name="staff_name" value="${staff_name}" />
+                    <input type="text" class="form-control" id="staff_name" name="staff_name" value="${staff_name}" required />
                 </div>
 
                 <!-- 役職は職員のみ -->
@@ -58,9 +64,10 @@
                     </select>
                 </div>
 
+                <!-- パスワードフィールドを追加 -->
                 <div class="mb-3">
                     <label for="password" class="form-label">パスワード:</label>
-                    <input type="password" class="form-control" id="password" name="password" />
+                    <input type="password" class="form-control" id="password" name="password" required />
                 </div>
 
                 <button type="submit" class="btn btn-primary">登録</button>
@@ -69,4 +76,3 @@
         </section>
     </c:param>
 </c:import>
-

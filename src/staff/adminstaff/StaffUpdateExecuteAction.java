@@ -23,12 +23,12 @@ public class StaffUpdateExecuteAction extends Action {
         String staffName = req.getParameter("staffName");
         String staffRole = req.getParameter("staffRole");
 
-        // スタッフIDが取得できていない場合のエラー処理
+        // staffIdが取得できていない場合のエラー処理
         if (staffIdStr == null || staffIdStr.isEmpty()) {
             errors.put("staffId", "職員IDが必要です");
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("staff_update.jsp").forward(req, res);
-            return;
+            return; // エラーが発生した場合は処理を中断
         }
 
         // スタッフIDのパース
@@ -42,7 +42,21 @@ public class StaffUpdateExecuteAction extends Action {
             errors.put("staffId", "指定された職員が存在しません");
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("staff_update.jsp").forward(req, res);
-            return;
+            return; // エラーが発生した場合は処理を中断
+        }
+
+        // スタッフ情報の更新前にエラーチェック
+        if (staffName == null || staffName.trim().isEmpty()) {
+            errors.put("staffName", "氏名は必須です");
+        }
+        if (staffRole == null || staffRole.trim().isEmpty()) {
+            errors.put("staffRole", "役職は必須です");
+        }
+
+        if (!errors.isEmpty()) {
+            req.setAttribute("errors", errors);
+            req.getRequestDispatcher("staff_update.jsp").forward(req, res);
+            return; // エラーが発生した場合は処理を中断
         }
 
         // スタッフ情報の更新

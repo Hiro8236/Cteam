@@ -83,13 +83,14 @@ public class StaffDao extends Dao {
      * @throws Exception
      */
     public void save(Staff staff) throws Exception {
-        String sql = "INSERT INTO Staff (staffname, staffrole, password) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Staff (staffid, staffname, staffrole, password) VALUES (?, ?, ?, ?)";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            statement.setString(1, staff.getStaffName());
-            statement.setString(2, staff.getStaffRole());
-            statement.setString(3, staff.getPassword());
+        	statement.setInt(1, staff.getStaffID());
+            statement.setString(2, staff.getStaffName());
+            statement.setString(3, staff.getStaffRole());
+            statement.setString(4, staff.getPassword());
             statement.executeUpdate();
 
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
@@ -186,18 +187,23 @@ public class StaffDao extends Dao {
      * @throws Exception
      */
     public void update(Staff staff) throws Exception {
-        String query = "UPDATE staff SET staffname = ?, staffrole = ? WHERE staffid = ?";
+        // staffIdを更新するSQLクエリ
+        String query = "UPDATE staff SET staffname = ?, staffrole = ?, staffid = ? WHERE staffid = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
+            // スタッフ情報の更新
             stmt.setString(1, staff.getStaffName());
             stmt.setString(2, staff.getStaffRole());
-            stmt.setInt(3, staff.getStaffID());
+            stmt.setInt(3, staff.getStaffID()); // 新しいstaffId（変更後）
+            stmt.setInt(4, staff.getStaffID()); // 旧staffId（変更前）
 
+            // クエリを実行
             stmt.executeUpdate();
         }
     }
+
 
 
 	// パスワードのハッシュ化

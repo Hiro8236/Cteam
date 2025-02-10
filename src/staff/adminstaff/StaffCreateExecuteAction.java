@@ -22,16 +22,17 @@ public class StaffCreateExecuteAction extends Action {
         Map<String, String> errors = new HashMap<>();
 
         // ログインユーザーの情報を取得
-        Staff staff = (Staff) session.getAttribute("user");
-        if (staff == null) {
+        Staff loggedInStaff = (Staff) session.getAttribute("user");
+        if (loggedInStaff == null) {
             res.sendRedirect("login.jsp");
             return;
         }
 
         // リクエストパラメータの取得
-        String staffName = req.getParameter("staff_name");
-        String staffRole = req.getParameter("staff_role");
-        String password = req.getParameter("password");
+        String staffName = req.getParameter("staff_name"); // 職員名
+        String staffRole = req.getParameter("staff_role"); // 役職
+        String password = req.getParameter("password");   // パスワード
+        String staffIDStr = req.getParameter("staff_id");  // ユーザー指定の職員ID
 
         // 入力値の検証
         if (staffName == null || staffName.trim().isEmpty()) {
@@ -43,6 +44,9 @@ public class StaffCreateExecuteAction extends Action {
         if (password == null || password.trim().isEmpty()) {
             errors.put("password", "パスワードを入力してください");
         }
+        if (staffIDStr == null || staffIDStr.trim().isEmpty()) {
+            errors.put("staff_id", "職員IDを入力してください");
+        }
 
         // エラーがある場合はJSPへフォワード
         if (!errors.isEmpty()) {
@@ -53,20 +57,31 @@ public class StaffCreateExecuteAction extends Action {
             return;
         }
 
+        // 入力された職員IDがユニークかを確認
+        int staffID = Integer.parseInt(staffIDStr);
+        Staff existingStaff = staffDao.findById(staffID);
 
+        if (existingStaff != null) {
+            errors.put("staff_id", "この職員IDはすでに使用されています");
+            req.setAttribute("errors", errors);
+            req.setAttribute("staff_name", staffName);
+            req.setAttribute("staff_role", staffRole);
+            req.getRequestDispatcher("staff_create.jsp").forward(req, res);
+            return;
+        }
 
+        // パスワードをハッシュ化
         UserDao userDao = new UserDao();
         String hashedPassword = userDao.hashPassword(password);
 
-
-        // 職員インスタンスを作成して保存
+        // 新しい職員インスタンスを作成
         Staff newStaff = new Staff();
         newStaff.setStaffName(staffName);
         newStaff.setStaffRole(staffRole);
         newStaff.setPassword(hashedPassword);
+        newStaff.setStaffID(staffID); // ユーザー指定のIDを設定
 
-
-        // 職員IDを自動インクリメントに任せる
+        // 職員情報をデータベースに保存
         staffDao.save(newStaff);
 
         // 完了ページへフォワード
