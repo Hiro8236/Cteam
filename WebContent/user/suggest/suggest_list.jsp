@@ -34,8 +34,10 @@
             <!-- 総件数（suggestlistsの要素数） -->
             <c:set var="totalItems" value="${fn:length(suggestlists)}" />
 
-            <!-- 総ページ数の計算 -->
+             <!-- 総ページ数の計算： (totalItems + itemsPerPage - 1) div itemsPerPage -->
             <c:set var="totalPages" value="${(totalItems + itemsPerPage - 1) div itemsPerPage}" />
+            <!-- 小数点以下を切り捨てた整数値 -->
+            <c:set var="totalPagesInt" value="${totalPages - (totalPages mod 1)}" />
 
             <!-- 表示開始／終了インデックス -->
             <c:set var="startIndex" value="${(page - 1) * itemsPerPage}" />
@@ -108,7 +110,7 @@
                     <a href="?page=${page - 1}" style="margin-right: 10px;">&laquo; 前へ</a>
                 </c:if>
                 ページ ${page} / <fmt:formatNumber value="${totalPages}" type="number" maxFractionDigits="0" />
-                <c:if test="${page lt totalPages}">
+                <c:if test="${page lt totalPagesInt}">
                     <a href="?page=${page + 1}" style="margin-left: 10px;">次へ &raquo;</a>
                 </c:if>
             </div>

@@ -36,8 +36,8 @@
             <c:set var="totalItems" value="${fn:length(institutions)}" />
             <!-- 総ページ数の計算： (totalItems + itemsPerPage - 1) div itemsPerPage -->
             <c:set var="totalPages" value="${(totalItems + itemsPerPage - 1) div itemsPerPage}" />
-            <!-- ここで総ページ数を数値型に変換（totalPagesInt） -->
-            <c:set var="totalPagesInt" value="${totalPages * 1}" />
+            <!-- 小数点以下を切り捨てた整数値 -->
+            <c:set var="totalPagesInt" value="${totalPages - (totalPages mod 1)}" />
             <!-- 表示開始／終了インデックス -->
             <c:set var="startIndex" value="${(page - 1) * itemsPerPage}" />
             <c:set var="endIndex" value="${startIndex + itemsPerPage}" />

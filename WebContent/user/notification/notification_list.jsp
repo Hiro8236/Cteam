@@ -28,11 +28,13 @@
 </c:choose>
 <!-- 総件数 -->
 <c:set var="totalItems" value="${fn:length(institutions)}" />
-<!-- 修正: 総ページ数の計算をシンプルな式に変更 -->
+<!-- 総ページ数の計算： (totalItems + itemsPerPage - 1) div itemsPerPage -->
 <c:set var="totalPages" value="${(totalItems + itemsPerPage - 1) div itemsPerPage}" />
+<!-- 小数点以下を切り捨てた整数値 -->
+<c:set var="totalPagesInt" value="${totalPages - (totalPages mod 1)}" />
 <!-- 表示開始／終了インデックス -->
-<c:set var="startIndex" value="${(page - 1) * itemsPerPage}" />
-<c:set var="endIndex" value="${startIndex + itemsPerPage}" />
+<c:set var="startIndex" value="${(page - 1) * itemsPerPages}" />
+<c:set var="endIndex" value="${startIndex + itemsPerPages}" />
 
 
         <!-- お知らせ一覧セクション（スタッフ管理の見た目を統一） -->
@@ -95,8 +97,8 @@
             <c:if test="${page > 1}">
                 <a href="?page=${page - 1}" style="margin-right: 10px;">&laquo; 前へ</a>
             </c:if>
-            ページ ${page} / <fmt:formatNumber value="${totalPages}" type="number" maxFractionDigits="0" />
-            <c:if test="${page < totalPages}">
+            ページ ${page} / <fmt:formatNumber value="${totalPageInt}" type="number" maxFractionDigits="0" />
+            <c:if test="${page < totalPageInt}">
                 <a href="?page=${page + 1}" style="margin-left: 10px;">次へ &raquo;</a>
             </c:if>
         </div>
