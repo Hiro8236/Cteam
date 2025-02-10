@@ -2,38 +2,54 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="/common/base.jsp">
-    <c:param name="title" value="ぽシステム" />
+    <c:param name="title" value="サポ助" />
     <c:param name="content">
 
-         <section class="me-4">
-            <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4" style="background-color:#f2f2f2">おすすめ支援一覧</h2>
-			<c:choose>
-			    <c:when test="${suggestlists != null && suggestlists.size() > 0}">
-			        <table class="table table-hover">
-			            <thead>
-			                <tr>
-			                    <th>支援名</th>
-			                    <th>支援詳細</th>
-			                </tr>
-			            </thead>
-			            <tbody>
-			                <c:forEach var="suggestlists" items="${suggestlists}">
-							    <tr>
-							        <td>${suggestlists.name}</td>
-							        <td>${suggestlists.detail}</td>
-							        <td><a href="BookmarkCreate.action?id=${suggestlists.ID}">${suggestlists.ID}:登録</a></td>
+        <section class="me-4">
+            <h1>適用可能な支援制度</h1>
 
-							    </tr>
-							</c:forEach>
+            <!-- エラーメッセージがある場合はアラートで表示 -->
+            <c:if test="${not empty errorMessage}">
+                <script type="text/javascript">
+                    alert("${errorMessage}");
+                </script>
+            </c:if>
 
-			            </tbody>
-			        </table>
-			    </c:when>
+            <c:set var="userID" value="${sessionScope.userID}" />
 
-			    <c:otherwise>
-			        <div>支援情報が存在しませんでした</div>
-			    </c:otherwise>
-			</c:choose>
+            <c:choose>
+                <c:when test="${suggestlists != null && suggestlists.size() > 0}">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>支援名</th>
+                                <th>制度詳細</th>
+                                <th>登録</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="suggest" items="${suggestlists}">
+                                <tr onclick="location.href='/Cteam1/user/institution/InstitutionsDetail.action?id=${suggest.institutionID}'" style="cursor: pointer;">
+                                    <td>${suggest.name}</td>
+                                    <td>${suggest.detail}</td>
+                                    <td>
+                                        <a href="/Cteam1/user/bookmark/BookmarkCreate.action?institutionID=${suggest.institutionID}"
+                                           onclick="event.stopPropagation();">登録</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </c:when>
+                <c:otherwise>
+                    <p>該当する支援制度がありません。</p>
+                </c:otherwise>
+            </c:choose>
+
+            <div class="suggest-link">
+                <a href="/Cteam1/user/Home.action">トップページへ戻る</a>
+            </div>
         </section>
+
     </c:param>
 </c:import>

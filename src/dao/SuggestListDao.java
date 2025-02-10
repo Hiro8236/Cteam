@@ -3,7 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,48 +10,47 @@ import bean.Suggest;
 
 public class SuggestListDao extends Dao {
 
-    // 全ての支援を取得するメソッド
-    public List<Suggest> getAll() throws Exception {
-        List<Suggest> suggestLists = new ArrayList<>();
-        String sql = "SELECT id, name, detail FROM suggest";
+    // ユーザーの情報に基づいて適用可能な支援制度を取得
+    public List<Suggest> getByUserId(int userId) throws Exception {
+        List<Suggest> suggestList = new ArrayList<>();
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
+        String sql = "SELECT i.* " +
+                     "FROM institution i " +
+                     "JOIN user u ON ( " +
+                     "    (u.AnnualIncome <= i.IncomeRequirement OR i.IncomeRequirement IS NULL) " +
+                     "    AND (u.ChildrenCount >= i.EligibleChildrenCount OR i.EligibleChildrenCount IS NULL) " +
+                     "    AND (u.EmploymentStatus = i.RequiredEmploymentStatus OR i.RequiredEmploymentStatus IS NULL) " +
+                     "    AND (u.SingleParentReason = i.EligibilityReason OR i.EligibilityReason IS NULL) " +
+                     "    AND (u.ChildSchoolStatus = i.RequiredSchoolStatus OR i.RequiredSchoolStatus IS NULL) " +
+                     ") " +
+                     "WHERE u.UserID = ?";
 
-            while (resultSet.next()) {
-                Suggest suggest = new Suggest();
-                suggest.setId(resultSet.getInt("id"));
-                suggest.setName(resultSet.getString("name"));
-                suggest.setDetail(resultSet.getString("detail"));
-                suggestLists.add(suggest);
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Suggest suggest = new Suggest();
+                    suggest.setInstitutionID(rs.getInt("InstitutionID"));
+                    suggest.setName(rs.getString("Name"));
+                    suggest.setDetail(rs.getString("Detail"));
+                    suggest.setVideo(rs.getString("Video"));
+                    suggest.setPdfPath(rs.getString("PDFPath"));
+                    suggest.setIncomeRequirement(rs.getInt("IncomeRequirement"));
+                    suggest.setEligibleChildrenCount(rs.getInt("EligibleChildrenCount"));
+                    suggest.setRequiredEmploymentStatus(rs.getString("RequiredEmploymentStatus"));
+                    suggest.setEligibilityReason(rs.getString("EligibilityReason"));
+                    suggest.setRequiredSchoolStatus(rs.getString("RequiredSchoolStatus"));
+
+                    suggestList.add(suggest);
+                }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception("支援リストの取得中にエラーが発生しました: " + e.getMessage());
+            throw new Exception("支援制度の取得中にエラーが発生しました: " + e.getMessage(), e);
         }
 
-        return suggestLists;
-    }
-
-    // 支援をデータベースに挿入するメソッド
-    public void insert(Integer userId, Integer institutionId) throws Exception {
-        // SQLのINSERT文
-        String sql = "INSERT INTO bookmark (user_id, institution_id) VALUES (?, ?)";
-
-        // データベース接続
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            // パラメータの設定
-            statement.setInt(1, userId);
-            statement.setInt(2, institutionId);
-
-            // 実行
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace(); // エラーが発生した場合
-            throw new Exception("支援の挿入中にエラーが発生しました: " + e.getMessage());
-        }
+        return suggestList;
     }
 }

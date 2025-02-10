@@ -40,6 +40,7 @@
             <c:set var="startIndex" value="${(page - 1) * itemsPerPage}" />
             <c:set var="endIndex" value="${startIndex + itemsPerPage}" />
 
+<<<<<<< HEAD
             <!-- 支援一覧セクション -->
             <section class="staff-management">
                 <!-- ヘッダー部分：一覧タイトルと新規登録ボタン -->
@@ -109,6 +110,11 @@
                 <c:if test="${page < totalPagesInt}">
                     <a href="?page=${page + 1}" style="margin-left: 10px;">次へ &raquo;</a>
                 </c:if>
+=======
+            <!-- おすすめ一覧リンクのスタイル変更 -->
+            <div class="suggest-link">
+                <a href="suggest/SuggestList.action">おすすめ一覧</a>
+>>>>>>> branch 'master' of https://github.com/Hiro8236/Cteam.git
             </div>
         </section>
     </c:param>
