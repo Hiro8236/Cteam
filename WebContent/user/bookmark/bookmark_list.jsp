@@ -38,7 +38,7 @@
                                         <td>
                                             <form action="BookmarkDelete.action" method="post">
                                                 <input type="hidden" name="BookmarkID" value="${bookmark.bookmarkID}" />
-                                                <input class="btn btn-secondary" type="submit" value="削除" />
+                                                <input class="btn btn-delete" type="submit" value="削除" />
                                             </form>
                                         </td>
                                     </tr>

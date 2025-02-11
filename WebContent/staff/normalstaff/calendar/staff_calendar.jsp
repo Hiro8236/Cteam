@@ -58,8 +58,8 @@
                 <input type="hidden" id="eventID" name="eventID">
 
                 <div style="display: flex; gap: 10px;">
-                    <button type="submit" class="btn btn-primary">保存</button>
-                    <button type="button" id="deleteEventBtn" class="btn btn-danger" style="display: none;">削除</button>
+                    <button type="submit" class="btn btn-edit">保存</button>
+                    <button type="button" id="deleteEventBtn" class="btn btn-delete" style="display: none;">削除</button>
                 </div>
             </form>
         </div>

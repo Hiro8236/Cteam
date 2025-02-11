@@ -88,11 +88,12 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
-                                        <td>
-                                            <!-- 登録ボタンのクリックで行クリックを止める -->
-                                            <a href="/Cteam1/user/bookmark/BookmarkCreate.action?institutionID=${suggest.institutionID}"
-                                               onclick="event.stopPropagation();">登録</a>
-                                        </td>
+										<td>
+										    <!-- 登録ボタンのクリックで行クリックを止める -->
+										    <a href="/Cteam1/user/bookmark/BookmarkCreate.action?institutionID=${suggest.institutionID}"
+										       class="btn btn-success"
+										       onclick="event.stopPropagation();">登録</a>
+										</td>
                                     </tr>
                                 </c:if>
                             </c:forEach>
