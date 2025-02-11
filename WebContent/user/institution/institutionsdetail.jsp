@@ -27,6 +27,7 @@
             <div class="video-section">
                 <h3>支援関連動画</h3>
                 <c:if test="${not empty institution.video}">
+                
                     <iframe width="100%" height="315" src="https://www.youtube.com/embed/${institution.video}" frameborder="0" allowfullscreen></iframe>
                 </c:if>
                 <c:if test="${empty institution.video}">

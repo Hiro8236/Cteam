@@ -22,7 +22,22 @@ public class StaffInstitutionEditAction extends Action {
         System.out.println("1");
         // 支援リストを取得
         List<Institution> institutions = insDao.getAll(); // 全ての支援情報を取得
+        for (Institution institution : institutions) {
+            System.out.println("ID: " + institution.getID());
+            System.out.println("Name: " + institution.getName());
+            System.out.println("Detail: " + institution.getDetail());
+            System.out.println("Video: " + institution.getVideo());
+            System.out.println("PDF Path: " + institution.getPdfPath());
+            System.out.println("Income Requirement: " + institution.getIncomeRequirement());
+            System.out.println("Eligible Children Count: " + institution.getEligibleChildrenCount());
+            System.out.println("Required Employment Status: " + institution.getRequiredEmploymentStatus());
+            System.out.println("Eligibility Reason: " + institution.getEligibilityReason());
+            System.out.println("Required School Status: " + institution.getRequiredSchoolStatus());
+            System.out.println("---------------------------------------");
+        }
+
         req.setAttribute("institutions", institutions); // JSPに渡す
+
         System.out.println("2");
 
         // リクエストパラメータの取得

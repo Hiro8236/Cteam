@@ -14,7 +14,9 @@ public class InstitutionDao extends Dao {
     // 全ての支援情報を取得
     public List<Institution> getAll() throws Exception {
         List<Institution> institutions = new ArrayList<>();
-        String sql = "SELECT InstitutionID, name, detail, video, PdfPath FROM institution";
+        String sql = "SELECT InstitutionID, name, detail, video, PdfPath, " +
+                     "IncomeRequirement, EligibleChildrenCount, RequiredEmploymentStatus, " +
+                     "EligibilityReason, RequiredSchoolStatus FROM institution";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -26,7 +28,13 @@ public class InstitutionDao extends Dao {
                 institution.setName(resultSet.getString("name"));
                 institution.setDetail(resultSet.getString("detail"));
                 institution.setVideo(resultSet.getString("video"));
-                institution.setPdfPath(resultSet.getString("PdfPath")); // PdfPathを取得して設定
+                institution.setPdfPath(resultSet.getString("PdfPath"));
+                institution.setIncomeRequirement(resultSet.getObject("IncomeRequirement") != null ? resultSet.getInt("IncomeRequirement") : null);
+                institution.setEligibleChildrenCount(resultSet.getObject("EligibleChildrenCount") != null ? resultSet.getInt("EligibleChildrenCount") : null);
+                institution.setRequiredEmploymentStatus(resultSet.getString("RequiredEmploymentStatus"));
+                institution.setEligibilityReason(resultSet.getString("EligibilityReason"));
+                institution.setRequiredSchoolStatus(resultSet.getString("RequiredSchoolStatus"));
+
                 institutions.add(institution);
             }
         }
@@ -37,7 +45,9 @@ public class InstitutionDao extends Dao {
     // IDを指定して支援情報を取得
     public Institution findById(int id) throws Exception {
         Institution institution = null;
-        String sql = "SELECT InstitutionID, name, detail, video, PdfPath FROM institution WHERE InstitutionID = ?";
+        String sql = "SELECT InstitutionID, name, detail, video, PdfPath, " +
+                     "IncomeRequirement, EligibleChildrenCount, RequiredEmploymentStatus, " +
+                     "EligibilityReason, RequiredSchoolStatus FROM institution WHERE InstitutionID = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -51,7 +61,12 @@ public class InstitutionDao extends Dao {
                     institution.setName(resultSet.getString("name"));
                     institution.setDetail(resultSet.getString("detail"));
                     institution.setVideo(resultSet.getString("video"));
-                    institution.setPdfPath(resultSet.getString("PdfPath")); // PdfPathを取得して設定
+                    institution.setPdfPath(resultSet.getString("PdfPath"));
+                    institution.setIncomeRequirement(resultSet.getObject("IncomeRequirement") != null ? resultSet.getInt("IncomeRequirement") : null);
+                    institution.setEligibleChildrenCount(resultSet.getObject("EligibleChildrenCount") != null ? resultSet.getInt("EligibleChildrenCount") : null);
+                    institution.setRequiredEmploymentStatus(resultSet.getString("RequiredEmploymentStatus"));
+                    institution.setEligibilityReason(resultSet.getString("EligibilityReason"));
+                    institution.setRequiredSchoolStatus(resultSet.getString("RequiredSchoolStatus"));
                 }
             }
         } catch (SQLException e) {
@@ -62,9 +77,7 @@ public class InstitutionDao extends Dao {
         return institution;
     }
 
-
-
- // 支援をデータベースに挿入し、自動生成されたIDを返す
+    // 支援をデータベースに挿入し、自動生成されたIDを返す
     public int insert(Institution institution) throws Exception {
         String sql = "INSERT INTO institution (name, detail, video, PdfPath, IncomeRequirement, EligibleChildrenCount, RequiredEmploymentStatus, EligibilityReason, RequiredSchoolStatus) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -73,32 +86,18 @@ public class InstitutionDao extends Dao {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            // パラメータを設定
             statement.setString(1, institution.getName());
             statement.setString(2, institution.getDetail());
             statement.setString(3, institution.getVideo());
-            statement.setString(4, institution.getPdfPath()); // PdfPathを設定
-            statement.setObject(5, institution.getIncomeRequirement(), java.sql.Types.INTEGER); // NULL許容
-            statement.setObject(6, institution.getEligibleChildrenCount(), java.sql.Types.INTEGER); // NULL許容
+            statement.setString(4, institution.getPdfPath());
+            statement.setObject(5, institution.getIncomeRequirement(), java.sql.Types.INTEGER);
+            statement.setObject(6, institution.getEligibleChildrenCount(), java.sql.Types.INTEGER);
             statement.setString(7, institution.getRequiredEmploymentStatus());
             statement.setString(8, institution.getEligibilityReason());
             statement.setString(9, institution.getRequiredSchoolStatus());
 
-            // デバッグ用出力
-            System.out.println(institution.getName());
-            System.out.println(institution.getDetail());
-            System.out.println(institution.getVideo());
-            System.out.println(institution.getPdfPath());
-            System.out.println(institution.getIncomeRequirement());
-            System.out.println(institution.getEligibleChildrenCount());
-            System.out.println(institution.getRequiredEmploymentStatus());
-            System.out.println(institution.getEligibilityReason());
-            System.out.println(institution.getRequiredSchoolStatus());
-
-            // 実行
             statement.executeUpdate();
 
-            // 自動生成されたIDを取得
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     generatedId = generatedKeys.getInt(1);
@@ -112,43 +111,6 @@ public class InstitutionDao extends Dao {
         return generatedId;
     }
 
-/*
-    // 支援をデータベースに挿入し、自動生成されたIDを返す
-    public int insert(Institution institution) throws Exception {
-        String sql = "INSERT INTO institution (name, detail, video, PdfPath) VALUES (?, ?, ?, ?)";
-        int generatedId = -1;
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-
-            // パラメータを設定
-            statement.setString(1, institution.getName());
-            statement.setString(2, institution.getDetail());
-            statement.setString(3, institution.getVideo());
-            statement.setString(4, institution.getPdfPath()); // PdfPathを設定
-
-            System.out.println(institution.getName());
-            System.out.println(institution.getDetail());
-            System.out.println(institution.getVideo());
-            System.out.println(institution.getPdfPath());
-
-            // 実行
-            statement.executeUpdate();
-
-            // 自動生成されたIDを取得
-            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    generatedId = generatedKeys.getInt(1);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        }
-
-        return generatedId;
-    }
-*/
     // 指定したIDの支援情報を削除
     public boolean deleteInstitutionById(int id) throws Exception {
         boolean isDeleted = false;
@@ -167,7 +129,7 @@ public class InstitutionDao extends Dao {
         return isDeleted;
     }
 
- // 指定したIDの支援情報を更新（追加情報も更新可能に）
+    // 指定したIDの支援情報を更新
     public boolean updateInstitution(int id, String name, String detail, String video, String pdfPath,
                                      Integer incomeRequirement, Integer eligibleChildrenCount,
                                      String requiredEmploymentStatus, String eligibilityReason,
@@ -195,25 +157,4 @@ public class InstitutionDao extends Dao {
             return rowsUpdated > 0;
         }
     }
-
-    // 指定したIDの支援情報を更新
-/*
-    public boolean updateInstitution(Integer id, String name, String detail, String pdfPath) throws Exception {
-        String sql = "UPDATE institution SET name = ?, detail = ?, PdfPath = ? WHERE InstitutionID = ?";
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            // パラメータを設定
-            statement.setString(1, name);
-            statement.setString(2, detail);
-            statement.setString(3, pdfPath); // PdfPathを更新
-            statement.setInt(4, id);
-
-            // クエリを実行し、影響を受けた行数を取得
-            int rowsUpdated = statement.executeUpdate();
-            return rowsUpdated > 0; // 更新成功の場合はtrue
-        }
-    }
-    */
 }
