@@ -70,8 +70,8 @@
                                             </td>
                                             <td>
                                                 <c:choose>
-                                                    <c:when test="${fn:length(institution.detail) > 15}">
-                                                        ${fn:substring(institution.detail, 0, 15)}&hellip;
+                                                    <c:when test="${fn:length(institution.detail) > 20}">
+                                                        ${fn:substring(institution.detail, 0, 20)}&hellip;
                                                     </c:when>
                                                     <c:otherwise>
                                                         ${institution.detail}

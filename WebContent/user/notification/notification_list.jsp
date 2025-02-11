@@ -32,12 +32,6 @@
 
         <!-- 総ページ数の計算： (totalItems + itemsPerPage - 1) div itemsPerPage -->
         <c:set var="totalPages" value="${(totalItems + itemsPerPage - 1) div itemsPerPage}" />
-
-        <!-- 小数点以下を切り捨てた整数値（totalPagesInt）
-             ※ totalPages から (totalPages mod 1) を引く方法でもOKですが、
-                JSTL では除算結果が整数になるため、このままでも多くの場合問題ありません。
-                必要なら <c:set var="totalPagesInt" value="${totalPages - (totalPages mod 1)}" /> のようにしてもOKです。
-        -->
         <c:set var="totalPagesInt" value="${totalPages}" />
 
         <!-- 表示開始／終了インデックス
