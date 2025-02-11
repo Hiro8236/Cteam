@@ -26,7 +26,7 @@
 
                 <div class="mb-3">
                     <label for="description" class="form-label">説明:</label>
-                    <input type="text" id="description" name="description" class="form-control">
+                    <textarea id="description" name="description" class="form-control" rows="4"></textarea>
                 </div>
 
                 <div class="mb-3">
@@ -44,7 +44,7 @@
                 <div class="mb-3">
                     <div id="notification-container">
                         <input type="checkbox" id="notification" name="notification">
-                        <label for="notification" class="form-label">イベント前日に通知を受け取る</label>
+                        <label for="notification" >イベント前日に通知を受け取る</label>
                     </div>
                 </div>
                 <input type="hidden" id="eventID" name="eventID">

@@ -27,7 +27,7 @@
 
                 <div class="mb-3">
                     <label for="description" class="form-label">説明:</label>
-                    <input type="text" id="description" name="description" class="form-control">
+                    <textarea id="description" name="description" class="form-control" rows="4"></textarea>
                 </div>
 
                 <div class="mb-3">
@@ -42,7 +42,7 @@
 
                 <!-- 公開設定 -->
                 <fieldset class="mb-3">
-                    <legend class="form-label">公開設定:</legend>
+                    <legend >公開設定:</legend>
                     <div>
                         <label>
                             <input type="radio" id="public" name="visibility" value="public"> 全体公開

@@ -1007,34 +1007,6 @@ table.table tbody tr:hover {
   color: #2c6f2d;
 }
 
-/* ===== モーダル ===== */
-
-.modal {
-  display: none; /* 初期状態は非表示 */
-  position: fixed;
-  z-index: 10;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.close {
-  float: right;
-  font-size: 24px;
-  cursor: pointer;
-}
 
 /* ===== 支援一覧・制度一覧・通知一覧 共通スタイル ===== */
 
@@ -1195,34 +1167,76 @@ a.btn-delete:hover {
   text-align: center;
 }
 
-/* ===== モーダル ===== */
-
+/* モーダル（オーバーレイ） */
 .modal {
-  display: none; /* 初期状態非表示 */
+  display: none; /* 初期状態は非表示 */
   position: fixed;
-  z-index: 10;
+  z-index: 9999;  /* 高いz-indexで前面に表示 */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5); /* 背景の透明度を少し高め */
   justify-content: center;
   align-items: center;
+  padding: 20px; /* モーダルコンテンツの周りに余白 */
 }
 
+/* モーダルコンテンツ */
 .modal-content {
   background-color: #fff;
-  padding: 20px;
   border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px; /* 最大幅を設定 */
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: modalFadeIn 0.3s ease-out;
 }
 
-.close {
-  float: right;
-  font-size: 24px;
-  cursor: pointer;
+.form-label {
+  display: inline-block;
+  width: 100px;         /* ラベルの幅は適宜調整 */
+  text-align: right;
+  margin-right: 10px;
+  vertical-align: top;  /* 上部揃え */
 }
+
+.form-control {
+  display: inline-block;
+  width: 60%;
+  vertical-align: top;  /* 上部揃え */
+}
+
+
+/* フェードインアニメーション */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* クローズボタン */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close:hover {
+  color: #000;
+}
+
 
 /* テーブルセルのテキストを一行に固定して省略表示 */
 .staff-table tbody td,
