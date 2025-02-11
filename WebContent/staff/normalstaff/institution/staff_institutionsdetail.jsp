@@ -17,16 +17,19 @@
                 <h3>支援内容</h3>
                 <p>${institution.detail != null ? institution.detail : '支援内容がありません'}</p>
             </div>
+<div class="video-section">
+    <h3>動画</h3>
+    <c:if test="${not empty institution.video}">
+        <c:set var="videoUrl" value="${institution.video}" />
+        <c:set var="videoId" value="${fn:replace(videoUrl, 'https://www.youtube.com/watch?v=', '')}" />
 
-            <div class="video-section">
-                <h3>動画</h3>
-                <c:if test="${not empty institution.video}">
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/${institution.video}" frameborder="0" allowfullscreen></iframe>
-                </c:if>
-                <c:if test="${empty institution.video}">
-                    <p>動画がありません</p>
-                </c:if>
-            </div>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+    </c:if>
+    <c:if test="${empty institution.video}">
+        <p>動画がありません</p>
+    </c:if>
+</div>
+
 
             <div class="pdf-section">
 			    <h3>PDF ファイル</h3>
