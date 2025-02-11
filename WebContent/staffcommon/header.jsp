@@ -21,7 +21,7 @@
     <ul class="navigation-list">
         <c:if test="${user != null && user.staffRole == 1}">
             <li><a href="/Cteam1/staff/normalstaff/StaffHome.action">ホーム</a></li>
-            <li><a href="/Cteam1/staff/normalstaff/institution/StaffInstitution.action">制度</a></li>
+            <li><a href="/Cteam1/staff/normalstaff/institution/StaffInstitution.action">支援</a></li>
             <li><a href="/Cteam1/staff/normalstaff/calendar/StaffCalendar.action">カレンダー</a></li>
             <li><a href="/Cteam1/staff/normalstaff/notification/StaffNotification.action">お知らせ</a></li>
         </c:if>
