@@ -37,6 +37,31 @@ body {
 }
 
 
+/* フッター全体 */
+.site-footer {
+  background-color: #e8f5e9;
+  padding: 20px 0;            /* 上下の余白 */
+  border-top: 1px solid #e9ecef;
+  margin-top: 30px;
+}
+
+/* コンテナで中央寄せ */
+.site-footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* フッターテキスト */
+.footer-text {
+  color: #6c757d;             /* muted相当の色 */
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+
 /* ▼▼ ドロップダウン用のサンプルCSS ▼▼ */
 
 /* ▼▼ ドロップダウン全体 ▼▼ */
