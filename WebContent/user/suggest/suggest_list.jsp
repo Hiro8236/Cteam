@@ -45,9 +45,7 @@
 
             <!-- おすすめ一覧のテーブル -->
             <div class="staff-list-header">
-                            <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4" style="background-color:#f2f2f2">
-                おすすめ支援一覧
-            </h2>
+                <h3 class="staff-list-title">おすすめ支援一覧</h3>
             </div>
 
             <c:choose>

@@ -11,7 +11,6 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar/locales/ja.js"></script>
 
-    <h1 class="h3 mb-3 fw-normal text-center bg-secondary bg-opacity-10 py-2 px-4">ユーザー用イベントカレンダー</h1>
     <div id="calendar" class="calendar-container" style="width: 120%; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); aspect-ratio: 16/9;"></div>
 
     <!-- モーダル -->

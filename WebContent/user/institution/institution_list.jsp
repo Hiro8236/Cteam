@@ -7,9 +7,9 @@
     <c:param name="title" value="サポ助" />
     <c:param name="content">
         <section class="staff-management">
-                        <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4" style="background-color:#f2f2f2">
-                支援一覧
-            </h2>
+            <div class="staff-list-header">
+                <h3 class="staff-list-title">支援一覧</h3>
+            </div>
 
             <!-- エラーメッセージがある場合、表示 -->
             <c:if test="${not empty errorMessage}">

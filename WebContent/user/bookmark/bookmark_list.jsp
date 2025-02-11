@@ -6,9 +6,9 @@
     <c:param name="content">
 
         <section class="me-4">
-            <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4" style="background-color:#f2f2f2">
-                ブックマーク一覧
-            </h2>
+            <div class="staff-list-header">
+                <h3 class="staff-list-title">ブックマーク一覧</h3>
+            </div>
 
             <!-- セッションからユーザーIDを取得 -->
             <c:set var="userID" value="${sessionScope.userID}" />
