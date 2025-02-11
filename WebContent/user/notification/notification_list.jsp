@@ -63,8 +63,8 @@
                                         onclick="location.href='notification_detail.jsp?id=${notification.notificationID}'">
                                         <td>
                                             <c:choose>
-                                                <c:when test="${fn:length(notification.title) > 10}">
-                                                    ${fn:substring(notification.title, 0, 10)}&hellip;
+                                                <c:when test="${fn:length(notification.title) > 15}">
+                                                    ${fn:substring(notification.title, 0, 15)}&hellip;
                                                 </c:when>
                                                 <c:otherwise>
                                                     ${notification.title}
@@ -73,8 +73,8 @@
                                         </td>
                                         <td>
                                             <c:choose>
-                                                <c:when test="${fn:length(notification.detail) > 20}">
-                                                    ${fn:substring(notification.detail, 0, 20)}&hellip;
+                                                <c:when test="${fn:length(notification.detail) > 30}">
+                                                    ${fn:substring(notification.detail, 0, 30)}&hellip;
                                                 </c:when>
                                                 <c:otherwise>
                                                     ${notification.detail}
