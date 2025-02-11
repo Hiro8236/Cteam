@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="header-container">
+<div class="header-container user-header">
     <ul class="navigation-list">
         <li><a href="/Cteam1/user/Home.action">ホーム</a></li>
         <li class="dropdown">
