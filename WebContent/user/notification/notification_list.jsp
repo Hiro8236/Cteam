@@ -59,8 +59,7 @@
                             <c:forEach var="notification" items="${notifications}" varStatus="status">
                                 <!-- 現在のページの範囲内の場合のみ表示 -->
                                 <c:if test="${status.index >= startIndex and status.index < endIndex}">
-                                    <tr style="cursor: pointer;"
-                                        onclick="location.href='notification_detail.jsp?id=${notification.notificationID}'">
+                                    <tr style="cursor: pointer;" onclick="location.href='notification_detail.jsp?id=${notification.notificationID}&title=${notification.title}&detail=${notification.detail}'">
                                         <td>
                                             <c:choose>
                                                 <c:when test="${fn:length(notification.title) > 15}">

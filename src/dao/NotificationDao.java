@@ -129,3 +129,4 @@ public class NotificationDao extends Dao {
     }
 
 }
+
