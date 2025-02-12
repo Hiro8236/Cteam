@@ -13,13 +13,13 @@
 
     <form class="suggest-form" action="UserSuggestInfoExecute.action" method="post">
         <label class="suggest-label" for="annualIncome">年間収入</label>
-        <input class="suggest-input" id="annualIncome" name="annualIncome" type="number" required />
+        <input class="suggest-input" id="annualIncome" name="annualIncome" type="number"/>
 
         <label class="suggest-label" for="childrenCount">子供の人数</label>
-        <input class="suggest-input" id="childrenCount" name="childrenCount" type="number" required />
+        <input class="suggest-input" id="childrenCount" name="childrenCount" type="number"/>
 
         <label class="suggest-label" for="employmentStatus">雇用状況</label>
-        <select class="suggest-select" id="employmentStatus" name="employmentStatus" required>
+        <select class="suggest-select" id="employmentStatus" name="employmentStatus">
             <option value="" selected>選択してください</option>
             <option value="就業中">就業中</option>
             <option value="休職中">休職中</option>
@@ -27,7 +27,7 @@
         </select>
 
         <label class="suggest-label" for="singleParentReason">ひとり親の理由</label>
-        <select class="suggest-input" id="singleParentReason" name="singleParentReason"  required>
+        <select class="suggest-input" id="singleParentReason" name="singleParentReason">
             <option value="" selected>選択してください</option>
             <option value="離婚">離婚</option>
             <option value="死別">死別</option>
@@ -35,7 +35,7 @@
         </select>
 
         <label class="suggest-label" for="childSchoolStatus">子供の学習状況</label>
-        <select class="suggest-input" id="childSchoolStatus" name="childSchoolStatus" required >
+        <select class="suggest-input" id="childSchoolStatus" name="childSchoolStatus">
             <option value="" selected>選択してください</option>
             <option value="未就学">未就学</option>
             <option value="幼稚園">幼稚園</option>
