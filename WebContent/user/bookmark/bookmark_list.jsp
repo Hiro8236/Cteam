@@ -53,6 +53,10 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
+                                    <tr onclick="location.href='../institution/InstitutionsDetail.action?id=${bookmark.institutionID}'" style="cursor: pointer;">
+                                        <td>${bookmark.name}</td>
+                                        <td>${bookmark.detail}</td>
+
                                         <td>
                                             <form action="BookmarkDelete.action" method="post">
                                                 <input type="hidden" name="BookmarkID" value="${bookmark.bookmarkID}" />
