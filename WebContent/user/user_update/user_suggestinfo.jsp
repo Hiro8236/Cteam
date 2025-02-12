@@ -27,10 +27,24 @@
         </select>
 
         <label class="suggest-label" for="singleParentReason">ひとり親の理由</label>
-        <input class="suggest-input" id="singleParentReason" name="singleParentReason" type="text" required />
+        <select class="suggest-input" id="singleParentReason" name="singleParentReason"  required>
+            <option value="" selected>選択してください</option>
+            <option value="離婚">離婚</option>
+            <option value="死別">死別</option>
+            <option value="その他">その他</option>
+        </select>
 
         <label class="suggest-label" for="childSchoolStatus">子供の学習状況</label>
-        <input class="suggest-input" id="childSchoolStatus" name="childSchoolStatus" type="text" required />
+        <select class="suggest-input" id="childSchoolStatus" name="childSchoolStatus" required >
+            <option value="" selected>選択してください</option>
+            <option value="未就学">未就学</option>
+            <option value="幼稚園">幼稚園</option>
+            <option value="保育園">保育園</option>
+            <option value="小学校">小学校</option>
+            <option value="中学校">中学校</option>
+            <option value="高校">高校</option>
+            <option value="その他">その他</option>
+        </select>
 
         <input type="submit" value="保存" class="suggest-btn" />
     </form>
