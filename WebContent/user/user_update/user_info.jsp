@@ -24,7 +24,6 @@
         <div class="user-info-section">
             <h2 class="user-info-title">パスワード</h2>
             <div class="user-info-row">
-                <p class="user-password">password: ${user.getPassword()}</p>
                 <a class="btn-link" href="/Cteam1/user/user_update/UserUpdate.action?action=2&cd=${UserID}">変更</a>
             </div>
         </div>
