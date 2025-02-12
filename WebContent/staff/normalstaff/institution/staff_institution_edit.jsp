@@ -93,7 +93,7 @@
             <div class="pdf-section">
                 <h3>PDF ファイル</h3>
                 <c:if test="${not empty institution.pdfPath}">
-                    <a href="StaffInstitutionDownload.action?id=${institution.institutionId}" target="_blank">
+                    <a href="StaffInstitutionDownload.action?id=${institution.ID}" target="_blank">
                         PDFをダウンロード
                     </a>
                 </c:if>
