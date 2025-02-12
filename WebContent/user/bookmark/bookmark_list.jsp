@@ -32,7 +32,7 @@
                             </thead>
                             <tbody>
                                 <c:forEach var="bookmark" items="${bookmarklists}">
-                                    <tr>
+                                    <tr onclick="location.href='../institution/InstitutionsDetail.action?id=${bookmark.institutionID}'" style="cursor: pointer;">
                                         <td>${bookmark.name}</td>
                                         <td>${bookmark.detail}</td>
                                         <td>
