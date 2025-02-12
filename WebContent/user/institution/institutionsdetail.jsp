@@ -9,7 +9,7 @@
         <h1>支援詳細</h1>
 
         <div style="text-align: right;">
-            <a href="Home.action">戻る</a>
+            <a href="../Home.action">戻る</a>
         </div>
 
         <section class="institution-details">
