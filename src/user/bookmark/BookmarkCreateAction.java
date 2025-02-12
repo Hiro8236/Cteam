@@ -14,7 +14,7 @@ public class BookmarkCreateAction extends Action {
         BookmarkListDao bookmarkListDao = new BookmarkListDao();
 
         // リクエストパラメータの取得と検証
-        String idParam = req.getParameter("institutionID");
+        String idParam = req.getParameter("id");
         if (idParam == null || idParam.isEmpty()) {
             throw new IllegalArgumentException("institutionIDパラメータが指定されていません。");
         }
