@@ -1528,3 +1528,84 @@ table.table tbody td {
   }
 }
 
+
+/* ユーザー情報セクション */
+.user-info-section {
+    margin-bottom: 30px;
+}
+
+.user-info-title {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+    border-bottom: 2px solid #f1f1f1;
+    padding-bottom: 8px;
+}
+
+/* ユーザー情報の横並び */
+.user-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.user-email, .user-password {
+    color: #666;
+    font-size: 1.1rem;
+    flex: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.user-info-section a.btn-link {
+    color: #007bff;
+    text-decoration: none;
+    padding: 8px 18px;
+    font-size: 1.1rem;
+    border: 2px solid #007bff;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.user-info-section a.btn-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* アカウント削除 */
+.account-delete-section {
+    margin-top: 40px;
+}
+
+.delete-title {
+    color: #e74c3c;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+}
+
+.account-delete-section a.btn-danger {
+    color: white;
+    background-color: #e74c3c;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.account-delete-section a.btn-danger:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* ホバー時の効果 */
+a.btn-link, a.btn-danger {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
