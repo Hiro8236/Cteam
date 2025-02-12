@@ -18,7 +18,7 @@ public class SuggestListDao extends Dao {
         String sql = "SELECT i.* " +
                      "FROM institution i " +
                      "JOIN user u ON (" +
-                     "    (u.AnnualIncome IS NULL OR u.AnnualIncome >= i.IncomeRequirement) " +
+                     "    (u.AnnualIncome IS NULL OR u.AnnualIncome <= i.IncomeRequirement) " +
                      "    AND (u.ChildrenCount IS NULL OR u.ChildrenCount >= i.EligibleChildrenCount) " +
                      "    AND (u.EmploymentStatus IS NULL OR u.EmploymentStatus = i.RequiredEmploymentStatus) " +
                      "    AND (u.SingleParentReason IS NULL OR u.SingleParentReason = i.EligibilityReason) " +
