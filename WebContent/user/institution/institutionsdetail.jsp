@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <c:import url="/common/base.jsp">
@@ -26,10 +27,12 @@
             <!-- 動画セクション -->
             <div class="video-section">
                 <h3>支援関連動画</h3>
-                <c:if test="${not empty institution.video}">
-                
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/${institution.video}" frameborder="0" allowfullscreen></iframe>
-                </c:if>
+  					<c:if test="${not empty institution.video}">
+        				<c:set var="videoUrl" value="${institution.video}" />
+        				<c:set var="videoId" value="${fn:replace(videoUrl, 'https://www.youtube.com/watch?v=', '')}" />
+
+        				<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    				</c:if>
                 <c:if test="${empty institution.video}">
                     <p>動画がありません</p>
                 </c:if>

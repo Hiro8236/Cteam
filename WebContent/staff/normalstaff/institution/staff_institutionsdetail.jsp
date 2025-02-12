@@ -23,7 +23,7 @@
         <c:set var="videoUrl" value="${institution.video}" />
         <c:set var="videoId" value="${fn:replace(videoUrl, 'https://www.youtube.com/watch?v=', '')}" />
 
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </c:if>
     <c:if test="${empty institution.video}">
         <p>動画がありません</p>
