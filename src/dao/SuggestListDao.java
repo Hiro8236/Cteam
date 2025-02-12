@@ -15,15 +15,8 @@ public class SuggestListDao extends Dao {
         List<Suggest> suggestList = new ArrayList<>();
 
         String sql = "SELECT i.* " +
-                     "FROM institution i " +
-                     "JOIN user u ON ( " +
-                     "    (u.AnnualIncome <= i.IncomeRequirement OR i.IncomeRequirement IS NULL) " +
-                     "    AND (u.ChildrenCount >= i.EligibleChildrenCount OR i.EligibleChildrenCount IS NULL) " +
-                     "    AND (u.EmploymentStatus = i.RequiredEmploymentStatus OR i.RequiredEmploymentStatus IS NULL) " +
-                     "    AND (u.SingleParentReason = i.EligibilityReason OR i.EligibilityReason IS NULL) " +
-                     "    AND (u.ChildSchoolStatus = i.RequiredSchoolStatus OR i.RequiredSchoolStatus IS NULL) " +
-                     ") " +
-                     "WHERE u.UserID = ?";
+                "FROM institution i";
+
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
