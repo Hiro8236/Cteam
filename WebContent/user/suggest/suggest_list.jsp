@@ -29,33 +29,32 @@
             <c:choose>
                 <c:when test="${not empty suggestlists}">
                     <table class="staff-table">
-                        <thead>
                             <tr>
                                 <th>支援名</th>
                                 <th>制度詳細</th>
                                 <th>登録</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="suggest" items="${suggestlists}" varStatus="status">
-                                <c:if test="
-                                    (${empty suggest.incomeRequirement or user.AnnualIncome >= suggest.incomeRequirement}) and
-                                    (${empty suggest.eligibleChildrenCount or user.ChildrenCount >= suggest.eligibleChildrenCount}) and
-                                    (${empty suggest.requiredEmploymentStatus or user.EmploymentStatus eq suggest.requiredEmploymentStatus}) and
-                                    (${empty suggest.eligibilityReason or user.SingleParentReason eq suggest.eligibilityReason}) and
-                                    (${empty suggest.requiredSchoolStatus or user.ChildSchoolStatus eq suggest.requiredSchoolStatus})">
-                                    <tr style="cursor: pointer;"
-                                        onclick="location.href='/Cteam1/user/institution/InstitutionsDetail.action?id=${suggest.institutionID}'">
-                                        <td>${suggest.name}</td>
-                                        <td>${suggest.detail}</td>
-                                        <td>
-                                            <a href="/Cteam1/user/bookmark/BookmarkCreate.action?institutionID=${suggest.institutionID}"
-                                               class="btn btn-success" onclick="event.stopPropagation();">登録</a>
-                                        </td>
-                                    </tr>
-                                </c:if>
-                            </c:forEach>
-                        </tbody>
+                           <c:if test="${not empty user}">
+						    <c:forEach var="suggest" items="${suggestlists}" varStatus="status">
+						        <c:if test="
+						            (${empty suggest.incomeRequirement} or (not empty user.AnnualIncome and user.AnnualIncome >= suggest.incomeRequirement)) and
+						            (${empty suggest.eligibleChildrenCount} or (not empty user.ChildrenCount and user.ChildrenCount >= suggest.eligibleChildrenCount)) and
+						            (${empty suggest.requiredEmploymentStatus} or (not empty user.EmploymentStatus and user.EmploymentStatus eq suggest.requiredEmploymentStatus)) and
+						            (${empty suggest.eligibilityReason} or (not empty user.SingleParentReason and user.SingleParentReason eq suggest.eligibilityReason)) and
+						            (${empty suggest.requiredSchoolStatus} or (not empty user.ChildSchoolStatus and user.ChildSchoolStatus eq suggest.requiredSchoolStatus))
+						        ">
+						            <tr style="cursor: pointer;" onclick="location.href='/Cteam1/user/institution/InstitutionsDetail.action?id=${suggest.institutionID}'">
+						                <td>${suggest.name}</td>
+						                <td>${suggest.detail}</td>
+						                <td>
+						                    <a href="/Cteam1/user/bookmark/BookmarkCreate.action?institutionID=${suggest.institutionID}"
+						                       class="btn btn-success" onclick="event.stopPropagation();">登録</a>
+						                </td>
+						            </tr>
+						        </c:if>
+						    </c:forEach>
+							</c:if>
+
                     </table>
                 </c:when>
                 <c:otherwise>
