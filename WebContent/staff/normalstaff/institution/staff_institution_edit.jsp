@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<c:import url="/common/base.jsp">
+<c:import url="/staffcommon/base.jsp">
     <c:param name="title" value="支援詳細 - ぽシステム" />
     <c:param name="content">
         <h1>支援詳細</h1>
@@ -151,16 +151,6 @@
 
                     <button type="submit">保存</button>
 
-
-                    <pre>${institution}</pre>
-
-<p>支援名: <c:out value="${institution.name}" /></p>
-<p>支援詳細: <c:out value="${institution.detail}" /></p>
-<p>年間収入: <c:out value="${institution.incomeRequirement}" /></p>
-<p>子供の人数: <c:out value="${institution.eligibleChildrenCount}" /></p>
-<p>雇用状況: <c:out value="${institution.requiredEmploymentStatus}" /></p>
-<p>ひとり親の理由: <c:out value="${institution.eligibilityReason}" /></p>
-<p>子供の学歴状況: <c:out value="${institution.requiredSchoolStatus}" /></p>
 
                 </form>
             </div>
