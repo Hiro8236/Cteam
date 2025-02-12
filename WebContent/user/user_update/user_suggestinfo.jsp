@@ -19,10 +19,16 @@
             <label>子供の人数</label>
         </div>
 
-        <div class="form-floating">
-            <input class="form-control" name="employmentStatus" type="text" />
-            <label>雇用状況</label>
-        </div>
+  		<div class="form-floating">
+    		<select class="form-select" name="employmentStatus">
+        		<option value="" selected>選択してください</option>
+        		<option value="就業中">就業中</option>
+        		<option value="休職中">休職中</option>
+        		<option value="求職中">求職中</option>
+    		</select>
+    		<label>雇用状況</label>
+		</div>
+
 
         <div class="form-floating">
             <input class="form-control" name="singleParentReason" type="text" />
