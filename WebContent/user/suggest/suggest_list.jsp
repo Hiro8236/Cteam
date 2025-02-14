@@ -18,6 +18,11 @@
             <!-- ログイン情報を取得（もし登録ボタンの表示を制御するなら使う） -->
             <c:set var="userID" value="${sessionScope.userID}" />
 
+            <!-- ログインされていない場合のメッセージ表示 -->
+            <c:if test="${empty userID}">
+                 <div> <a href="../login/Login.action">ログイン</a>してください</div>
+            </c:if>
+
             <!-- ページネーション設定 -->
             <c:set var="itemsPerPage" value="5" />
 
@@ -34,7 +39,7 @@
             <!-- 総件数（suggestlistsの要素数） -->
             <c:set var="totalItems" value="${fn:length(suggestlists)}" />
 
-             <!-- 総ページ数の計算： (totalItems + itemsPerPage - 1) div itemsPerPage -->
+            <!-- 総ページ数の計算： (totalItems + itemsPerPage - 1) div itemsPerPage -->
             <c:set var="totalPages" value="${(totalItems + itemsPerPage - 1) div itemsPerPage}" />
             <!-- 小数点以下を切り捨てた整数値 -->
             <c:set var="totalPagesInt" value="${totalPages - (totalPages mod 1)}" />
@@ -86,12 +91,12 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
-										<td>
-										    <!-- 登録ボタンのクリックで行クリックを止める -->
-										    <a href="/Cteam1/user/bookmark/BookmarkCreate.action?institutionID=${suggest.institutionID}"
-										       class="btn btn-success"
-										       onclick="event.stopPropagation();">登録</a>
-										</td>
+                                        <td>
+                                            <!-- 登録ボタンのクリックで行クリックを止める -->
+                                            <a href="/Cteam1/user/bookmark/BookmarkCreate.action?institutionID=${suggest.institutionID}"
+                                               class="btn btn-success"
+                                               onclick="event.stopPropagation();">登録</a>
+                                        </td>
                                     </tr>
                                 </c:if>
                             </c:forEach>

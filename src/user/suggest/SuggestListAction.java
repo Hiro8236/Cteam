@@ -17,9 +17,9 @@ public class SuggestListAction extends Action {
 	    HttpSession session = req.getSession();
 	    Integer userID = (Integer) session.getAttribute("userID");
 
-	    // ユーザーIDがない場合、ログイン画面にリダイレクト
 	    if (userID == null) {
-	        res.sendRedirect("/Cteam1/user/Login.action");
+	        // Send an alert message to the user
+	        res.getWriter().write("<script type='text/javascript'>alert('ログインしてください'); window.location.href='/Cteam1/user/login/Login.action';</script>");
 	        return;
 	    }
 
