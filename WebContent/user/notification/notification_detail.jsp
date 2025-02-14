@@ -23,6 +23,7 @@
                 <p><%= (detail != null && !detail.isEmpty()) ? detail : "お知らせ内容がありません" %></p>
             </div>
 
+
         </section>
 
         <a href="Notification.action">一覧へ戻る</a>

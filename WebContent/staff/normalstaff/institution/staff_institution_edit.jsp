@@ -3,7 +3,7 @@
 
 
 <c:import url="/staffcommon/base.jsp">
-    <c:param name="title" value="支援詳細 - ぽシステム" />
+    <c:param name="title" value="支援詳細 " />
     <c:param name="content">
         <h1>支援詳細</h1>
 
@@ -93,7 +93,7 @@
             <div class="pdf-section">
                 <h3>PDF ファイル</h3>
                 <c:if test="${not empty institution.pdfPath}">
-                    <a href="StaffInstitutionDownload.action?id=${institution.institutionId}" target="_blank">
+                    <a href="StaffInstitutionDownload.action?id=${institution.ID}" target="_blank">
                         PDFをダウンロード
                     </a>
                 </c:if>
