@@ -85,7 +85,7 @@
                                             <c:if test="${not empty userID}">
 												<td>
 												    <!-- 登録ボタンのクリックで行クリックを止める -->
-												    <a href="/Cteam1/user/bookmark/BookmarkCreate.action?institutionID=${suggest.institutionID}"
+												    <a href="/Cteam1/user/bookmark/BookmarkCreate.action?institutionID=${institution.ID}"
 												       class="btn btn-success"
 												       onclick="event.stopPropagation();">登録</a>
 												</td>
